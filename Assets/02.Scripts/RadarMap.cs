@@ -94,7 +94,7 @@ public class RadarMap : MonoBehaviour
 
             //대상오브젝트의 절대각도
             //카메라 각도에따라 미니맵이 회전한다
-            float deltay = Mathf.Atan2(mapPos.z, mapPos.x) * Mathf.Rad2Deg+ Camera.main.transform.rotation.eulerAngles.y; //+ playerPos.eulerAngles.y; 이거주석안하면 미니맵이 회전함
+            float deltay = Mathf.Atan2(mapPos.z, mapPos.x) * Mathf.Rad2Deg+ Camera.main.transform.eulerAngles.y; //+ playerPos.eulerAngles.y; 이거주석안하면 미니맵이 회전함
 
           
             //미니맵 아이콘x,y
@@ -104,12 +104,14 @@ public class RadarMap : MonoBehaviour
             m.icon.transform.SetParent(this.transform);
             m.icon.transform.position = new Vector3(mapPos.x, mapPos.z, 0) + this.transform.position;
             m.icon.transform.localScale = new Vector3(rect.rect.width*0.01f, rect.rect.width * 0.01f, rect.rect.width * 0.01f);
-            if (m.icon.tag == "PlayerIcon")
+            if (m.owner.layer == LayerMask.NameToLayer("Player"))
             {
+                if ((Mathf.Abs(player.playerInfo.playerVector.x) + Mathf.Abs(player.playerInfo.playerVector.z)) > 0)
+                {
+                    float ang = Mathf.Atan2(player.playerInfo.playerVector.z, player.playerInfo.playerVector.x) * Mathf.Rad2Deg;
+                    m.icon.transform.rotation = Quaternion.Euler(0, 0, ang);
+                }
 
-                float ang = Mathf.Atan2(player.playerInfo.plyaerVector.z, player.playerInfo.plyaerVector.x) * Mathf.Rad2Deg;
-
-                m.icon.transform.rotation = Quaternion.Euler(0, 0, ang);
             }
         }
     }
@@ -133,6 +135,14 @@ public class RadarMap : MonoBehaviour
         foreach(MapObject m in mapObject)
         {
             Debug.Log(m.owner);
+        }
+    }
+
+    public void RoatateMapDot()
+    {
+        foreach (MapObject m in mapObject)
+        {
+            m.icon.transform.RotateAround(m.icon.transform.position, Vector3.forward, 5f);
         }
     }
 }

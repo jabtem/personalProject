@@ -9,6 +9,8 @@ public class smoothFollowCam : MonoBehaviour
     //따라다닐 대상
     public Transform target;
     public float distance = 10.0f;
+    RadarMap map;
+    Transform myTr;
 
     public float height = 5.0f;
 
@@ -16,6 +18,12 @@ public class smoothFollowCam : MonoBehaviour
 
     public float rotationDaping = 3.0f;
 
+
+    private void Awake()
+    {
+        myTr = GetComponent<Transform>();
+        map = GameObject.FindGameObjectWithTag("Minimap").GetComponent<RadarMap>();
+    }
 
     // 한 프레임에 모든 Update가 실행된 후 호출되는 함수로
     // 주로 카메라의 이동이나 Update와 따로 실행되야 할 로직에 사용
@@ -49,4 +57,9 @@ public class smoothFollowCam : MonoBehaviour
 
     }
 
+    public void rotate()
+    {
+        transform.RotateAround(myTr.position, Vector3.up, 5.0f);
+        map.RoatateMapDot();
+    }
 }

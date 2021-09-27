@@ -10,7 +10,7 @@ public class PlayerInfo
     Vector3 _playerVector;
 
 
-    public Vector3 plyaerVector
+    public Vector3 playerVector
     {
         get
         {
@@ -32,6 +32,7 @@ public class PlayerMoveCtrl : MonoBehaviour
     // CharacterController 컴포넌트를 위한 레퍼런스
     CharacterController controller;
     Transform myTr;
+    Transform PlayerBody;
     Ray ray;
     RaycastHit hitInfo;
     // 중력 
@@ -44,31 +45,53 @@ public class PlayerMoveCtrl : MonoBehaviour
     //케릭터 점프 속도
     public float jumpSpeed = 10.0f;
 
+    //애니메이션
+    Animator anim;
 
 
     // 케릭터 이동 방향
     public Vector3 moveDirection;
+
+    //정지시 이전 캐릭터방향 미니맵마커 유지용
+    Vector3 preMoveDirection;
+
     public PlayerInfo playerInfo = new PlayerInfo();
     void Awake()
     {
         // 레퍼런스 연결
         myTr = GetComponent<Transform>();
         controller = GetComponent<CharacterController>();
-
+        PlayerBody = transform.Find("Body");
         Camera.main.GetComponent<smoothFollowCam>().target = this.transform;
+        anim = GetComponent<Animator>();
 
     }
 
     void Update()
     {
+
+
+        //조작을하고있을때만 미니맵마커회전
+
+        float ang = Mathf.Atan2(playerInfo.playerVector.z, playerInfo.playerVector.x) * Mathf.Rad2Deg * -1f;
+        Quaternion rot = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0f);//카메라의앵글에따라 변환
         //사용자 자신이 조작할때만 움직임, 다른유저의 조작에 간섭X
         if (controller.isGrounded)
         {
 
             float v = Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("Joystick");
             float h = Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("Joystick");
+
             moveDirection = new Vector3(h * movSpeed, 0, v * movSpeed);
-            playerInfo.plyaerVector = moveDirection.normalized;
+
+            if (Mathf.Abs(v) >0 || Mathf.Abs(h)>0)
+            {           
+                PlayerBody.rotation = Quaternion.Euler(0, ang + Camera.main.transform.rotation.eulerAngles.y+90 , 0);
+                playerInfo.playerVector = moveDirection;
+            }
+
+
+
             // 만약 콜라이더가 땅에 있을 경우 
             //디바이스마다 일정한 회전 속도
             float amtRot = rotSpeed * Time.deltaTime;
@@ -94,7 +117,10 @@ public class PlayerMoveCtrl : MonoBehaviour
             //    moveDirection.y = jumpSpeed;
             //}
         }
-        Quaternion rot = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0f);//카메라의앵글에따라 변환
+
+
+
+
 
         moveDirection.y -= gravity * Time.deltaTime;// 디바이스마다 일정 속도로 케릭에 중력 적용
                                                     // CharacterController의 Move 함수에 방향과 크기의 벡터값을 적용(디바이스마다 일정)
@@ -112,6 +138,10 @@ public class PlayerMoveCtrl : MonoBehaviour
     //    }
     //}
 
+    public void OnAttackBtn()
+    {
+        anim.SetTrigger("Attack");
+    }
 
 }
 
