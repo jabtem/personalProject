@@ -75,7 +75,6 @@ public class PlayerMoveCtrl : MonoBehaviour
 
         float ang = Mathf.Atan2(playerInfo.playerVector.z, playerInfo.playerVector.x) * Mathf.Rad2Deg * -1f;
         Quaternion rot = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0f);//카메라의앵글에따라 변환
-        //사용자 자신이 조작할때만 움직임, 다른유저의 조작에 간섭X
         if (controller.isGrounded)
         {
 
@@ -87,9 +86,9 @@ public class PlayerMoveCtrl : MonoBehaviour
             if (Mathf.Abs(v) >0 || Mathf.Abs(h)>0)
             {           
                 PlayerBody.rotation = Quaternion.Euler(0, ang + Camera.main.transform.rotation.eulerAngles.y+90 , 0);
-                playerInfo.playerVector = moveDirection;
+                
             }
-
+            playerInfo.playerVector = moveDirection;
 
 
             // 만약 콜라이더가 땅에 있을 경우 
@@ -127,16 +126,6 @@ public class PlayerMoveCtrl : MonoBehaviour
         controller.Move(rot * moveDirection * Time.deltaTime);
 
     }
-    //void OnTriggerEnter(Collider col)
-    //{
-    //    //아이템 획득 테스트용
-    //    if(col.tag =="Item" && pv.isMine)
-    //    {
-    //        Item item = col.GetComponent<ItemInfo>().item;
-    //        inven.AcquireItem(item);
-    //        Destroy(col.gameObject);
-    //    }
-    //}
 
     public void OnAttackBtn()
     {

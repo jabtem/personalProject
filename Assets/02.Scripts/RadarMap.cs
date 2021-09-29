@@ -110,6 +110,7 @@ public class RadarMap : MonoBehaviour
                 {
                     float ang = Mathf.Atan2(player.playerInfo.playerVector.z, player.playerInfo.playerVector.x) * Mathf.Rad2Deg;
                     m.icon.transform.rotation = Quaternion.Euler(0, 0, ang);
+
                 }
 
             }
@@ -138,11 +139,11 @@ public class RadarMap : MonoBehaviour
         }
     }
 
-    public void RoatateMapDot()
+    public void RoatateMapDot(float rotate)
     {
         foreach (MapObject m in mapObject)
         {
-            m.icon.transform.RotateAround(m.icon.transform.position, Vector3.forward, 5f);
+            m.icon.transform.RotateAround(m.icon.transform.position, Vector3.forward, rotate);
         }
     }
 }
