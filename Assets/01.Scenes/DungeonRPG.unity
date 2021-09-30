@@ -22528,6 +22528,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2561e598b228d704a84a975b80edc325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  comboPossible: 0
+  step: 0
 --- !u!1001 &900888114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52024,7 +52027,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5930651933887949384}
-  - component: {fileID: 5930651933887460969}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -52032,25 +52034,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &5930651933887460969
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5930651933887460968}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: 80212f1697003ec4d8b59bdcb908a1fc, type: 3}
-  m_Controller: {fileID: 9100000, guid: d1f7ffd55459c134abf045e518bec4ad, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5930651933887460970
 GameObject:
   m_ObjectHideFlags: 0

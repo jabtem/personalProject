@@ -19,19 +19,23 @@ public class PlayerAttackCtrl : MonoBehaviour
 
     public void Attack()
     {
+        id = Animator.StringToHash("comboStep");
 
-        if(step == 0)
+        if(anim.GetInteger(id) == 0)
         {
             id = Animator.StringToHash("Base Layer.AttackA");
             anim.Play(id);
-            step = 1;
+            id = Animator.StringToHash("comboStep");
+            anim.SetInteger(id, 1);
+
         }
-        if(step !=0)
+        else if(anim.GetInteger(id) != 0)
         {
             if(comboPossible)
             {
                 comboPossible = false;
-                step += 1;
+                id = Animator.StringToHash("comboStep");
+                anim.SetInteger(id, anim.GetInteger(id)+1);
             }
         }
     }
@@ -42,12 +46,14 @@ public class PlayerAttackCtrl : MonoBehaviour
     }
     public void Combo()
     {
-        if (step == 2)
+        id = Animator.StringToHash("comboStep");
+
+        if (anim.GetInteger(id) == 2)
         {
             id = Animator.StringToHash("Base Layer.AttackB");
             anim.Play(id);
         }
-        if (step == 3)
+        else if (anim.GetInteger(id) == 3)
         {
             id = Animator.StringToHash("Base Layer.AttackC");
             anim.Play(id);
@@ -57,6 +63,7 @@ public class PlayerAttackCtrl : MonoBehaviour
     public void ComboReset()
     {
         comboPossible = false;
-        step = 0;
+        id = Animator.StringToHash("comboStep");
+        anim.SetInteger(id, 0);
     }
 }

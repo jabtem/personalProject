@@ -1,0 +1,108 @@
+2-104      loop     idle0
+480-586    noloop   idle1
+215-265    noloop   idle2
+590-690    noloop   idle3
+692-900    noloop   idle4
+902-965    noloop   idle5
+
+2636-2668  loop     walk
+   
+3130-3152  loop     run0      
+3760-3782  loop     run1
+5180-5202  loop     run2 
+5642-5664  loop     run3
+133-157    noloop   runBackward      
+160-184    noloop   runLeft       
+187-211    noloop   runRight       
+
+398-409    noloop   jump
+410-440    loop     jumpFloat    
+441-447    loop     jumpFall    
+452-475    noloop   jumpLanded  
+
+290-317    noloop   attack0
+1592-1622  noloop   attack1
+1535-1589  noloop   attack2
+
+1803-1837  noloop   attackDagger0
+2310-2338  noloop   attackDagger1
+2490-2530  noloop   attackDagger2
+1917-1952  noloop   attackDagger3
+2407-2437  noloop   attackDagger4
+2585-2631  noloop   attackDagger5
+
+2145-2230  noloop   skillDagger0
+4320-4560  noloop   skillDagger1
+2013-2077  noloop   skillDagger2
+4130-4180  noloop   skillDagger3
+6207-6237  noloop   skillDagger4
+
+1838-1874  noloop   attackAxe0
+1875-1915  noloop   attackAxe1
+2535-2581  noloop   attackAxe2
+2341-2371  noloop   attackAxe3
+
+1625-1682  noloop   skillAxe0 
+6207-6237  noloop   skillAxe1 
+1720-1750  noloop   skillAxe2 
+4660-4703  noloop   skillAxe3 
+4750-4795  noloop   skillAxe4 
+4660-4703  noloop   skillAxe5 
+3855-3945  noloop   skillAxe6 
+
+5840-5870  noloop   attackSword0
+5875-5900  noloop   attackSword1
+6025-6076  noloop   attackSword2
+
+2080-2142  noloop   skillSword0  
+4185-4235  noloop   skillSword1
+3472-3561  noloop   skillSword2
+3791-3851  noloop   skillSword3
+3255-3305  noloop   skillSword4
+1685-1715  noloop   skillSword5
+4625-4655  noloop   skillSword6
+5290-5372  noloop   skillSword7
+
+2374-2404  noloop   attackSpear0
+2440-2488  noloop   attackSpear1 
+
+4565-4623  noloop   skillSpear0  
+3180-3253  noloop   skillSpear1  
+3565-3612  noloop   skillSpear2  
+2845-2882  noloop   skillSpear3  
+3645-3725  noloop   skillSpear4  
+
+5225-5251  noloop   skill0     
+5255-5285  noloop   skill1           
+5540-5570  noloop   skill2     
+5420-5535  noloop   skill3
+6165-6202  noloop   skill4
+1105-1140  loop     skill5
+1143-1178  noloop   skill6
+1182-1217  noloop   skill7
+1219-1252  noloop   skill8
+1253-1292  noloop   skill9
+1294-1324  noloop   skill10
+1326-1360  noloop   skill11
+1363-1394  noloop   skill12
+1397-1457  noloop   skill13
+1460-1492  noloop   skill14
+1495-1532  noloop   skill15
+6130-6158  noloop   skill16
+6243-6278  noloop   skill17
+4715-4745  noloop   skill18                         
+3410-3470  noloop   skill19
+3531-3561  noloop   skill20
+
+371-395	   loop     turn  
+
+5720-5770  loop     rest0
+2770-2820  loop     rest1
+
+267-287    noloop   wound           
+319-367    noloop   death
+
+2672-2702  noloop   other0
+2706-2765  noloop   other1                                                   
+4920-4990  noloop   other2  
+5020-5166  noloop   other3 

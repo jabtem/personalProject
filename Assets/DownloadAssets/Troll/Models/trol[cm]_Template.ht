@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1105 &110500000
+HumanTemplate:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: trol[cm]_Template
+  m_BoneTemplate:
+    Chest: Bip01 Neck
+    Head: Bip01 Head
+    Hips: Bip01 Spine
+    Left Index Intermediate: Bip01 L Finger11
+    Left Index Proximal: Bip01 L Finger1
+    Left Little Proximal: Bip01 L Finger01
+    Left Middle Intermediate: Bip01 L Finger21
+    Left Middle Proximal: Bip01 L Finger2
+    LeftFoot: Bip01 L Foot
+    LeftHand: Bip01 L Hand
+    LeftLowerArm: Bip01 L Forearm
+    LeftLowerLeg: Bip01 L Calf
+    LeftShoulder: Bip01 L Clavicle
+    LeftToes: Bip01 L Toe0
+    LeftUpperArm: Bip01 L UpperArm
+    LeftUpperLeg: Bip01 L Thigh
+    Right Index Intermediate: Bip01 R Finger11
+    Right Index Proximal: Bip01 R Finger1
+    Right Little Proximal: Bip01 R Finger01
+    Right Middle Intermediate: Bip01 R Finger21
+    Right Middle Proximal: Bip01 R Finger2
+    RightFoot: Bip01 R Foot
+    RightHand: Bip01 R Hand
+    RightLowerArm: Bip01 R Forearm
+    RightLowerLeg: Bip01 R Calf
+    RightShoulder: Bip01 R Clavicle
+    RightToes: Bip01 R Toe0
+    RightUpperArm: Bip01 R UpperArm
+    RightUpperLeg: Bip01 R Thigh
+    Spine: Bip01 Spine1

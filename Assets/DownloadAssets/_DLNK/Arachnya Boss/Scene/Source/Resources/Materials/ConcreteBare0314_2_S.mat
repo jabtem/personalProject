@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ConcreteBare0314_2_S
+  m_Shader: {fileID: 4800000, guid: ddf333def9b3bea49b85f325a68b64b1, type: 3}
+  m_ShaderKeywords: _AOENABLE_ON _CUSTOMGLOSS_ON _TRANSLUCENCY_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AmbientOclussion:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Base:
+        m_Texture: {fileID: 2800000, guid: 6e62d4ef7508a88459991dae0fd9539e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: b2681f34fae537a42b25383b04072778, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 8900000, guid: b7bb3ff99e74141e3858bfeb7098a3ce, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffCubeIBL:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Gloss:
+        m_Texture: {fileID: 2800000, guid: 6e62d4ef7508a88459991dae0fd9539e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightingRamp:
+        m_Texture: {fileID: 2800000, guid: 657724541a46a8e49b5ff7e9ff566e04, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 6e62d4ef7508a88459991dae0fd9539e, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _MaskMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: b2681f34fae537a42b25383b04072778, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _OccTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectionMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RimMask:
+        m_Texture: {fileID: 2800000, guid: 6e62d4ef7508a88459991dae0fd9539e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecCubeIBL:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecMap:
+        m_Texture: {fileID: 2800000, guid: 6e62d4ef7508a88459991dae0fd9539e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Specular:
+        m_Texture: {fileID: 2800000, guid: 6e62d4ef7508a88459991dae0fd9539e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SubdermisTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TransMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TranslucencyMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AOBurn: 0
+    - _AODetail: 0
+    - _AOEnable: 1
+    - _AOLevel: 0.5
+    - _AmbientalPower: 1
+    - _Aniso: 0
+    - _AnisoDir: 0
+    - _BIsForwardLighting: 0
+    - _ColorMask: 0
+    - _CustomGloss: 1
+    - _Cutoff: 0.3
+    - _Fresnel: 0
+    - _Fuzz: 0
+    - _FuzzOcc: 0.5
+    - _FuzzScatter: 1
+    - _NormalSmooth: -0.58
+    - _OccStrength: 1
+    - _ReflectionEmission: 0
+    - _ReflectionPower: 0
+    - _RimFresnel: 5.19
+    - _RimPower: 0
+    - _Shininess: 0.08035251
+    - _Shinniness: 0.23214284
+    - _SpecInt: 1
+    - _SpecularLevel: 1
+    - _Subdermis: 1
+    - _TransPower: 2.25
+    - _Translucency: 1
+    - _TranslucencySky: 0
+    - _Visibility: 1
+    m_Colors:
+    - _BoxMax: {r: 1, g: 1, b: 1, a: 0}
+    - _BoxMin: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorTint: {r: 0.02205884, g: 1, b: 0.5808825, a: 1}
+    - _FuzzColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ReflectColor: {r: 0.11764705, g: 0.11764705, b: 0.11764705, a: 0.5019608}
+    - _ReflectionTint: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0.31720564, g: 0.21366782, b: 0.38235295, a: 0}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SubdermisColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TextureData: {r: 10, g: -0.1, b: 0, a: 1}
+    - _TransColor: {r: 0.9191176, g: 0.8446374, b: 0.6014814, a: 1}
+    - _TranslucencyColor: {r: 1, g: 0.5, b: 0.4, a: 1}
