@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerAttackCtrl : MonoBehaviour
 {
-    public Animator anim;
+    Animator anim;
     //콤보 가능여부
     public bool comboPossible;
 
-    //콤보스템
-    public int step;
+    //콤보 가능여부판당용
+    public float curDelay =0;
+
     int id;
+    bool timerOn;
 
     void Awake()
     {
@@ -23,6 +25,7 @@ public class PlayerAttackCtrl : MonoBehaviour
 
         if(anim.GetInteger(id) == 0)
         {
+            timerOn = true;
             id = Animator.StringToHash("Base Layer.AttackA");
             anim.Play(id);
             id = Animator.StringToHash("comboStep");
@@ -44,20 +47,9 @@ public class PlayerAttackCtrl : MonoBehaviour
     {
         comboPossible = true;
     }
-    public void Combo()
+    public void ComboImpossible()
     {
-        id = Animator.StringToHash("comboStep");
-
-        if (anim.GetInteger(id) == 2)
-        {
-            id = Animator.StringToHash("Base Layer.AttackB");
-            anim.Play(id);
-        }
-        else if (anim.GetInteger(id) == 3)
-        {
-            id = Animator.StringToHash("Base Layer.AttackC");
-            anim.Play(id);
-        }
+        comboPossible = false;
     }
 
     public void ComboReset()
