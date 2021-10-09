@@ -129,7 +129,7 @@ public class PlayerMoveCtrl : MonoBehaviour
 
     public void OnAttackBtn()
     {
-        anim.SetTrigger("Attack");
+        Debug.Log("aa");
     }
 
 }
