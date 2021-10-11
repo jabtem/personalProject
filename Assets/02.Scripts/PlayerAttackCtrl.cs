@@ -13,9 +13,6 @@ public class PlayerAttackCtrl : MonoBehaviour
 
     int id;
 
-    //이전 애니메이션 해쉬값
-    int preAnimHash;
-
 
     void Awake()
     {
@@ -23,38 +20,52 @@ public class PlayerAttackCtrl : MonoBehaviour
     }
 
     void Update()
-    { 
-        comboDelay();
+    {
+        id = Animator.StringToHash("comboStep");
+        if (anim.GetInteger(id) > 0)
+            comboDelay();
         //현재 베이스레이어의 애니메이션의 진행상태
         animTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime * 100f;
+
+
         if (animTime > 100f)
-            animTime = 100f;
+            animTime = animTime%100;
 
     }
 
     void comboDelay()
     {
         //애니메이션 교체가 완료되면
-        if(preAnimHash != anim.GetCurrentAnimatorStateInfo(0).fullPathHash)
+        id = Animator.StringToHash("comboStep");
+
+
+        //어택애니메이션에서만 동작하도록
+        if(anim.GetInteger(id) >0 && anim.GetInteger(id)< 3)
         {
-            Debug.Log("AnimChange!");
+            if (animTime > 50f && animTime < 80f)
+            {
+                ComboPossible();
+            }
+            else if (animTime > 80f)
+            {
+                ComboImpossible();
+            }
+            else if (animTime <= 50f)
+            {
+                ComboImpossible();
+            }
+
+            Debug.Log("test");
         }
 
 
-        if (animTime > 50f && animTime < 80f)
-        {
-            ComboPossible();
-        }
-        else if(animTime > 80f)
-        {
-            ComboImpossible();
-        }
+
     }
 
     public void Attack()
     {
         id = Animator.StringToHash("comboStep");
-
+            
 
         if (anim.GetInteger(id) == 0)
         {
@@ -66,10 +77,8 @@ public class PlayerAttackCtrl : MonoBehaviour
         }
         else if(anim.GetInteger(id) != 0)
         {
-            if(comboPossible)
+            if (comboPossible)
             {
-                preAnimHash = anim.GetCurrentAnimatorStateInfo(0).fullPathHash;
-                comboPossible = false;
                 id = Animator.StringToHash("comboStep");
                 anim.SetInteger(id, anim.GetInteger(id)+1);
             }
