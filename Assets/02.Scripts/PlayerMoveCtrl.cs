@@ -48,6 +48,8 @@ public class PlayerMoveCtrl : MonoBehaviour
     //애니메이션
     Animator anim;
 
+    //애니메이션 파라메터 id해쉬값
+    int id;
 
     // 케릭터 이동 방향
     public Vector3 moveDirection;
@@ -70,6 +72,16 @@ public class PlayerMoveCtrl : MonoBehaviour
     void Update()
     {
 
+        Debug.Log(controller.velocity);
+        id = Animator.StringToHash("speed");
+
+        if ((Mathf.Abs(controller.velocity.x) + Mathf.Abs(controller.velocity.z)) > 0)
+        {
+
+            anim.SetInteger(id, 1);
+        }
+        else
+            anim.SetInteger(id, 0);
 
         //조작을하고있을때만 미니맵마커회전
 
