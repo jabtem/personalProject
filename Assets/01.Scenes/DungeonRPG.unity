@@ -1986,32 +1986,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 71338822}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &73343461 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1498777380728912401, guid: 50259c0a0d0243547a8944b7cc809783,
-    type: 3}
-  m_PrefabInstance: {fileID: 1474364235}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &73343462 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1498777380728912400, guid: 50259c0a0d0243547a8944b7cc809783,
     type: 3}
   m_PrefabInstance: {fileID: 1474364235}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &73343463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73343461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a5de9e455f9424b8defbb8d0b5ec75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPos: {fileID: 898548563}
-  mapScale: 5
 --- !u!1001 &75897419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43059,6 +43039,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1565808104}
     m_Modifications:
+    - target: {fileID: 73343463, guid: 50259c0a0d0243547a8944b7cc809783, type: 3}
+      propertyPath: playerPos
+      value: 
+      objectReference: {fileID: 898548563}
     - target: {fileID: 1498777380728912400, guid: 50259c0a0d0243547a8944b7cc809783,
         type: 3}
       propertyPath: m_Pivot.x
@@ -43169,8 +43153,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniMap
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1498777380728912407, guid: 50259c0a0d0243547a8944b7cc809783, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50259c0a0d0243547a8944b7cc809783, type: 3}
 --- !u!1001 &1474747814
 PrefabInstance:

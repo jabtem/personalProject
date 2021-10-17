@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1498777380728912405}
   - component: {fileID: 1498777380728912406}
   - component: {fileID: 1498777380728912404}
-  - component: {fileID: 1498777380728912407}
+  - component: {fileID: 73343463}
   m_Layer: 5
   m_Name: MiniMap
   m_TagString: Minimap
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
---- !u!114 &1498777380728912407
+--- !u!114 &73343463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,7 +98,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1498777380728912401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e12cf69b40aa2d4cbfab76dab43c5e7, type: 3}
+  m_Script: {fileID: 11500000, guid: b6a5de9e455f9424b8defbb8d0b5ec75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPos: {fileID: 0}
   mapScale: 5
