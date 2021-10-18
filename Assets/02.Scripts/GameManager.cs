@@ -46,7 +46,11 @@ public class GameManager : MonoBehaviour
     }
     public void LoadLoadingScene(int num)
     {
-        //로딩씬을불러옴
+        //로딩화면을불러옴(UI)
+        //UI를 활용해서 하는게 프레임드랍이 적다 
         loadingManger.LoadingScene(num);
+
+        //로딩씬불러옴(씬)
+        //LoadingManger2.LoadScene(num);
     }
 }
