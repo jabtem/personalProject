@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public class LoadingManger : MonoBehaviour
+public class LoadSceneManger : MonoBehaviour
 {
     public Image loadingBar;
     public CanvasGroup loadingBarCanvas;
@@ -22,6 +22,13 @@ public class LoadingManger : MonoBehaviour
         StartCoroutine(Load(num));
     }
 
+    public void LoadScene(int num)
+    {
+        SceneManager.LoadScene(num);
+        SceneManager.sceneLoaded += SceneLoadedEnd;
+    }
+
+
     private IEnumerator Load(int sceneIndex)
     {
         loadingBar.fillAmount = 0;
@@ -36,7 +43,6 @@ public class LoadingManger : MonoBehaviour
 
             if (operation.progress<0.9f)
             {
-                Debug.LogError(operation.progress);
                 loadingBar.fillAmount = Mathf.Lerp(loadingBar.fillAmount, operation.progress, timer);
                 if(loadingBar.fillAmount >= operation.progress)
                 {
@@ -61,7 +67,17 @@ public class LoadingManger : MonoBehaviour
 
     private void SceneLoadedEnd(Scene scene, LoadSceneMode loadSceneMode)
     {
-        loadingBarCanvas.gameObject.SetActive(false);
+        if(loadingBarCanvas.gameObject.activeSelf)
+            loadingBarCanvas.gameObject.SetActive(false);
+
+        //전환된씬이 캐릭터 선택창인경우 버튼세팅
+        if(scene.buildIndex == 1)
+        {
+            Button butt = GameObject.FindObjectOfType<Button>();
+            butt.onClick.RemoveAllListeners();
+            butt.onClick.AddListener(delegate { LoadingScene(2); });
+        }
+
         SceneManager.sceneLoaded -= SceneLoadedEnd;
 
     }

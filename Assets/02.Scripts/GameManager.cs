@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance = null;
     GameManager[] objs;
     GameObject loading;
-    LoadingManger loadingManger;
+    LoadSceneManger loadSceneManager;
 
     public static GameManager instance
     {
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         objs = FindObjectsOfType<GameManager>();
         loading = transform.GetChild((int)Child.LoadinBar).gameObject;
-        loadingManger = gameObject.GetComponent<LoadingManger>();
+        loadSceneManager = gameObject.GetComponent<LoadSceneManger>();
         //게임매니저는 항상 한개만 존재해야한다
         //여러개 존재하면 하나빼고 다삭제
         if (objs.Length != 1)
@@ -42,13 +42,13 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(int num)
     {
-        SceneManager.LoadSceneAsync(num);
+        loadSceneManager.LoadScene(num);
     }
     public void LoadLoadingScene(int num)
     {
         //로딩화면을불러옴(UI)
         //UI를 활용해서 하는게 프레임드랍이 적다 
-        loadingManger.LoadingScene(num);
+        loadSceneManager.LoadingScene(num);
 
         //로딩씬불러옴(씬)
         //LoadingManger2.LoadScene(num);
