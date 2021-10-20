@@ -37,10 +37,10 @@ public class MapObject
 
 public class RadarMap : MonoBehaviour
 {
-    public Transform playerPos;
+    public Transform playerPos =null;
     RectTransform rect;
     public float mapScale = 2f;
-    PlayerMoveCtrl player;
+    public PlayerMoveCtrl player;
     public static List<MapObject> mapObject = new List<MapObject>();
 
     public static void RegisterMapObject(GameObject o)
@@ -119,7 +119,7 @@ public class RadarMap : MonoBehaviour
     void Awake()
     {
         rect = GetComponent<RectTransform>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoveCtrl>();
+        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoveCtrl>();
 
     }
 
@@ -146,4 +146,5 @@ public class RadarMap : MonoBehaviour
             m.icon.transform.RotateAround(m.icon.transform.position, Vector3.forward, rotate);
         }
     }
+
 }

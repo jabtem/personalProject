@@ -17,6 +17,13 @@ public class LoadSceneManger : MonoBehaviour
 
     public void LoadingScene(int num)
     {
+        //현재 활성화된씬이 캐릭선택창인경우
+        if(SceneManager.GetActiveScene().buildIndex == 1 && GameManager.instance.CharacterNum == 0)
+        {
+            Debug.Log("캐릭터를 선택하세요");
+            return;
+        }
+
         loadingBarCanvas.gameObject.SetActive(true);
         SceneManager.sceneLoaded += SceneLoadedEnd;
         StartCoroutine(Load(num));
@@ -76,6 +83,12 @@ public class LoadSceneManger : MonoBehaviour
             Button butt = GameObject.FindObjectOfType<Button>();
             butt.onClick.RemoveAllListeners();
             butt.onClick.AddListener(delegate { LoadingScene(2); });
+        }
+        else if(scene.buildIndex == 2)
+        {
+            CreatePlayer obj = GameObject.FindObjectOfType<CreatePlayer>();
+            obj.Create(GameManager.instance.CharacterNum);
+
         }
 
         SceneManager.sceneLoaded -= SceneLoadedEnd;

@@ -73,15 +73,16 @@ public class PlayerMoveCtrl : MonoBehaviour
     {
 
         Debug.Log(controller.velocity);
-        id = Animator.StringToHash("speed");
+        //테스트용캡슐 애니메이터가 없으므로 일단 주석처리
+        //id = Animator.StringToHash("speed");
 
-        if ((Mathf.Abs(controller.velocity.x) + Mathf.Abs(controller.velocity.z)) > 0)
-        {
+        //if ((Mathf.Abs(controller.velocity.x) + Mathf.Abs(controller.velocity.z)) > 0)
+        //{
 
-            anim.SetInteger(id, 1);
-        }
-        else
-            anim.SetInteger(id, 0);
+        //    anim.SetInteger(id, 1);
+        //}
+        //else
+        //    anim.SetInteger(id, 0);
 
         //조작을하고있을때만 미니맵마커회전
 

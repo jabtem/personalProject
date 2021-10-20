@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 enum Child {LoadinBar}
+enum PlayerCharacter {Oriental = 1,Dagger, Axe};
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class GameManager : MonoBehaviour
     GameManager[] objs;
     GameObject loading;
     LoadSceneManger loadSceneManager;
+
+    //캐릭터 넘버
+    public int CharacterNum = 0;
 
     public static GameManager instance
     {

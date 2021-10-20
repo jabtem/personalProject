@@ -8,6 +8,9 @@ public class ChracterSelectRay : MonoBehaviour
     Ray ray;
     RaycastHit rayhit;
 
+    GameObject PlayerCharacter;
+
+
     void Update()
     {
 
@@ -21,6 +24,31 @@ public class ChracterSelectRay : MonoBehaviour
 
 
         Debug.DrawRay(ray.origin, ray.direction * 100.0f, Color.blue);
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            if(Physics.Raycast(ray, out rayhit, 150f, layerMask))
+            {
+                var objs = GameObject.FindObjectsOfType<SelectChacracterMove>();
+
+                foreach(var obj in objs)
+                {
+                    obj.go = false;
+                }
+
+                Debug.Log(rayhit.collider.gameObject);
+                SelectChacracterMove chracter = rayhit.collider.gameObject.GetComponent<SelectChacracterMove>();
+
+                chracter.go = true;
+
+                if(GameManager.instance !=null)
+                {
+                    GameManager.instance.CharacterNum = chracter.CharacterNum;
+                }
+
+            }
+        }
+
 #endif
 
     }
