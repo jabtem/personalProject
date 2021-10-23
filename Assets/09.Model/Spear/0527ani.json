@@ -1,0 +1,84 @@
+{
+    "format": {
+        "version": "1.0"
+    },
+    "shaders": {
+        "Main shader": {
+            "parameters": {
+                "Common Parameters": {
+                    "ao_intensity": 0.75,
+                    "emissive_intensity": 1,
+                    "horizonFade": 1.2999999523162842,
+                    "nbSamples": 16
+                },
+                "Light & Shadow": {
+                    "_LightColor": [
+                        1,
+                        0.7968683242797852,
+                        0.7968683242797852
+                    ],
+                    "_ShadowColor": [
+                        0.13796010613441467,
+                        0.029912905767560005,
+                        0.037676744163036346
+                    ],
+                    "_Smoothness": 0.5799999833106995,
+                    "_Threshold": 0.5,
+                    "ambient_str": 0.25,
+                    "light_str": 1
+                },
+                "Parallax Occlusion Mapping": {
+                    "maxPOMSamples": 16,
+                    "minPOMSamples": 4,
+                    "pomStrength": 1,
+                    "usePOM": false
+                },
+                "Subsurface Scattering Parameters": {
+                    "sssColor": [
+                        0.7009999752044678,
+                        0.3009999990463257,
+                        0.3050000071525574
+                    ],
+                    "sssEnabled": true,
+                    "sssScale": 0.5,
+                    "sssSource": 1,
+                    "sssType": 1
+                }
+            },
+            "shader": "ToonShader",
+            "shaderInstance": "Main shader"
+        }
+    },
+    "texturesets": {
+        "01_hair": {
+            "shader": "Main shader"
+        },
+        "Earring": {
+            "shader": "Main shader"
+        },
+        "body": {
+            "shader": "Main shader"
+        },
+        "clothes": {
+            "shader": "Main shader"
+        },
+        "eye1": {
+            "shader": "Main shader"
+        },
+        "eye2": {
+            "shader": "Main shader"
+        },
+        "face": {
+            "shader": "Main shader"
+        },
+        "metal": {
+            "shader": "Main shader"
+        },
+        "tail": {
+            "shader": "Main shader"
+        },
+        "wp": {
+            "shader": "Main shader"
+        }
+    }
+}
