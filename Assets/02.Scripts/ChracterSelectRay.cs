@@ -36,7 +36,6 @@ public class ChracterSelectRay : MonoBehaviour
                     obj.go = false;
                 }
 
-                Debug.Log(rayhit.collider.gameObject);
                 SelectChacracterMove chracter = rayhit.collider.gameObject.GetComponent<SelectChacracterMove>();
 
                 chracter.go = true;

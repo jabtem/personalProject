@@ -15,6 +15,15 @@ public class SelectChacracterMove : MonoBehaviour
 
     public int CharacterNum;
 
+    //애니메이션 파라메터 ID
+    int parameterID;
+    //애니메이션 속도 ID
+    int animSpeed;
+
+    Animator anim;
+    Rigidbody rigid;
+
+
     public bool go
     {
         get
@@ -27,17 +36,43 @@ public class SelectChacracterMove : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        anim = gameObject.GetComponent<Animator>();
+        parameterID = Animator.StringToHash("move");
+        animSpeed = Animator.StringToHash("animSpeed");
+    }
+
 
     void Update()
     {
         if(_go)
         {
             transform.position = Vector3.Lerp(gameObject.transform.position, movePoint.position, 0.01f);
+            if(Mathf.Abs(transform.position.x - movePoint.position.x) + Mathf.Abs(transform.position.z - movePoint.position.z) < 0.5f)
+            {
+                anim.SetBool(parameterID, false);
+            }
+            else
+            {
+                anim.SetBool(parameterID, true);
+                anim.SetFloat(animSpeed, 1f);
+            }
         }
         else if(!_go)
         {
             transform.position = Vector3.Lerp(gameObject.transform.position, backPoint.position, 0.01f);
+            if (Mathf.Abs(transform.position.x - backPoint.position.x) + Mathf.Abs(transform.position.z - backPoint.position.z) < 0.5f)
+            {
+                anim.SetBool(parameterID, false);
+            }
+            else
+            {
+                anim.SetBool(parameterID, true);
+                anim.SetFloat(animSpeed, -1f);
+            }
         }
+
     }
 
 
