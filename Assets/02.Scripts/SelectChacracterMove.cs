@@ -48,8 +48,8 @@ public class SelectChacracterMove : MonoBehaviour
     {
         if(_go)
         {
-            transform.position = Vector3.Lerp(gameObject.transform.position, movePoint.position, 0.01f);
-            if(Mathf.Abs(transform.position.x - movePoint.position.x) + Mathf.Abs(transform.position.z - movePoint.position.z) < 0.5f)
+            transform.position = Vector3.MoveTowards(gameObject.transform.position, movePoint.position, 0.01f);
+            if(Mathf.Abs(transform.position.x - movePoint.position.x) + Mathf.Abs(transform.position.z - movePoint.position.z) < 0.1f)
             {
                 anim.SetBool(parameterID, false);
             }
@@ -61,8 +61,8 @@ public class SelectChacracterMove : MonoBehaviour
         }
         else if(!_go)
         {
-            transform.position = Vector3.Lerp(gameObject.transform.position, backPoint.position, 0.01f);
-            if (Mathf.Abs(transform.position.x - backPoint.position.x) + Mathf.Abs(transform.position.z - backPoint.position.z) < 0.5f)
+            transform.position = Vector3.MoveTowards(gameObject.transform.position, backPoint.position, 0.01f);
+            if (Mathf.Abs(transform.position.x - backPoint.position.x) + Mathf.Abs(transform.position.z - backPoint.position.z) < 0.1f)
             {
                 anim.SetBool(parameterID, false);
             }
