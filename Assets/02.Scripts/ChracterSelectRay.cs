@@ -29,14 +29,14 @@ public class ChracterSelectRay : MonoBehaviour
         {
             if(Physics.Raycast(ray, out rayhit, 150f, layerMask))
             {
-                var objs = GameObject.FindObjectsOfType<SelectChacracterMove>();
+                var objs = GameObject.FindObjectsOfType<SelectCharacterMove>();
 
                 foreach(var obj in objs)
                 {
                     obj.go = false;
                 }
 
-                SelectChacracterMove chracter = rayhit.collider.gameObject.GetComponent<SelectChacracterMove>();
+                SelectCharacterMove chracter = rayhit.collider.gameObject.GetComponent<SelectCharacterMove>();
 
                 chracter.go = true;
 
