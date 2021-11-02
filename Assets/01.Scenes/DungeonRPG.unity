@@ -2138,7 +2138,7 @@ GameObject:
   - component: {fileID: 85305589}
   - component: {fileID: 85305588}
   - component: {fileID: 85305587}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4370,7 +4370,7 @@ GameObject:
   - component: {fileID: 169513763}
   - component: {fileID: 169513765}
   - component: {fileID: 169513764}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10175,7 +10175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 414721402}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10504,9 +10504,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5eca8ecd00628f4a88bc520a3cb61d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orSword: {fileID: 4748963083389503379, guid: ae2e432a4bb10fc41a8c1626643b04fd, type: 3}
-  dagger: {fileID: 581231588226843835, guid: ec7d04d99b921eb478b5f23370f48942, type: 3}
-  axe: {fileID: 1061706420460791626, guid: 9a2741ac7ffe5c1479e2ac69afedace7, type: 3}
+  katana: {fileID: 1337087426911131244, guid: 180ddc90e5aa66f44a1f72624db72722, type: 3}
+  spear: {fileID: 581231588226843835, guid: ec7d04d99b921eb478b5f23370f48942, type: 3}
+  twoHandSword: {fileID: 1061706420460791626, guid: 9a2741ac7ffe5c1479e2ac69afedace7,
+    type: 3}
   miniMap: {fileID: 1474364236}
 --- !u!1001 &438871036
 PrefabInstance:
@@ -15632,7 +15633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 634528403}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SkillUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16188,7 +16189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 666273497}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DragSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19036,7 +19037,7 @@ GameObject:
   m_Component:
   - component: {fileID: 753996312}
   - component: {fileID: 753996313}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20694,7 +20695,7 @@ GameObject:
   - component: {fileID: 828630791}
   - component: {fileID: 828630793}
   - component: {fileID: 828630792}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22767,7 +22768,7 @@ GameObject:
   - component: {fileID: 906607748}
   - component: {fileID: 906607750}
   - component: {fileID: 906607749}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23167,7 +23168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 922141548}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ActionUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35935,7 +35936,7 @@ GameObject:
   - component: {fileID: 1464919804}
   - component: {fileID: 1464919806}
   - component: {fileID: 1464919805}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37882,7 +37883,7 @@ GameObject:
   - component: {fileID: 1565808107}
   - component: {fileID: 1565808106}
   - component: {fileID: 1565808105}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41031,7 +41032,7 @@ GameObject:
   - component: {fileID: 1684559457}
   - component: {fileID: 1684559459}
   - component: {fileID: 1684559458}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SkilBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44630,7 +44631,7 @@ GameObject:
   - component: {fileID: 1875651959}
   - component: {fileID: 1875651961}
   - component: {fileID: 1875651960}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48839,7 +48840,7 @@ GameObject:
   - component: {fileID: 2044194435}
   - component: {fileID: 2044194434}
   - component: {fileID: 2044194433}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
