@@ -6785,7 +6785,7 @@ Animator:
   m_GameObject: {fileID: 8195915722408643713}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e23e3304d2484d84b9d6e4b070cb17db, type: 3}
-  m_Controller: {fileID: 9100000, guid: f561dd83d5af06c418e8f936f0c48fee, type: 2}
+  m_Controller: {fileID: 9100000, guid: 00afa81ed94f2d145bdca33f5881caa9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7387,9 +7387,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8518282244822683124}
-  - component: {fileID: 2366404407740962702}
+  - component: {fileID: 733188473}
+  - component: {fileID: 733188474}
   m_Layer: 0
-  m_Name: 1026
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7443,25 +7444,127 @@ Transform:
   m_Father: {fileID: 8195915722408643718}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!95 &2366404407740962702
-Animator:
-  serializedVersion: 3
+--- !u!114 &733188473
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9042335512351479630}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: e23e3304d2484d84b9d6e4b070cb17db, type: 3}
-  m_Controller: {fileID: 9100000, guid: f561dd83d5af06c418e8f936f0c48fee, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776adaaacdc5c4e8ab0395120a6e972b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixTransforms: 1
+  solver:
+    executedInEditor: 0
+    IKPosition: {x: -1.5039667, y: 1.6225947, z: -1.0867455}
+    IKPositionWeight: 1
+    root: {fileID: 8518282244822683124}
+    target: {fileID: 0}
+    spine:
+    - transform: {fileID: 9018287859773641356}
+      weight: 0
+      solverPosition: {x: 0, y: 0, z: 0}
+      solverRotation: {x: 0, y: 0, z: 0, w: 0}
+      defaultLocalPosition: {x: -0.23944354, y: 0.036229704, z: 0.00000022351745}
+      defaultLocalRotation: {x: 0.00000023841855, y: 0.0000007152557, z: 0.000000014901159,
+        w: 1}
+      length: 0
+      sqrMag: 0
+      axis: {x: 0.0020695056, y: 0.9999981, z: 0.0000023192988}
+      baseForwardOffsetEuler: {x: 0, y: 0, z: 0}
+    - transform: {fileID: 8088307266277243855}
+      weight: 0
+      solverPosition: {x: 0, y: 0, z: 0}
+      solverRotation: {x: 0, y: 0, z: 0, w: 0}
+      defaultLocalPosition: {x: -0.5798541, y: -0.00043106225, z: -0.0000000011641443}
+      defaultLocalRotation: {x: -0, y: 5.68434e-14, z: 4.4408877e-14, w: 1}
+      length: 0
+      sqrMag: 0
+      axis: {x: 0.0020695056, y: 0.9999981, z: 0.0000023192988}
+      baseForwardOffsetEuler: {x: 0, y: 0, z: 0}
+    - transform: {fileID: 7133036756356382108}
+      weight: 0
+      solverPosition: {x: 0, y: 0, z: 0}
+      solverRotation: {x: 0, y: 0, z: 0, w: 0}
+      defaultLocalPosition: {x: -0.5413499, y: -0.06505538, z: -3.802838e-17}
+      defaultLocalRotation: {x: -0, y: -0, z: -0, w: 1}
+      length: 0
+      sqrMag: 0
+      axis: {x: 0.0020695056, y: 0.9999981, z: 0.0000023192988}
+      baseForwardOffsetEuler: {x: 0, y: 0, z: 0}
+    head:
+      transform: {fileID: 6778758385151699690}
+      weight: 1
+      solverPosition: {x: 0, y: 0, z: 0}
+      solverRotation: {x: 0, y: 0, z: 0, w: 1}
+      defaultLocalPosition: {x: -0.15615867, y: 0, z: -5.773159e-15}
+      defaultLocalRotation: {x: 1.1018338e-21, y: -0.000000093626745, z: -1.4788562e-13,
+        w: 1}
+      length: 0
+      sqrMag: 0
+      axis: {x: 0.0020695406, y: 0.99999815, z: 0.0000022011593}
+      baseForwardOffsetEuler: {x: 0, y: 0, z: 0}
+    eyes: []
+    bodyWeight: 0
+    headWeight: 1
+    eyesWeight: 1
+    clampWeight: 0.5
+    clampWeightHead: 0.5
+    clampWeightEyes: 0.5
+    clampSmoothing: 2
+    spineWeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.3
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    spineTargetOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &733188474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9042335512351479630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8362d7c66e966dd498d59b31392d5148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ik: {fileID: 733188473}
+  target: {fileID: 0}
+  weight: 1
+  offset: {x: 0, y: 0, z: 0}
+  targetSwitchSmoothTime: 0.3
+  weightSmoothTime: 0.3
+  smoothTurnTowardsTarget: 1
+  maxRadiansDelta: 3
+  maxMagnitudeDelta: 3
+  slerpSpeed: 3
+  pivotOffsetFromRoot: {x: 0, y: 1, z: 0}
+  minDistance: 1
+  maxRootAngle: 0
 --- !u!1 &9107429734609752083
 GameObject:
   m_ObjectHideFlags: 0

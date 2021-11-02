@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CreatePlayer : MonoBehaviour
 {
-    public GameObject orSword;
-    public GameObject dagger;
-    public GameObject axe;
+    public GameObject katana;
+    public GameObject spear;
+    public GameObject twoHandSword;
     public RadarMap miniMap;
 
     public void Create(int num)
@@ -16,17 +16,17 @@ public class CreatePlayer : MonoBehaviour
         switch (num)
         {
             case 1:
-                go = GameObject.Instantiate(orSword, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                go = GameObject.Instantiate(katana, this.gameObject.transform.position, this.gameObject.transform.rotation);
                 miniMap.playerPos = go.transform;
                 miniMap.player = go.GetComponent<PlayerMoveCtrl>();
                 break;
             case 2:
-                go = GameObject.Instantiate(dagger, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                go = GameObject.Instantiate(spear, this.gameObject.transform.position, this.gameObject.transform.rotation);
                 miniMap.playerPos = go.transform;
                 miniMap.player = go.GetComponent<PlayerMoveCtrl>();
                 break;
             case 3:
-                go = GameObject.Instantiate(axe, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                go = GameObject.Instantiate(twoHandSword, this.gameObject.transform.position, this.gameObject.transform.rotation);
                 miniMap.playerPos = go.transform;
                 miniMap.player = go.GetComponent<PlayerMoveCtrl>();
                 break;
