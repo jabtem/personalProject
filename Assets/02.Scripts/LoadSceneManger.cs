@@ -88,7 +88,6 @@ public class LoadSceneManger : MonoBehaviour
         {
             CreatePlayer obj = GameObject.FindObjectOfType<CreatePlayer>();
             obj.Create(GameManager.instance.CharacterNum);
-
         }
 
         SceneManager.sceneLoaded -= SceneLoadedEnd;

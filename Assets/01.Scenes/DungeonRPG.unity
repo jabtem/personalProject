@@ -10472,7 +10472,7 @@ GameObject:
   - component: {fileID: 434481246}
   - component: {fileID: 434481247}
   m_Layer: 0
-  m_Name: ChracaterSpawnPoint
+  m_Name: PlayerCreateManger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10509,6 +10509,8 @@ MonoBehaviour:
   twoHandSword: {fileID: 1061706420460791626, guid: 9a2741ac7ffe5c1479e2ac69afedace7,
     type: 3}
   miniMap: {fileID: 1474364236}
+  actionButtos:
+  - {fileID: 2044194433}
 --- !u!1001 &438871036
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48841,7 +48843,7 @@ GameObject:
   - component: {fileID: 2044194434}
   - component: {fileID: 2044194433}
   m_Layer: 5
-  m_Name: Button
+  m_Name: AttackButt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
