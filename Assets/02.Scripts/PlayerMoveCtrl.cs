@@ -140,11 +140,6 @@ public class PlayerMoveCtrl : MonoBehaviour
 
     }
 
-    public void OnAttackBtn()
-    {
-        Debug.Log("aa");
-    }
-
 }
 
 
