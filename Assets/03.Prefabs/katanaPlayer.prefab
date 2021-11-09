@@ -2638,8 +2638,8 @@ GameObject:
   - component: {fileID: 1337087426911131246}
   - component: {fileID: 1337087426911131245}
   - component: {fileID: 1337087426911131240}
-  - component: {fileID: 1337087426911131241}
   - component: {fileID: 1337087426911131242}
+  - component: {fileID: 2508331016200242637}
   m_Layer: 9
   m_Name: katanaPlayer
   m_TagString: Player
@@ -2709,7 +2709,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab288cc31413aac41934fec28ee3e2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1337087426911131241
+--- !u!114 &1337087426911131242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337087426911131244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2561e598b228d704a84a975b80edc325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboPossible: 0
+  maxComboCount: 3
+--- !u!95 &2508331016200242637
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -2728,20 +2742,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1337087426911131242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1337087426911131244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2561e598b228d704a84a975b80edc325, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  comboPossible: 0
-  animTime: 0
 --- !u!1 &1365784770838539624
 GameObject:
   m_ObjectHideFlags: 0

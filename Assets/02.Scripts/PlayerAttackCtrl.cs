@@ -7,12 +7,12 @@ public class PlayerAttackCtrl : MonoBehaviour
     Animator anim;
     AnimatorTransitionInfo transitionInfo;
     //콤보 가능여부
-    bool comboPossible;
+    public bool comboPossible;
 
     //콤보 가능여부판당용 현재 애니메이션의 진행도
     float animTime = 0;
 
-    int id;
+    int comboStepID;
 
     //해당캐릭터의 일반공격 콤보최대횟수
     public int maxComboCount;
@@ -20,14 +20,14 @@ public class PlayerAttackCtrl : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
+        comboStepID = Animator.StringToHash("comboStep");
     }
 
     void Update()
     {
-        id = Animator.StringToHash("comboStep");
         transitionInfo = anim.GetAnimatorTransitionInfo(0);
         animTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime * 100f;
-        if (anim.GetInteger(id) > 0)
+        if (anim.GetInteger(comboStepID) > 0)
         {
             comboDelay();
 
@@ -50,10 +50,8 @@ public class PlayerAttackCtrl : MonoBehaviour
     void comboDelay()
     {
         //애니메이션 교체가 완료되면
-        id = Animator.StringToHash("comboStep");
-
         //어택애니메이션에서만 동작하도록
-        if (anim.GetInteger(id) >0 && anim.GetInteger(id)< 3)
+        if (anim.GetInteger(comboStepID) >0 && anim.GetInteger(comboStepID) < 3)
         {
             if (animTime > 50f && animTime < 80f)
             {
@@ -76,26 +74,26 @@ public class PlayerAttackCtrl : MonoBehaviour
 
     public void Attack()
     {
-        id = Animator.StringToHash("comboStep");
 
+        Debug.Log("Attack!");
 
-
-        if (anim.GetInteger(id) == maxComboCount)
+        if (anim.GetInteger(comboStepID) == maxComboCount)
         {
             return;
         }
 
-        if (anim.GetInteger(id) == 0)
+        if (anim.GetInteger(comboStepID) == 0)
         {
 
-            anim.SetInteger(id, 1);
+            anim.applyRootMotion = true;
+            anim.SetInteger(comboStepID, 1);
 
         }
-        else if(anim.GetInteger(id) != 0)
+        else if(anim.GetInteger(comboStepID) != 0)
         {
             if (comboPossible)
             {
-                anim.SetInteger(id, anim.GetInteger(id)+1);
+                anim.SetInteger(comboStepID, anim.GetInteger(comboStepID) +1);
             }
         }
     }
@@ -112,8 +110,8 @@ public class PlayerAttackCtrl : MonoBehaviour
     public void ComboReset()
     {
         comboPossible = false;
-        id = Animator.StringToHash("comboStep");
-        anim.SetInteger(id, 0);
+        anim.applyRootMotion = false;
+        anim.SetInteger(comboStepID, 0);
 
     }
 }
