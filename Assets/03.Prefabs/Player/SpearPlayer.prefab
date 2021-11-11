@@ -2187,7 +2187,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboPossible: 0
+  SA: 1
   maxComboCount: 3
+  dodgeDistance: 0
+  guardCount: 0
 --- !u!114 &749803798976602370
 MonoBehaviour:
   m_ObjectHideFlags: 0

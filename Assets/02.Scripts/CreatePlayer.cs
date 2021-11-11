@@ -36,14 +36,14 @@ public class CreatePlayer : MonoBehaviour
     }
     void ActionButtonSet(GameObject go)
     {
-        if(go.GetComponent<PlayerAttackCtrl>() == null)
+        if(go.GetComponent<PlayerActionCtrl>() == null)
         {
             //어택컨트롤컴포넌트가없을경우 세팅X
             return;
         }
         else
         {
-            PlayerAttackCtrl attCtrl = go.GetComponent<PlayerAttackCtrl>();
+            PlayerActionCtrl attCtrl = go.GetComponent<PlayerActionCtrl>();
             //버튼할당된 리스너 초기화
             for(int i=0; i< actionButtos.Length; ++i)
             {

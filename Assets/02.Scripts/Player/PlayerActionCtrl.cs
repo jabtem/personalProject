@@ -2,20 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackCtrl : MonoBehaviour
+
+public class PlayerActionCtrl : MonoBehaviour
 {
+    public enum specialAction
+    {
+        Dodge, Guard
+    }
+
+
+
+
+
+
+
+
     Animator anim;
     AnimatorTransitionInfo transitionInfo;
     //콤보 가능여부
     public bool comboPossible;
+    public specialAction SA;
 
     //콤보 가능여부판당용 현재 애니메이션의 진행도
     float animTime = 0;
-
     int comboStepID;
 
+
     //해당캐릭터의 일반공격 콤보최대횟수
+    [HideInInspector]
     public int maxComboCount;
+
+
+    //회피거리
+    [HideInInspector]
+    public float dodgeDistance;
+
+    //가드횟수
+    [HideInInspector]
+    public int guardCount;
 
     void Awake()
     {
