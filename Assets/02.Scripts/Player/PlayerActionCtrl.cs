@@ -22,6 +22,7 @@ public class PlayerActionCtrl : MonoBehaviour
     //콤보 가능여부
     public bool comboPossible;
     public specialAction SA;
+    CharacterController controller;
 
     //콤보 가능여부판당용 현재 애니메이션의 진행도
     float animTime = 0;
@@ -35,7 +36,9 @@ public class PlayerActionCtrl : MonoBehaviour
 
     //회피거리
     [HideInInspector]
-    public float dodgeDistance;
+    public float dodgeTime;
+    [HideInInspector]
+    public float dodgeSpeed;
 
     //가드횟수
     [HideInInspector]
@@ -44,11 +47,13 @@ public class PlayerActionCtrl : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>();
         comboStepID = Animator.StringToHash("comboStep");
     }
 
     void Update()
     {
+        Debug.Log(SA);
         transitionInfo = anim.GetAnimatorTransitionInfo(0);
         animTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime * 100f;
         if (anim.GetInteger(comboStepID) > 0)
@@ -120,6 +125,34 @@ public class PlayerActionCtrl : MonoBehaviour
                 anim.SetInteger(comboStepID, anim.GetInteger(comboStepID) +1);
             }
         }
+    }
+
+    //특수액션 가드 of 회피
+    public void SpecialAction()
+    {
+        if (SA == specialAction.Dodge)
+        {
+            StartCoroutine(Dodge());
+        }
+    }
+
+
+    IEnumerator Dodge()
+    {
+        float startTime = 0;
+
+        PlayerMoveCtrl pMove = GetComponent<PlayerMoveCtrl>();
+
+        while(startTime <dodgeTime)
+        {
+            startTime += Time.deltaTime;
+
+            pMove.moveDirection.x = pMove.lastMoveDirection.x * dodgeSpeed;
+            pMove.moveDirection.z = pMove.lastMoveDirection.z * dodgeSpeed;
+
+            yield return null;
+        }
+
     }
 
     public void ComboPossible()

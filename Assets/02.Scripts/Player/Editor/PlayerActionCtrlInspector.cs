@@ -33,7 +33,8 @@ public class PlayerActionCtrlInspector : Editor
         switch (playerActionCtrl.SA)
         {
             case PlayerActionCtrl.specialAction.Dodge :
-                playerActionCtrl.dodgeDistance = EditorGUILayout.FloatField("회피거리", playerActionCtrl.dodgeDistance);
+                playerActionCtrl.dodgeTime = EditorGUILayout.FloatField("회피시간", playerActionCtrl.dodgeTime);
+                playerActionCtrl.dodgeSpeed = EditorGUILayout.FloatField("회피속도", playerActionCtrl.dodgeSpeed);
                 break;
             case PlayerActionCtrl.specialAction.Guard:
                 playerActionCtrl.guardCount = EditorGUILayout.IntField("가드횟수", playerActionCtrl.guardCount);

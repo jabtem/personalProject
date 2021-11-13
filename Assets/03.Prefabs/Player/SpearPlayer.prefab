@@ -2169,11 +2169,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ee837f0d34c85479596ea65d1fab37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 20
-  movSpeed: 5
+  gravity: 1
+  moveSpeed: 5
   rotSpeed: 120
   jumpSpeed: 10
   moveDirection: {x: 0, y: 0, z: 0}
+  lastMoveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &749803798976602369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2189,7 +2190,8 @@ MonoBehaviour:
   comboPossible: 0
   SA: 1
   maxComboCount: 3
-  dodgeDistance: 0
+  dodgeTime: 0
+  dodgeSpeed: 0
   guardCount: 0
 --- !u!114 &749803798976602370
 MonoBehaviour:

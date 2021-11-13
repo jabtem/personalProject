@@ -23,7 +23,7 @@ public class PlayerInfo
     }
 
 }
-// 테스트는 NavMeshAgent 비활성
+// 캐릭터 컨트롤러 조작방식
 public class PlayerMoveCtrl : MonoBehaviour
 {
     GameObject actionBtn;
@@ -39,7 +39,7 @@ public class PlayerMoveCtrl : MonoBehaviour
     public float gravity = 20.0f;
 
     // 케릭터 이동속도
-    public float movSpeed = 5.0f;
+    public float moveSpeed = 5.0f;
     // 케릭터 회전속도
     public float rotSpeed = 120.0f;
     //케릭터 점프 속도
@@ -53,6 +53,8 @@ public class PlayerMoveCtrl : MonoBehaviour
 
     // 케릭터 이동 방향
     public Vector3 moveDirection;
+    //조이스틱을이용해 마지막으로 이동했던 방향
+    public Vector3 lastMoveDirection;
 
     //정지시 이전 캐릭터방향 미니맵마커 유지용
     Vector3 preMoveDirection;
@@ -71,8 +73,6 @@ public class PlayerMoveCtrl : MonoBehaviour
 
     void Update()
     {
-
-        Debug.Log(controller.velocity);
         //테스트용캡슐 애니메이터가 없으므로 일단 주석처리
         id = Animator.StringToHash("speed");
 
@@ -94,12 +94,14 @@ public class PlayerMoveCtrl : MonoBehaviour
             float v = Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("Joystick");
             float h = Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("Joystick");
 
-            moveDirection = new Vector3(h * movSpeed, 0, v * movSpeed);
+            moveDirection = new Vector3(h , 0, v );
 
             if (Mathf.Abs(v) >0 || Mathf.Abs(h)>0)
             {           
                 PlayerBody.rotation = Quaternion.Euler(0, ang + Camera.main.transform.rotation.eulerAngles.y+90 , 0);
-                
+                lastMoveDirection = moveDirection;
+
+
             }
             playerInfo.playerVector = moveDirection;
 
@@ -120,30 +122,31 @@ public class PlayerMoveCtrl : MonoBehaviour
             // 월드좌표계 기준으로 변환하여 변환된 벡터를 반환해 준다.
             //즉, 로컬좌표계 기준의 방향벡터를 > 월드좌표계 기준의 방향벡터로 변환
 
-            moveDirection = transform.TransformDirection(moveDirection);
+            //moveDirection = transform.TransformDirection(moveDirection);
 
-            ////키보드가 점프 입력일 경우
-            //if (Input.GetButton("Jump"))
-            //{
-            //    // jumpSpeed 만큼 케릭을 이동
-            //    moveDirection.y = jumpSpeed;
-            //}
+            //키보드가 점프 입력일 경우
+            if (Input.GetButton("Jump"))
+            {
+                // jumpSpeed 만큼 케릭을 이동
+                moveDirection.x = lastMoveDirection.x * jumpSpeed;
+                moveDirection.z = lastMoveDirection.z * jumpSpeed;
+            }
+        }
+        else
+        {
+            //지면이아닐때만 중력이 작용하도록
+            moveDirection.y -= gravity * Time.deltaTime;// 디바이스마다 일정 속도로 케릭에 중력 적용
+                                                        // CharacterController의 Move 함수에 방향과 크기의 벡터값을 적용(디바이스마다 일정)
         }
 
-
-
-
-
-        moveDirection.y -= gravity * Time.deltaTime;// 디바이스마다 일정 속도로 케릭에 중력 적용
-                                                    // CharacterController의 Move 함수에 방향과 크기의 벡터값을 적용(디바이스마다 일정)
-        controller.Move(rot * moveDirection * Time.deltaTime);
+        controller.Move(rot * moveDirection * moveSpeed * Time.deltaTime);
 
     }
 
 }
 
 
-/* 만약 CharacterController를 안쓴다면...
+/* 만약 CharacterController를 안쓸경우
 
 using System.Collections;
 using System.Collections.Generic;
@@ -151,7 +154,7 @@ using UnityEngine;
 
 
 
-public class PlayerCtrl_1 : MonoBehaviour {
+public class PlayerMoveCtrl : MonoBehaviour {
 
     // 이동 관련 변수
     private float ang = 0.0f;
