@@ -10509,9 +10509,8 @@ MonoBehaviour:
   twoHandSword: {fileID: 2281391034263034779, guid: c1e889250727f87449db32f732058f94,
     type: 3}
   miniMap: {fileID: 1474364236}
-  actionButtos:
-  - {fileID: 2044194433}
-  aa:
+  actionButtons:
+  - {fileID: 2044194436}
   - {fileID: 1288771337}
 --- !u!1001 &438871036
 PrefabInstance:
@@ -48626,6 +48625,14 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11496818, guid: 1a5154ebeae449e4994357609381b281, type: 3}
+      propertyPath: radiusModifier
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496818, guid: 1a5154ebeae449e4994357609381b281, type: 3}
+      propertyPath: activationRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496818, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: highlightColor.b
       value: 0
       objectReference: {fileID: 0}
@@ -48671,7 +48678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11496818, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: customActivationRange
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22426446, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: m_SizeDelta.x
@@ -48683,11 +48690,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22426446, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -200.01599
       objectReference: {fileID: 0}
     - target: {fileID: 22426446, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -122.25598
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: m_Pivot.x
@@ -48719,11 +48726,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 432
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 432
+      value: 810
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: m_LocalPosition.x
@@ -48755,11 +48762,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 279.984
+      value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 282.74402
+      value: 405
       objectReference: {fileID: 0}
     - target: {fileID: 22473068, guid: 1a5154ebeae449e4994357609381b281, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -49176,22 +49183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1001 &2045275630
 PrefabInstance:
   m_ObjectHideFlags: 0

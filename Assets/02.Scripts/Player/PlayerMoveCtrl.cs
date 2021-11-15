@@ -59,6 +59,10 @@ public class PlayerMoveCtrl : MonoBehaviour
     //정지시 이전 캐릭터방향 미니맵마커 유지용
     Vector3 preMoveDirection;
 
+    //이동가능여부 판단
+    //공격중 조이스틱조작이나 구르기중 조이스틱 조작차단용
+    public bool canMove;
+
     public PlayerInfo playerInfo = new PlayerInfo();
     void Awake()
     {
@@ -68,7 +72,7 @@ public class PlayerMoveCtrl : MonoBehaviour
         PlayerBody = transform.Find("Body");
         Camera.main.GetComponent<smoothFollowCam>().target = this.transform;
         anim = GetComponent<Animator>();
-
+        canMove = true;
     }
 
     void Update()
@@ -76,13 +80,13 @@ public class PlayerMoveCtrl : MonoBehaviour
         //테스트용캡슐 애니메이터가 없으므로 일단 주석처리
         id = Animator.StringToHash("speed");
 
-        if ((Mathf.Abs(controller.velocity.x) + Mathf.Abs(controller.velocity.z)) > 0)
-        {
+        //if ((Mathf.Abs(controller.velocity.x) + Mathf.Abs(controller.velocity.z)) > 0)
+        //{
 
-            anim.SetInteger(id, 1);
-        }
-        else
-            anim.SetInteger(id, 0);
+        //    anim.SetInteger(id, 1);
+        //}
+        //else
+        //    anim.SetInteger(id, 0);
 
         //조작을하고있을때만 미니맵마커회전
 
@@ -93,25 +97,34 @@ public class PlayerMoveCtrl : MonoBehaviour
 
             float v = Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("Joystick");
             float h = Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("Joystick");
+            Debug.Log("v" + v);
+            Debug.Log("h" + h);
 
-            moveDirection = new Vector3(h , 0, v );
+            if (canMove)
+            {
 
-            if (Mathf.Abs(v) >0 || Mathf.Abs(h)>0)
-            {           
-                PlayerBody.rotation = Quaternion.Euler(0, ang + Camera.main.transform.rotation.eulerAngles.y+90 , 0);
-                lastMoveDirection = moveDirection;
+                moveDirection = new Vector3(h, 0, v);
 
+                if (Mathf.Abs(v) > 0 || Mathf.Abs(h) > 0)
+                {
+                    PlayerBody.rotation = Quaternion.Euler(0, ang + Camera.main.transform.rotation.eulerAngles.y + 90, 0);
+
+                    //정규화된 방향벡터를 전달 = 구르기속도가 일정해야 하기때문 
+                    lastMoveDirection = moveDirection.normalized;
+                    anim.SetInteger(id, 1);
+
+                }
+                else
+                    anim.SetInteger(id, 0);
+                playerInfo.playerVector = moveDirection;
+
+
+                // 만약 콜라이더가 땅에 있을 경우 
+                //디바이스마다 일정한 회전 속도
+                float amtRot = rotSpeed * Time.deltaTime;
+                //인풋입력 키보드+조이스틱
 
             }
-            playerInfo.playerVector = moveDirection;
-
-
-            // 만약 콜라이더가 땅에 있을 경우 
-            //디바이스마다 일정한 회전 속도
-            float amtRot = rotSpeed * Time.deltaTime;
-            //인풋입력 키보드+조이스틱
-
-
             //오브젝트를 회전
             //transform.Rotate(Vector3.up * ang * amtRot);
 
@@ -123,14 +136,7 @@ public class PlayerMoveCtrl : MonoBehaviour
             //즉, 로컬좌표계 기준의 방향벡터를 > 월드좌표계 기준의 방향벡터로 변환
 
             //moveDirection = transform.TransformDirection(moveDirection);
-
-            //키보드가 점프 입력일 경우
-            if (Input.GetButton("Jump"))
-            {
-                // jumpSpeed 만큼 케릭을 이동
-                moveDirection.x = lastMoveDirection.x * jumpSpeed;
-                moveDirection.z = lastMoveDirection.z * jumpSpeed;
-            }
+ 
         }
         else
         {

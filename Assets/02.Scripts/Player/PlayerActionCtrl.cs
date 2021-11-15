@@ -27,6 +27,7 @@ public class PlayerActionCtrl : MonoBehaviour
     //콤보 가능여부판당용 현재 애니메이션의 진행도
     float animTime = 0;
     int comboStepID;
+    int dodgeId;
 
 
     //해당캐릭터의 일반공격 콤보최대횟수
@@ -49,11 +50,11 @@ public class PlayerActionCtrl : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         comboStepID = Animator.StringToHash("comboStep");
+        dodgeId = Animator.StringToHash("dodge");
     }
 
     void Update()
     {
-        Debug.Log(SA);
         transitionInfo = anim.GetAnimatorTransitionInfo(0);
         animTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime * 100f;
         if (anim.GetInteger(comboStepID) > 0)
@@ -132,6 +133,8 @@ public class PlayerActionCtrl : MonoBehaviour
     {
         if (SA == specialAction.Dodge)
         {
+            
+            anim.SetBool(dodgeId, true);
             StartCoroutine(Dodge());
         }
     }
@@ -139,20 +142,28 @@ public class PlayerActionCtrl : MonoBehaviour
 
     IEnumerator Dodge()
     {
+        //회피로직
+        // 속도(이동속도*회피속도)로 회피시간만큼 이동한다
+        //예) doegeSpeed = 5
+        //이동속도의 5배로 회피시간만큼 순간적으로빠르게이동
+
         float startTime = 0;
 
         PlayerMoveCtrl pMove = GetComponent<PlayerMoveCtrl>();
+        pMove.canMove = false;
 
         while(startTime <dodgeTime)
         {
             startTime += Time.deltaTime;
 
-            pMove.moveDirection.x = pMove.lastMoveDirection.x * dodgeSpeed;
-            pMove.moveDirection.z = pMove.lastMoveDirection.z * dodgeSpeed;
+            pMove.moveDirection.x = pMove.lastMoveDirection.x* dodgeSpeed ;
+            pMove.moveDirection.z = pMove.lastMoveDirection.z* dodgeSpeed;
 
             yield return null;
         }
-
+        //지정된시간만큼 회피이동을한후로 조이스틱조작을 허용하고 애니메이션 되돌림
+        anim.SetBool(dodgeId, false);
+        pMove.canMove = true;
     }
 
     public void ComboPossible()

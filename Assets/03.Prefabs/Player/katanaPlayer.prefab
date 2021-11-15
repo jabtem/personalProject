@@ -2680,6 +2680,7 @@ MonoBehaviour:
   jumpSpeed: 10
   moveDirection: {x: 0, y: 0, z: 0}
   lastMoveDirection: {x: 0, y: 0, z: 0}
+  canMove: 0
 --- !u!143 &1337087426911131245
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2725,8 +2726,8 @@ MonoBehaviour:
   comboPossible: 0
   SA: 0
   maxComboCount: 3
-  dodgeTime: 0.2
-  dodgeSpeed: 10
+  dodgeTime: 0.5
+  dodgeSpeed: 5
   guardCount: 0
 --- !u!95 &2508331016200242637
 Animator:
