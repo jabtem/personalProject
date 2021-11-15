@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CreatePlayer : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class CreatePlayer : MonoBehaviour
 
     //배열 0:공격버튼
     public Button[] actionButtos;
+    public EventTrigger[] aa;
     GameObject playerChracter;
     public void Create(int num)
     {
@@ -51,6 +53,15 @@ public class CreatePlayer : MonoBehaviour
             }
 
             actionButtos[0].onClick.AddListener(delegate { attCtrl.Attack(); });
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerDown;
+            entry.callback.RemoveAllListeners();
+            //델리게이트(대리자)
+            //entry.callback.AddListener(delegate { attCtrl.SpecialAction(); });
+            //람다식
+            entry.callback.AddListener((date) => { attCtrl.SpecialAction(); });
+            aa[0].triggers.Add(entry);
+
 
         }
     }
