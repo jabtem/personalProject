@@ -23,6 +23,7 @@ public class PlayerActionCtrl : MonoBehaviour
     public bool comboPossible;
     public specialAction SA;
     CharacterController controller;
+    PlayerMoveCtrl pMove;
 
     //콤보 가능여부판당용 현재 애니메이션의 진행도
     float animTime = 0;
@@ -50,6 +51,7 @@ public class PlayerActionCtrl : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         comboStepID = Animator.StringToHash("comboStep");
+        pMove = GetComponent<PlayerMoveCtrl>();
     }
 
     void Update()
@@ -111,6 +113,9 @@ public class PlayerActionCtrl : MonoBehaviour
             return;
         }
 
+
+        pMove.canMove = false;
+
         if (anim.GetInteger(comboStepID) == 0)
         {
 
@@ -130,6 +135,12 @@ public class PlayerActionCtrl : MonoBehaviour
     //특수액션 가드 of 회피
     public void SpecialAction()
     {
+        if (anim.GetInteger(comboStepID) > 0)
+        {
+            return;
+        }
+
+
         if (SA == specialAction.Dodge)
         {
 
@@ -153,7 +164,6 @@ public class PlayerActionCtrl : MonoBehaviour
 
         float startTime = 0;
 
-        PlayerMoveCtrl pMove = GetComponent<PlayerMoveCtrl>();
         pMove.canMove = false;
 
         while(startTime <dodgeTime)
@@ -196,6 +206,7 @@ public class PlayerActionCtrl : MonoBehaviour
         comboPossible = false;
         anim.applyRootMotion = false;
         anim.SetInteger(comboStepID, 0);
+        pMove.canMove = true;
 
     }
 }
