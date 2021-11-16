@@ -27,7 +27,7 @@ public class PlayerActionCtrl : MonoBehaviour
     //콤보 가능여부판당용 현재 애니메이션의 진행도
     float animTime = 0;
     int comboStepID;
-    int dodgeId;
+    int specialActionID;
 
 
     //해당캐릭터의 일반공격 콤보최대횟수
@@ -50,7 +50,6 @@ public class PlayerActionCtrl : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         comboStepID = Animator.StringToHash("comboStep");
-        dodgeId = Animator.StringToHash("dodge");
     }
 
     void Update()
@@ -133,9 +132,12 @@ public class PlayerActionCtrl : MonoBehaviour
     {
         if (SA == specialAction.Dodge)
         {
-            
-            anim.SetBool(dodgeId, true);
+
             StartCoroutine(Dodge());
+        }
+        else if(SA == specialAction.Guard)
+        {
+            GuardButtDown();
         }
     }
 
@@ -146,6 +148,8 @@ public class PlayerActionCtrl : MonoBehaviour
         // 속도(이동속도*회피속도)로 회피시간만큼 이동한다
         //예) doegeSpeed = 5
         //이동속도의 5배로 회피시간만큼 순간적으로빠르게이동
+        specialActionID = Animator.StringToHash("dodge");
+        anim.SetBool(specialActionID, true);
 
         float startTime = 0;
 
@@ -162,9 +166,21 @@ public class PlayerActionCtrl : MonoBehaviour
             yield return null;
         }
         //지정된시간만큼 회피이동을한후로 조이스틱조작을 허용하고 애니메이션 되돌림
-        anim.SetBool(dodgeId, false);
+        anim.SetBool(specialActionID, false);
         pMove.canMove = true;
     }
+
+    void GuardButtDown()
+    {
+        specialActionID = Animator.StringToHash("guard");
+        anim.SetBool(specialActionID, true);
+    }
+    public void GuardButtUp()
+    {
+        specialActionID = Animator.StringToHash("guard");
+        anim.SetBool(specialActionID, false);
+    }
+
 
     public void ComboPossible()
     {

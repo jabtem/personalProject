@@ -97,8 +97,6 @@ public class PlayerMoveCtrl : MonoBehaviour
 
             float v = Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("Joystick");
             float h = Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("Joystick");
-            Debug.Log("v" + v);
-            Debug.Log("h" + h);
 
             if (canMove)
             {

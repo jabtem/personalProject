@@ -45,7 +45,7 @@ public class CreatePlayer : MonoBehaviour
         }
         else
         {
-            PlayerActionCtrl attCtrl = go.GetComponent<PlayerActionCtrl>();
+            PlayerActionCtrl actionCtrl = go.GetComponent<PlayerActionCtrl>();
             ////버튼할당된 리스너 초기화
             //for(int i=0; i< actionButtos.Length; ++i)
             //{
@@ -55,25 +55,33 @@ public class CreatePlayer : MonoBehaviour
             //actionButtos[0].onClick.AddListener(delegate { attCtrl.Attack(); });
             for(int i=0; i< actionButtons.Length; ++i)
             {
-                EventTrigger.Entry triggerEntry = new EventTrigger.Entry();
+                EventTrigger.Entry triggerDownEntry = new EventTrigger.Entry();
+                triggerDownEntry.eventID = EventTriggerType.PointerDown;
+                triggerDownEntry.callback.RemoveAllListeners();
                 switch (i)
                 {
+                    //공격버튼 세팅
                     case 0:
-                        triggerEntry.eventID = EventTriggerType.PointerDown;
-                        triggerEntry.callback.RemoveAllListeners();
-                        triggerEntry.callback.AddListener((data) => { attCtrl.Attack(); });
+
+                        triggerDownEntry.callback.AddListener((data) => { actionCtrl.Attack(); });
                         break;
+                    //특수액션 세팅
                     case 1:
-                        triggerEntry.eventID = EventTriggerType.PointerDown;
-                        triggerEntry.callback.RemoveAllListeners();
                         //델리게이트(대리자)
                         //triggerEntry.callback.AddListener(delegate { attCtrl.SpecialAction(); });
                         //람다식
-                        triggerEntry.callback.AddListener((data) => { attCtrl.SpecialAction(); });
+                        triggerDownEntry.callback.AddListener((data) => { actionCtrl.SpecialAction(); });
+                        if(actionCtrl.SA == PlayerActionCtrl.specialAction.Guard)
+                        {
+                            EventTrigger.Entry triggerUpEntry = new EventTrigger.Entry();
+                            triggerUpEntry.eventID = EventTriggerType.PointerUp;
+                            triggerUpEntry.callback.AddListener((data) => { actionCtrl.GuardButtUp(); });
+                            actionButtons[i].triggers.Add(triggerUpEntry);
+                        }
 
                         break;
                 }
-                actionButtons[i].triggers.Add(triggerEntry);
+                actionButtons[i].triggers.Add(triggerDownEntry);
             }
             
 
