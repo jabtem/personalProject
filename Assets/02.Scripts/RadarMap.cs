@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MapObject
 {
     Image _icon ;
+    
     GameObject _owner;
 
     public Image icon 
@@ -153,4 +154,8 @@ public class RadarMap : MonoBehaviour
         player = go.GetComponent<PlayerMoveCtrl>();
     }
 
+    void OnDisable()
+    {
+        mapObject.Clear();
+    }
 }

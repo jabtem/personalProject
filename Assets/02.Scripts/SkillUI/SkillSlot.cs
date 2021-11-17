@@ -11,17 +11,21 @@ public class SkillSlot : MonoBehaviour ,IBeginDragHandler, IDragHandler , IEndDr
     //스킬사용버튼과 스킬슬롯 구분용
     public bool canDrop;
 
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        DragSkillSlot.instance.dragSlot = this;
-        DragSkillSlot.instance.DragSetImage(skillImage);
-        DragSkillSlot.instance.SetColor(1);
-        DragSkillSlot.instance.transform.position = eventData.position;
+        if(!canDrop)
+        {
+            DragSkillSlot.instance.dragSlot = this;
+            DragSkillSlot.instance.DragSetImage(skillImage);
+            DragSkillSlot.instance.SetColor(1);
+            DragSkillSlot.instance.transform.position = eventData.position;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (DragSkillSlot.instance.dragSlot !=null)
+        if (DragSkillSlot.instance.dragSlot !=null && !canDrop)
         {
             DragSkillSlot.instance.transform.position = eventData.position;
         }
@@ -29,12 +33,27 @@ public class SkillSlot : MonoBehaviour ,IBeginDragHandler, IDragHandler , IEndDr
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("drop");
+        if(DragSkillSlot.instance.dragSlot ==null)
+        {
+            return;
+        }
+
+        if(canDrop)
+        {
+            skillImage.sprite = DragSkillSlot.instance.dragSlot.skillImage.sprite;
+            SetColor(1);
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         DragSkillSlot.instance.SetColor(0);
         Debug.Log("end");
+    }
+    void SetColor(float _alpha)
+    {
+        Color color = skillImage.color;
+        color.a = _alpha;
+        skillImage.color = color;
     }
 }

@@ -23,6 +23,7 @@ public class MinimapIconManager : MonoBehaviour
     void Start()
     {
         CreateEenmyIcon(5);
+        CreatePlayerIcon(1);
     }
 
     void CreateEenmyIcon(int enemyCnt)

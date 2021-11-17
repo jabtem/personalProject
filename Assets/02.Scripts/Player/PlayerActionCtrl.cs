@@ -29,6 +29,7 @@ public class PlayerActionCtrl : MonoBehaviour
     float animTime = 0;
     int comboStepID;
     int specialActionID;
+    int idleID;
 
 
     //해당캐릭터의 일반공격 콤보최대횟수
@@ -51,6 +52,7 @@ public class PlayerActionCtrl : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         comboStepID = Animator.StringToHash("comboStep");
+        idleID = Animator.StringToHash("Base Layer.Idle");
         pMove = GetComponent<PlayerMoveCtrl>();
     }
 
@@ -67,6 +69,12 @@ public class PlayerActionCtrl : MonoBehaviour
                 //애니메이션이벤트없이 콤보를리셋하도록 수정
                 ComboReset();
             }
+        }
+
+
+        if(anim.GetCurrentAnimatorStateInfo(0).fullPathHash == idleID)
+        {
+            pMove.canMove = true;
         }
 
         //현재 베이스레이어의 애니메이션의 진행상태
@@ -206,7 +214,5 @@ public class PlayerActionCtrl : MonoBehaviour
         comboPossible = false;
         anim.applyRootMotion = false;
         anim.SetInteger(comboStepID, 0);
-        pMove.canMove = true;
-
     }
 }

@@ -11,7 +11,6 @@ public class DragSkillSlot : MonoBehaviour
     Image skillImage;
 
 
-    //this 안붙이면 스택오버플로우
     public SkillSlot dragSlot
     {
         get

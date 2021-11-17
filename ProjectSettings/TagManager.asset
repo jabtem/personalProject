@@ -9,6 +9,8 @@ TagManager:
   - EnemyIcon
   - PlayerIcon
   - MinimapManager
+  - Enemy
+  - BackButton
   layers:
   - Default
   - TransparentFX

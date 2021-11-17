@@ -88,6 +88,10 @@ public class LoadSceneManger : MonoBehaviour
         {
             CreatePlayer obj = GameObject.FindObjectOfType<CreatePlayer>();
             obj.Create(GameManager.instance.CharacterNum);
+            Button backButt = GameObject.FindGameObjectWithTag("BackButton").GetComponent<Button>();
+
+            backButt.onClick.RemoveAllListeners();
+            backButt.onClick.AddListener(() => { LoadingScene(1); });
         }
 
         SceneManager.sceneLoaded -= SceneLoadedEnd;
