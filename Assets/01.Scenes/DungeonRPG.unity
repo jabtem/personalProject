@@ -5027,7 +5027,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1565808104}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -10655,11 +10655,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434481245}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -61.099976, y: 0, z: -32.09}
+  m_LocalPosition: {x: -1021.1, y: -540, z: -32.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1565808104}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &434481247
 MonoBehaviour:
@@ -15973,7 +15973,7 @@ RectTransform:
   m_Children:
   - {fileID: 1684559457}
   m_Father: {fileID: 1565808104}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16177,6 +16177,69 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 643037935}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &643244046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 643244048}
+  - component: {fileID: 643244047}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &643244047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643244046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124c512c25902c24883f28adb94d1cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillData: {fileID: 4900000, guid: 69a9f83b1e890a746a2d3c1bc2bbd821, type: 3}
+  skills:
+  - _skill_name: katanaSkill1
+    _skill_id: 1001
+  - _skill_name: katanaSkill2
+    _skill_id: 1002
+  - _skill_name: katanaSkill3
+    _skill_id: 1003
+  - _skill_name: spearSkill1
+    _skill_id: 2001
+  - _skill_name: spearSkill2
+    _skill_id: 2002
+  - _skill_name: spearSkill3
+    _skill_id: 2003
+  - _skill_name: twoHandsSkill1
+    _skill_id: 3001
+  - _skill_name: twoHandsSkill2
+    _skill_id: 3002
+  - _skill_name: twoHandsSkill3
+    _skill_id: 3003
+--- !u!4 &643244048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643244046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.01968956, y: 2.4727206, z: 2.9744887}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &648769064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32920,7 +32983,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1312950905
 PrefabInstance:
@@ -38419,6 +38482,7 @@ RectTransform:
   m_Children:
   - {fileID: 73343462}
   - {fileID: 922141548}
+  - {fileID: 434481246}
   - {fileID: 634528403}
   - {fileID: 201414154}
   m_Father: {fileID: 414721402}
