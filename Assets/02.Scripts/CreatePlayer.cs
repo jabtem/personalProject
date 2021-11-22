@@ -10,6 +10,11 @@ public class CreatePlayer : MonoBehaviour
     public GameObject spear;
     public GameObject twoHandSword;
     public RadarMap miniMap;
+    public GameObject katanaSkillSet;
+    public GameObject spearSkillSet;
+    public GameObject twoHandsSkillSet;
+
+
 
     //배열 0:공격버튼 1:특수액션
     //public Button[] actionButtos;
@@ -23,12 +28,15 @@ public class CreatePlayer : MonoBehaviour
         {
             case 1:
                 playerChracter = GameObject.Instantiate(katana, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                katanaSkillSet.SetActive(true);
                 break;
             case 2:
                 playerChracter = GameObject.Instantiate(spear, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                spearSkillSet.SetActive(true);
                 break;
             case 3:
                 playerChracter = GameObject.Instantiate(twoHandSword, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                twoHandsSkillSet.SetActive(true);
                 break;
 
         }

@@ -41,6 +41,7 @@ public class SkillDataReader : MonoBehaviour
 {
     public TextAsset skillData;
 
+
     public Skill[] skills;
 
     private void Start()

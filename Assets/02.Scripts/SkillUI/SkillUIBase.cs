@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class SkillUIBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    bool SkillUIActiavted = false;
+    [SerializeField]
+    //스킬 창
+    private GameObject goSkillBase;
+
+
+    public void OnBtn()
     {
-        
+        SkillUIActiavted = !SkillUIActiavted;
+        if (SkillUIActiavted)
+            OpenUI();
+        else
+            CloseUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OpenUI()
     {
-        
+        goSkillBase.SetActive(true);
+    }
+
+    void CloseUI()
+    {
+        goSkillBase.SetActive(false);
     }
 }

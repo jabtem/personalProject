@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class SkillSlot : MonoBehaviour ,IBeginDragHandler, IDragHandler , IEndDragHandler,IDropHandler
 {
     public Image skillImage;
+    public int skillId;
 
     //스킬사용버튼과 스킬슬롯 구분용
     public bool canDrop;
