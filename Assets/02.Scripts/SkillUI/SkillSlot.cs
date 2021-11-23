@@ -18,7 +18,7 @@ public class SkillSlot : MonoBehaviour ,IBeginDragHandler, IDragHandler , IEndDr
         if(!canDrop)
         {
             DragSkillSlot.instance.dragSlot = this;
-            DragSkillSlot.instance.DragSetImage(skillImage);
+            DragSkillSlot.instance.DragSlotSet(skillImage,skillId);
             DragSkillSlot.instance.SetColor(1);
             DragSkillSlot.instance.transform.position = eventData.position;
         }
@@ -42,6 +42,7 @@ public class SkillSlot : MonoBehaviour ,IBeginDragHandler, IDragHandler , IEndDr
         if(canDrop)
         {
             skillImage.sprite = DragSkillSlot.instance.dragSlot.skillImage.sprite;
+            skillId = DragSkillSlot.instance.dragSlot.skillId;
             SetColor(1);
         }
     }

@@ -20287,6 +20287,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7072406635357948139, guid: b1604e6ceb23a084f9961c50cb199a6e,
+        type: 3}
+      propertyPath: skillId
+      value: 3002
+      objectReference: {fileID: 0}
     - target: {fileID: 7072406635357948143, guid: b1604e6ceb23a084f9961c50cb199a6e,
         type: 3}
       propertyPath: m_Name
@@ -21632,7 +21637,7 @@ PrefabInstance:
     - target: {fileID: 7072406635357948139, guid: b1604e6ceb23a084f9961c50cb199a6e,
         type: 3}
       propertyPath: skillId
-      value: 1001
+      value: 2001
       objectReference: {fileID: 0}
     - target: {fileID: 7072406635357948139, guid: b1604e6ceb23a084f9961c50cb199a6e,
         type: 3}
@@ -28795,7 +28800,7 @@ PrefabInstance:
     - target: {fileID: 7072406635357948139, guid: b1604e6ceb23a084f9961c50cb199a6e,
         type: 3}
       propertyPath: skillId
-      value: 1001
+      value: 3001
       objectReference: {fileID: 0}
     - target: {fileID: 7072406635357948139, guid: b1604e6ceb23a084f9961c50cb199a6e,
         type: 3}
@@ -28811,7 +28816,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 4dc051a0301cecb4aa1a85036ace2a58,
+      objectReference: {fileID: 21300000, guid: 9895f5f95566ceb47bb239149d90cb44,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1604e6ceb23a084f9961c50cb199a6e, type: 3}
@@ -42268,6 +42273,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072406635357948139, guid: b1604e6ceb23a084f9961c50cb199a6e,
+        type: 3}
+      propertyPath: skillId
+      value: 2002
       objectReference: {fileID: 0}
     - target: {fileID: 7072406635357948143, guid: b1604e6ceb23a084f9961c50cb199a6e,
         type: 3}
