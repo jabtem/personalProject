@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerSkillCtrl : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    int skilId;
+    public SkillDataReader skillButt;
+
+    void Awake()
     {
-        
+        //스킬데이터 읽어오는 오브젝트가 단하나이기때문에 허용
+        skillButt = GameObject.FindObjectOfType<SkillDataReader>().GetComponent<SkillDataReader>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UseSkill()
     {
-        
+        skilId = skillButt.GetCurrentSKillID();
+        Debug.Log(skilId);
     }
+
 }

@@ -2097,6 +2097,7 @@ GameObject:
   - component: {fileID: 749803798976602371}
   - component: {fileID: 749803798976602368}
   - component: {fileID: 749803798976602369}
+  - component: {fileID: 4708528787533801955}
   - component: {fileID: 749803798976602370}
   m_Layer: 9
   m_Name: SpearPlayer
@@ -2175,6 +2176,7 @@ MonoBehaviour:
   jumpSpeed: 10
   moveDirection: {x: 0, y: 0, z: 0}
   lastMoveDirection: {x: 0, y: 0, z: 0}
+  canMove: 0
 --- !u!114 &749803798976602369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2193,6 +2195,18 @@ MonoBehaviour:
   dodgeTime: 0
   dodgeSpeed: 0
   guardCount: 0
+--- !u!114 &4708528787533801955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749803798976602372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e1f06b02628a7b419be6fdfa2fef937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &749803798976602370
 MonoBehaviour:
   m_ObjectHideFlags: 0

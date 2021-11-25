@@ -2635,10 +2635,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1337087426911131247}
-  - component: {fileID: 1337087426911131246}
   - component: {fileID: 1337087426911131245}
   - component: {fileID: 1337087426911131240}
+  - component: {fileID: 1337087426911131246}
   - component: {fileID: 1337087426911131242}
+  - component: {fileID: 5576008555538227518}
   - component: {fileID: 2508331016200242637}
   m_Layer: 9
   m_Name: katanaPlayer
@@ -2662,25 +2663,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1337087426911131246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1337087426911131244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ee837f0d34c85479596ea65d1fab37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravity: 1
-  moveSpeed: 5
-  rotSpeed: 120
-  jumpSpeed: 10
-  moveDirection: {x: 0, y: 0, z: 0}
-  lastMoveDirection: {x: 0, y: 0, z: 0}
-  canMove: 0
 --- !u!143 &1337087426911131245
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2711,6 +2693,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab288cc31413aac41934fec28ee3e2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1337087426911131246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337087426911131244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ee837f0d34c85479596ea65d1fab37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: 1
+  moveSpeed: 5
+  rotSpeed: 120
+  jumpSpeed: 10
+  moveDirection: {x: 0, y: 0, z: 0}
+  lastMoveDirection: {x: 0, y: 0, z: 0}
+  canMove: 0
 --- !u!114 &1337087426911131242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2729,6 +2730,18 @@ MonoBehaviour:
   dodgeTime: 0.5
   dodgeSpeed: 5
   guardCount: 0
+--- !u!114 &5576008555538227518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337087426911131244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e1f06b02628a7b419be6fdfa2fef937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &2508331016200242637
 Animator:
   serializedVersion: 3

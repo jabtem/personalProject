@@ -78,5 +78,24 @@ public class SkillDataReader : MonoBehaviour
     }
 
 
+    //현재 스킬정보를 가져옴
+    public int GetCurrentSKillID()
+    {
+        //현재 스킬버튼에 할당된 스킬id정보를받아오기위함
+        SkillSlot curSkill = GetComponent<SkillSlot>();
 
+        foreach(var skill in skills)
+        {
+            //현재스킬이 스킬데이터 정보에 존재하면
+            if(skill.skill_id == curSkill.skillId)
+            {
+
+                return curSkill.skillId;
+
+            }
+        }
+
+        return -1;
+
+    }
 }
