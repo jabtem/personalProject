@@ -88,6 +88,9 @@ public class CreatePlayer : MonoBehaviour
                         }
 
                         break;
+                    case 2:
+                        triggerDownEntry.callback.AddListener((data) => { actionCtrl.UseSkill(); });
+                        break;
                 }
                 actionButtons[i].triggers.Add(triggerDownEntry);
             }

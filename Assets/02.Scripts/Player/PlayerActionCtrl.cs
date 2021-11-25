@@ -47,6 +47,11 @@ public class PlayerActionCtrl : MonoBehaviour
     [HideInInspector]
     public int guardCount;
 
+
+    //스킬액션 관련변수
+    int skilId;
+    public SkillDataReader skillButt;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -54,6 +59,9 @@ public class PlayerActionCtrl : MonoBehaviour
         comboStepID = Animator.StringToHash("comboStep");
         idleID = Animator.StringToHash("Base Layer.Idle");
         pMove = GetComponent<PlayerMoveCtrl>();
+
+        //스킬데이터 읽어오는 오브젝트가 단하나이기때문에 허용
+        skillButt = GameObject.FindObjectOfType<SkillDataReader>().GetComponent<SkillDataReader>();
     }
 
     void Update()
@@ -74,7 +82,7 @@ public class PlayerActionCtrl : MonoBehaviour
 
         if(anim.GetCurrentAnimatorStateInfo(0).fullPathHash == idleID)
         {
-            pMove.canMove = true;
+            //pMove.canMove = true;
         }
 
         //현재 베이스레이어의 애니메이션의 진행상태
@@ -115,6 +123,7 @@ public class PlayerActionCtrl : MonoBehaviour
     {
 
         Debug.Log("Attack!");
+        pMove.canMove = false;
 
         if (anim.GetInteger(comboStepID) == maxComboCount)
         {
@@ -122,12 +131,12 @@ public class PlayerActionCtrl : MonoBehaviour
         }
 
 
-        pMove.canMove = false;
+
 
         if (anim.GetInteger(comboStepID) == 0)
         {
-
-            anim.applyRootMotion = true;
+            //공격애니메이션이 루트모션적용하기에 적합하지않음
+            //anim.applyRootMotion = true;
             anim.SetInteger(comboStepID, 1);
 
         }
@@ -212,7 +221,14 @@ public class PlayerActionCtrl : MonoBehaviour
     public void ComboReset()
     {
         comboPossible = false;
-        anim.applyRootMotion = false;
+        //anim.applyRootMotion = false;
         anim.SetInteger(comboStepID, 0);
+        pMove.canMove = true;
+    }
+
+    public void UseSkill()
+    {
+        skilId = skillButt.GetCurrentSKillID();
+        Debug.Log(skilId);
     }
 }
