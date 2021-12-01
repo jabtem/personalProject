@@ -30,6 +30,7 @@ public class PlayerActionCtrl : MonoBehaviour
     int comboStepID;
     int specialActionID;
     int idleID;
+    int skillNum;
 
 
     //해당캐릭터의 일반공격 콤보최대횟수
@@ -57,6 +58,7 @@ public class PlayerActionCtrl : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         comboStepID = Animator.StringToHash("comboStep");
+        skillNum = Animator.StringToHash("skillNum");
         idleID = Animator.StringToHash("Base Layer.Idle");
         pMove = GetComponent<PlayerMoveCtrl>();
 
@@ -229,6 +231,13 @@ public class PlayerActionCtrl : MonoBehaviour
     public void UseSkill()
     {
         skilId = skillButt.GetCurrentSKillID();
+        anim.SetInteger(skillNum, skilId % 1000);
         Debug.Log(skilId);
+    }
+
+    //스킬모션 리셋용 임시이벤트함수
+    public void MontionReset()
+    {
+        anim.SetInteger(skillNum, -1);
     }
 }
