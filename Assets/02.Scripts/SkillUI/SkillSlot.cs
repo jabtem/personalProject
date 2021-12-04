@@ -9,8 +9,6 @@ public class SkillSlot : MonoBehaviour ,IBeginDragHandler, IDragHandler , IEndDr
     public Image skillImage;
     public int skillId;
 
-    //스킬 쿨타임시간
-    public float skillCollTime;
 
     //스킬사용버튼과 스킬슬롯 구분용
     public bool canDrop;

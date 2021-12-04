@@ -15664,7 +15664,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 1522217372}
   skillId: 0
-  skillCollTime: 0
   canDrop: 1
 --- !u!114 &622372041
 MonoBehaviour:
@@ -15682,22 +15681,31 @@ MonoBehaviour:
   skills:
   - _skill_name: katanaSkill1
     _skill_id: 1001
+    _skill_coolTime: 5
   - _skill_name: katanaSkill2
     _skill_id: 1002
+    _skill_coolTime: 10
   - _skill_name: katanaSkill3
     _skill_id: 1003
+    _skill_coolTime: 15
   - _skill_name: spearSkill1
     _skill_id: 2001
+    _skill_coolTime: 6
   - _skill_name: spearSkill2
     _skill_id: 2002
+    _skill_coolTime: 12
   - _skill_name: spearSkill3
     _skill_id: 2003
+    _skill_coolTime: 18
   - _skill_name: twoHandsSkill1
     _skill_id: 3001
+    _skill_coolTime: 4
   - _skill_name: twoHandsSkill2
     _skill_id: 3002
+    _skill_coolTime: 8
   - _skill_name: twoHandsSkill3
     _skill_id: 3003
+    _skill_coolTime: 12
 --- !u!114 &622372042
 MonoBehaviour:
   m_ObjectHideFlags: 0

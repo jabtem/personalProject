@@ -181,6 +181,7 @@ public class PlayerActionCtrl : MonoBehaviour
         specialActionID = Animator.StringToHash("dodge");
         anim.SetBool(specialActionID, true);
 
+        Debug.Log("aa");
         float startTime = 0;
 
         pMove.canMove = false;
@@ -230,7 +231,7 @@ public class PlayerActionCtrl : MonoBehaviour
 
     public void UseSkill()
     {
-        skilId = skillButt.GetCurrentSKillID();
+        skilId = skillButt.GetCurrentSKilInfo();
         anim.SetInteger(skillNum, skilId % 1000);
         Debug.Log(skilId);
     }

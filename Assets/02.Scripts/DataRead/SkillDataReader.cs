@@ -5,6 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class Skill
 {
+    public Skill(){}
+    public Skill(string name, int id, float coolTime)
+    {
+        skill_name = name;
+        skill_id = id;
+        skill_coolTime = coolTime;
+    }
+
     //스킬명
     public string skill_name
     {
@@ -33,6 +41,20 @@ public class Skill
     }
     [SerializeField]
     int _skill_id;
+
+    public float skill_coolTime
+    {
+        get
+        {
+            return _skill_coolTime;
+        }
+        set
+        {
+            _skill_coolTime = value;
+        }
+    }
+    [SerializeField]
+    float _skill_coolTime;
 }
 
 
@@ -44,6 +66,8 @@ public class SkillDataReader : MonoBehaviour
 
     public Skill[] skills;
 
+    //딕셔너리의경우 해쉬맵과 같아 시간복잡도가 O(1)이므로 배열을탐색하는것보다 빠름
+    Dictionary<int, Skill> skillMap = new Dictionary<int, Skill>();
     private void Start()
     {
         ReadCSV();
@@ -68,31 +92,46 @@ public class SkillDataReader : MonoBehaviour
         for(int i=0; i< line-1; i++)
         {
             //첫행은 실제 데이터값이아닌 필드명칭이므로 제외하여 계산
-            skills[i] = new Skill();
 
-            
-            skills[i].skill_name = data[tableSize * (i+1)];
-            skills[i].skill_id = int.Parse(data[tableSize * (i + 1) +1 ]);
+
+            //인스펙터 데이터 확인용
+            //skills[i] = new Skill();
+            //skills[i].skill_name = data[tableSize * (i+1)];
+            //skills[i].skill_id = int.Parse(data[tableSize * (i + 1) +1 ]);
+            //skills[i].skill_coolTime = float.Parse(data[tableSize * (i + 1) + 2]);
+
+            string name = data[tableSize * (i + 1)];
+            int id = int.Parse(data[tableSize * (i + 1) + 1]);
+            float coolTime = float.Parse(data[tableSize * (i + 1) + 2]);
+            skillMap.Add(id, new Skill(name,id,coolTime));
 
         }
     }
 
 
     //현재 스킬정보를 가져옴
-    public int GetCurrentSKillID()
+    public int GetCurrentSKilInfo()
     {
         //현재 스킬버튼에 할당된 스킬id정보를받아오기위함
         SkillSlot curSkill = GetComponent<SkillSlot>();
-
-        foreach(var skill in skills)
+       
+        if (skillMap.ContainsKey(curSkill.skillId))
         {
-            //현재스킬이 스킬데이터 정보에 존재하면
-            if(skill.skill_id == curSkill.skillId)
-            {
 
-                return curSkill.skillId;
 
-            }
+            return curSkill.skillId;
+
+            //foreach (var skill in skills)
+            //{
+            //    //현재스킬이 스킬데이터 정보에 존재하면
+            //    if (skill.skill_id == curSkill.skillId)
+            //    {
+            //        return curSkill.skillId;
+                    
+            //    }
+            //}
+
+            
         }
 
         return -1;
