@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [System.Serializable]
 public class Skill
@@ -64,7 +65,7 @@ public class SkillDataReader : MonoBehaviour
     public TextAsset skillData;
 
 
-    public Skill[] skills;
+    //public Skill[] skills;
 
     //딕셔너리의경우 해쉬맵과 같아 시간복잡도가 O(1)이므로 배열을탐색하는것보다 빠름
     Dictionary<int, Skill> skillMap = new Dictionary<int, Skill>();
@@ -87,7 +88,7 @@ public class SkillDataReader : MonoBehaviour
         //열 개수 = (전체 문자열수 / 행 개수)
         int tableSize =data.Length / line;
 
-        skills = new Skill[line-1];
+        //skills = new Skill[line-1];
 
         for(int i=0; i< line-1; i++)
         {
@@ -110,14 +111,16 @@ public class SkillDataReader : MonoBehaviour
 
 
     //현재 스킬정보를 가져옴
-    public int GetCurrentSKilInfo()
+    public int GetCurrentSKilInfo(Action<bool> disalbeSkill)
     {
         //현재 스킬버튼에 할당된 스킬id정보를받아오기위함
         SkillSlot curSkill = GetComponent<SkillSlot>();
-       
+        SkillCoolTime skillCollTime = GetComponent<SkillCoolTime>();
+
+        //해당 스킬id가 존재하는경우
         if (skillMap.ContainsKey(curSkill.skillId))
         {
-
+            skillCollTime.StartCoolTime(skillMap[curSkill.skillId].skill_coolTime, (value) => disalbeSkill(value));
 
             return curSkill.skillId;
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 public class PlayerActionCtrl : MonoBehaviour
 {
@@ -33,6 +33,8 @@ public class PlayerActionCtrl : MonoBehaviour
     int skillNum;
 
 
+
+
     //해당캐릭터의 일반공격 콤보최대횟수
     [HideInInspector]
     public int maxComboCount;
@@ -52,6 +54,9 @@ public class PlayerActionCtrl : MonoBehaviour
     //스킬액션 관련변수
     int skilId;
     public SkillDataReader skillButt;
+
+    //스킬사용가능여부
+    public bool disableSkill;
 
     void Awake()
     {
@@ -231,8 +236,16 @@ public class PlayerActionCtrl : MonoBehaviour
 
     public void UseSkill()
     {
-        skilId = skillButt.GetCurrentSKilInfo();
-        anim.SetInteger(skillNum, skilId % 1000);
+        if(!disableSkill)
+        {
+            //코루틴은 레퍼런스를 직접사용할수가없으므로 Action사용
+            skilId = skillButt.GetCurrentSKilInfo((value)=> disableSkill=value);
+            //skilId = skillButt.GetCurrentSKilInfo(ref disableSkill);
+            anim.SetInteger(skillNum, skilId % 1000);
+            if(skilId > -1)
+                disableSkill = true;
+        }
+
         Debug.Log(skilId);
     }
 
