@@ -17,16 +17,17 @@ public class PlayerActionCtrl : MonoBehaviour
 
 
 
-    Animator anim;
+    public Animator anim;
     AnimatorTransitionInfo transitionInfo;
     //콤보 가능여부
+
     public bool comboPossible;
     public specialAction SA;
     CharacterController controller;
     PlayerMoveCtrl pMove;
 
     //콤보 가능여부판당용 현재 애니메이션의 진행도
-    float animTime = 0;
+    public float animTime = 0;
     int comboStepID;
     int specialActionID;
     int idleID;
@@ -77,22 +78,17 @@ public class PlayerActionCtrl : MonoBehaviour
         animTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime * 100f;
         if (anim.GetInteger(comboStepID) > 0)
         {
-            comboDelay();
-
-            if (animTime > 100f)
-            {
-                //애니메이션이벤트없이 콤보를리셋하도록 수정
-                ComboReset();
-            }
+            ComboDelay();
         }
 
-
-        if(anim.GetCurrentAnimatorStateInfo(0).fullPathHash == idleID)
+        if(anim.GetInteger(skillNum) > -1)
         {
-            //pMove.canMove = true;
+            //idle이 반복될경우 animTime은 100을넘어서 스킬을 재사용하려하면 오류가남 수정필요
+            //SkillMotionCheck();
         }
 
-        //현재 베이스레이어의 애니메이션의 진행상태
+
+        //현재 베이스레이어의 애니메이션의 진행상태를 최대수치 100으로고정
         //if (animTime > 100f)
         //{
         //    animTime = animTime % 100;
@@ -101,7 +97,7 @@ public class PlayerActionCtrl : MonoBehaviour
 
     }
 
-    void comboDelay()
+    void ComboDelay()
     {
         //애니메이션 교체가 완료되면
         //어택애니메이션에서만 동작하도록
@@ -122,8 +118,33 @@ public class PlayerActionCtrl : MonoBehaviour
 
         }
 
+        if (animTime > 100f)
+        {
+            ComboReset();
+        }
 
 
+
+    }
+
+
+    //현재 스킬모션이 다끝낫는지 여부
+    void SkillMotionCheck()
+    {
+        if(anim.GetInteger(skillNum) > 0)
+        {
+            if(animTime > 100f)
+            {
+                Debug.Log("reset");
+                SkillMotionReset();
+            }
+        }
+    }
+
+    //스킬모션 리셋용 임시이벤트함수
+    void SkillMotionReset()
+    {
+        anim.SetInteger(skillNum, -1);
     }
 
     public void Attack()
@@ -205,6 +226,8 @@ public class PlayerActionCtrl : MonoBehaviour
         pMove.canMove = true;
     }
 
+
+    #region 가드
     void GuardButtDown()
     {
         specialActionID = Animator.StringToHash("guard");
@@ -215,6 +238,7 @@ public class PlayerActionCtrl : MonoBehaviour
         specialActionID = Animator.StringToHash("guard");
         anim.SetBool(specialActionID, false);
     }
+    #endregion
 
 
     public void ComboPossible()
@@ -236,22 +260,29 @@ public class PlayerActionCtrl : MonoBehaviour
 
     public void UseSkill()
     {
-        if(!disableSkill)
+
+
+
+        if (!disableSkill && anim.GetInteger(skillNum) <= 0)
         {
+
+            skilId = skillButt.GetCurrentSKilInfo((value) => disableSkill = value);
+            anim.SetInteger(skillNum, 1);
+
+            int test = Animator.StringToHash("test");
+            anim.SetBool(test, !anim.GetBool(test));
+            //disableSkill = true;
+
             //코루틴은 레퍼런스를 직접사용할수가없으므로 Action사용
-            skilId = skillButt.GetCurrentSKilInfo((value)=> disableSkill=value);
+
+
             //skilId = skillButt.GetCurrentSKilInfo(ref disableSkill);
-            anim.SetInteger(skillNum, skilId % 1000);
-            if(skilId > -1)
-                disableSkill = true;
+            Debug.Log(skilId);
+            disableSkill = true;
         }
 
-        Debug.Log(skilId);
+
     }
 
-    //스킬모션 리셋용 임시이벤트함수
-    public void MontionReset()
-    {
-        anim.SetInteger(skillNum, -1);
-    }
+
 }

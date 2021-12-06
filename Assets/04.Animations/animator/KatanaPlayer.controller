@@ -49,7 +49,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.81707317
   m_HasExitTime: 0
   m_HasFixedDuration: 0
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &-8128338339441376003
@@ -99,7 +99,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.25550064
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 1
+  m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1102 &-7107700115782778183
@@ -150,7 +150,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.9264706
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 2
+  m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &-6475959765627898580
@@ -455,6 +455,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: skillNum
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: speed
     m_Type: 3
     m_DefaultFloat: 0
@@ -473,8 +479,8 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: skillNum
-    m_Type: 3
+  - m_Name: test
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -783,7 +789,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.6875
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &3962691437768300702
@@ -808,7 +814,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.82558143
   m_HasExitTime: 0
   m_HasFixedDuration: 0
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1102 &4058986933995729334
@@ -938,7 +944,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.7580645
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &8063414169682986447
@@ -974,7 +980,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 9045330889851249790}
-    m_Position: {x: 240, y: 210, z: 0}
+    m_Position: {x: 340, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4058986933995729334}
     m_Position: {x: 250, y: 10, z: 0}
@@ -984,7 +990,7 @@ AnimatorStateMachine:
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 3356855302189574494}
-    m_Position: {x: 620, y: 210, z: 0}
+    m_Position: {x: 630, y: 300, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -6266382490968360678}
     m_Position: {x: -10, y: 440, z: 0}

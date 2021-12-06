@@ -118,7 +118,7 @@ public class SkillDataReader : MonoBehaviour
         SkillCoolTime skillCollTime = GetComponent<SkillCoolTime>();
 
         //해당 스킬id가 존재하는경우
-        if (skillMap.ContainsKey(curSkill.skillId))
+        if (skillMap.ContainsKey(curSkill.skillId) )
         {
             skillCollTime.StartCoolTime(skillMap[curSkill.skillId].skill_coolTime, (value) => disalbeSkill(value));
 
