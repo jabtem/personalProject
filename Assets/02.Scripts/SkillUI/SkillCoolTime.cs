@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SkillCoolTime : MonoBehaviour
 {
     public Image coolTimeImage;
+    public Text coolTimeText;
 
     //쿨타임 공식 fillamount = 1 - (현재시간/ 쿨타임시간);
 
@@ -17,16 +18,25 @@ public class SkillCoolTime : MonoBehaviour
 
     IEnumerator CoolTime(float cooltime, Action<bool> result)
     {
-        coolTimeImage.fillAmount = 1;
-        float starttime = 0;
+        SkillSlot skillButt = GetComponent<SkillSlot>();
 
-        while(starttime < cooltime)
+        //쿨타임도는동안 스킬교체 불가능
+        skillButt.canDrop = false;
+
+        coolTimeImage.gameObject.SetActive(true);
+        coolTimeImage.fillAmount = 1;
+        coolTimeText.text = cooltime.ToString();
+        float startTime = 0;
+
+        while(startTime < cooltime)
         {
-            starttime += Time.deltaTime;
-            coolTimeImage.fillAmount = 1 - (starttime / cooltime);
+            startTime += Time.deltaTime;
+            coolTimeImage.fillAmount = 1 - (startTime / cooltime);
+            coolTimeText.text = string.Format("{0:0.#}", cooltime - startTime);
             yield return null;
         }
-
+        coolTimeImage.gameObject.SetActive(false);
+        skillButt.canDrop = true;
         result(false);
     }
 
