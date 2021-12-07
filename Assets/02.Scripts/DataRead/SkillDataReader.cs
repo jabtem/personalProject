@@ -137,7 +137,7 @@ public class SkillDataReader : MonoBehaviour
             
         }
 
-        return -1;
+        return 0;
 
     }
 }

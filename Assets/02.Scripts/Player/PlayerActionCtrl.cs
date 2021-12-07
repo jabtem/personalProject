@@ -15,7 +15,7 @@ public class PlayerActionCtrl : MonoBehaviour
 
 
 
-
+    
 
     public Animator anim;
     AnimatorTransitionInfo transitionInfo;
@@ -25,9 +25,11 @@ public class PlayerActionCtrl : MonoBehaviour
     public specialAction SA;
     CharacterController controller;
     PlayerMoveCtrl pMove;
-
-    //콤보 가능여부판당용 현재 애니메이션의 진행도
+    
+    //콤보나 스킬 재사용여부 판단용, 현재 애니메이션의 진행도확인용변수
     public float animTime = 0;
+
+    //애니메이션 파라미터 ID저장용
     int comboStepID;
     int specialActionID;
     int idleID;
@@ -74,25 +76,28 @@ public class PlayerActionCtrl : MonoBehaviour
 
     void Update()
     {
+        //nomaralizedTime은 0~1까지 소수점이지만 관리하기쉽도록 0~100으로 표현수정
+
+
+        //루프하는 애니메이션의경우 루프시작시 애니메이션진행도를 0으로 초기화한것처럼 계산
+
+
         transitionInfo = anim.GetAnimatorTransitionInfo(0);
-        animTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime * 100f;
-        if (anim.GetInteger(comboStepID) > 0)
+
+
+        //스킬모션과 어택모션은 루프하는애니메이션이아니므로 
+        if (anim.GetInteger(comboStepID) > 0 && !anim.GetCurrentAnimatorStateInfo(0).loop)
         {
+            animTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime * 100f;
             ComboDelay();
         }
-
-        if(anim.GetInteger(skillNum) > -1)
+        else if(anim.GetInteger(skillNum) > 0&& !anim.GetCurrentAnimatorStateInfo(0).loop)
         {
-            //idle이 반복될경우 animTime은 100을넘어서 스킬을 재사용하려하면 오류가남 수정필요
-            //SkillMotionCheck();
+            animTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime * 100f;
+            SkillMotionCheck();
         }
 
 
-        //현재 베이스레이어의 애니메이션의 진행상태를 최대수치 100으로고정
-        //if (animTime > 100f)
-        //{
-        //    animTime = animTime % 100;
-        //}
 
 
     }
@@ -101,6 +106,7 @@ public class PlayerActionCtrl : MonoBehaviour
     {
         //애니메이션 교체가 완료되면
         //어택애니메이션에서만 동작하도록
+
         if (anim.GetInteger(comboStepID) >0 && anim.GetInteger(comboStepID) < 3)
         {
             if (animTime > 50f && animTime < 80f)
@@ -117,9 +123,10 @@ public class PlayerActionCtrl : MonoBehaviour
             }
 
         }
-
-        if (animTime > 100f)
+        //트랜지션 전환시간고려
+        if (animTime >= 100f+ transitionInfo.duration)
         {
+           
             ComboReset();
         }
 
@@ -133,24 +140,17 @@ public class PlayerActionCtrl : MonoBehaviour
     {
         if(anim.GetInteger(skillNum) > 0)
         {
-            if(animTime > 100f)
+            if (animTime > 100f)
             {
-                Debug.Log("reset");
-                SkillMotionReset();
+
+                anim.SetInteger(skillNum, 0);
             }
         }
-    }
-
-    //스킬모션 리셋용 임시이벤트함수
-    void SkillMotionReset()
-    {
-        anim.SetInteger(skillNum, -1);
     }
 
     public void Attack()
     {
 
-        Debug.Log("Attack!");
         pMove.canMove = false;
 
         if (anim.GetInteger(comboStepID) == maxComboCount)
@@ -206,8 +206,6 @@ public class PlayerActionCtrl : MonoBehaviour
         //이동속도의 5배로 회피시간만큼 순간적으로빠르게이동
         specialActionID = Animator.StringToHash("dodge");
         anim.SetBool(specialActionID, true);
-
-        Debug.Log("aa");
         float startTime = 0;
 
         pMove.canMove = false;
@@ -261,24 +259,26 @@ public class PlayerActionCtrl : MonoBehaviour
     public void UseSkill()
     {
 
-
-
-        if (!disableSkill && anim.GetInteger(skillNum) <= 0)
+        //대기모션중이아니면 스킬사용못하게
+        if(anim.GetCurrentAnimatorStateInfo(0).fullPathHash != idleID)
         {
+            return;
+        }
 
-            skilId = skillButt.GetCurrentSKilInfo((value) => disableSkill = value);
-            anim.SetInteger(skillNum, 1);
 
-            int test = Animator.StringToHash("test");
-            anim.SetBool(test, !anim.GetBool(test));
-            //disableSkill = true;
-
+        //공격중엔스킬사용불가
+        if (!disableSkill && anim.GetInteger(skillNum) <= 0 && anim.GetInteger(comboStepID) == 0)
+        {
+            if (skilId != 0)
+            {
+                disableSkill = true;
+            }
             //코루틴은 레퍼런스를 직접사용할수가없으므로 Action사용
+            skilId = skillButt.GetCurrentSKilInfo((value) => disableSkill = value);
+            anim.SetInteger(skillNum, skilId%1000);
 
 
-            //skilId = skillButt.GetCurrentSKilInfo(ref disableSkill);
-            Debug.Log(skilId);
-            disableSkill = true;
+
         }
 
 
