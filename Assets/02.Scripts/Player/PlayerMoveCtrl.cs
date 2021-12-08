@@ -102,13 +102,14 @@ public class PlayerMoveCtrl : MonoBehaviour
             {
 
                 moveDirection = new Vector3(h, 0, v);
+                //벡터를 정규화 = 조이스틱 움직이는 정도의 상관없이 일정한속도로 이동하게하기위함
+                moveDirection = moveDirection.normalized;
 
                 if (Mathf.Abs(v) > 0 || Mathf.Abs(h) > 0)
                 {
                     PlayerBody.rotation = Quaternion.Euler(0, ang + Camera.main.transform.rotation.eulerAngles.y + 90, 0);
 
-                    //정규화된 방향벡터를 전달 = 구르기속도가 일정해야 하기때문 
-                    lastMoveDirection = moveDirection.normalized;
+                    lastMoveDirection = moveDirection;
                     anim.SetInteger(id, 1);
 
                 }
@@ -116,32 +117,17 @@ public class PlayerMoveCtrl : MonoBehaviour
                     anim.SetInteger(id, 0);
                 playerInfo.playerVector = moveDirection;
 
-
-                // 만약 콜라이더가 땅에 있을 경우 
-                //디바이스마다 일정한 회전 속도
-                float amtRot = rotSpeed * Time.deltaTime;
-                //인풋입력 키보드+조이스틱
-
             }
-            //오브젝트를 회전
-            //transform.Rotate(Vector3.up * ang * amtRot);
 
-            //Vector3 test = moveDirection.normalized;
-            //Debug.Log(Mathf.Atan2(test.z, test.x) * Mathf.Rad2Deg );
-
-            // transform.TransformDirection 함수는 인자로 전달된 벡터를 
-            // 월드좌표계 기준으로 변환하여 변환된 벡터를 반환해 준다.
-            //즉, 로컬좌표계 기준의 방향벡터를 > 월드좌표계 기준의 방향벡터로 변환
-
-            //moveDirection = transform.TransformDirection(moveDirection);
  
         }
         else
         {
-            //지면이아닐때만 중력이 작용하도록
-            moveDirection.y -= gravity * Time.deltaTime;// 디바이스마다 일정 속도로 케릭에 중력 적용
-                                                        // CharacterController의 Move 함수에 방향과 크기의 벡터값을 적용(디바이스마다 일정)
+            //지면이아니면 중력적용
+            moveDirection.y -= gravity * Time.deltaTime;
         }
+
+
 
         controller.Move(rot * moveDirection * moveSpeed * Time.deltaTime);
 

@@ -144,6 +144,7 @@ public class PlayerActionCtrl : MonoBehaviour
             {
 
                 anim.SetInteger(skillNum, 0);
+                pMove.canMove = true;
             }
         }
     }
@@ -267,11 +268,12 @@ public class PlayerActionCtrl : MonoBehaviour
 
 
         //공격중엔스킬사용불가
-        if (!disableSkill && anim.GetInteger(skillNum) <= 0 && anim.GetInteger(comboStepID) == 0)
+        if (!disableSkill && anim.GetInteger(skillNum) <= 0 )
         {
             if (skilId != 0)
             {
                 disableSkill = true;
+                pMove.canMove = false;
             }
             //코루틴은 레퍼런스를 직접사용할수가없으므로 Action사용
             skilId = skillButt.GetCurrentSKilInfo((value) => disableSkill = value);
