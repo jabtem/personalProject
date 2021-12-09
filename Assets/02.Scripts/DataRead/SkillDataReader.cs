@@ -121,18 +121,9 @@ public class SkillDataReader : MonoBehaviour
         if (skillMap.ContainsKey(curSkill.skillId) )
         {
             skillCollTime.StartCoolTime(skillMap[curSkill.skillId].skill_coolTime, (value) => disalbeSkill(value));
+            Debug.Log("test");
 
             return curSkill.skillId;
-
-            //foreach (var skill in skills)
-            //{
-            //    //현재스킬이 스킬데이터 정보에 존재하면
-            //    if (skill.skill_id == curSkill.skillId)
-            //    {
-            //        return curSkill.skillId;
-                    
-            //    }
-            //}
 
             
         }

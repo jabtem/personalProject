@@ -18,7 +18,6 @@ public class PlayerActionCtrl : MonoBehaviour
     
 
     public Animator anim;
-    AnimatorTransitionInfo transitionInfo;
     //콤보 가능여부
 
     public bool comboPossible;
@@ -77,14 +76,6 @@ public class PlayerActionCtrl : MonoBehaviour
     void Update()
     {
         //nomaralizedTime은 0~1까지 소수점이지만 관리하기쉽도록 0~100으로 표현수정
-
-
-        //루프하는 애니메이션의경우 루프시작시 애니메이션진행도를 0으로 초기화한것처럼 계산
-
-
-        transitionInfo = anim.GetAnimatorTransitionInfo(0);
-
-
         //스킬모션과 어택모션은 루프하는애니메이션이아니므로 
         if (anim.GetInteger(comboStepID) > 0 && !anim.GetCurrentAnimatorStateInfo(0).loop)
         {
@@ -124,7 +115,7 @@ public class PlayerActionCtrl : MonoBehaviour
 
         }
         //트랜지션 전환시간고려
-        if (animTime >= 100f+ transitionInfo.duration)
+        if (animTime >= 100f)
         {
            
             ComboReset();
