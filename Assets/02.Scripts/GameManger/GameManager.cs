@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     GameManager[] objs;
     GameObject loading;
     LoadSceneManger loadSceneManager;
+    public int speed = 1;
+
 
     //캐릭터 넘버
     public int CharacterNum = 0;
@@ -44,6 +46,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+
+            if (Time.timeScale == 1)
+            {
+                Time.timeScale = 0;
+                Debug.Log("tt");
+            }
+            else
+                Time.timeScale = 1;
+        }
+    }
+
     public void LoadScene(int num)
     {
         loadSceneManager.LoadScene(num);
@@ -56,5 +73,10 @@ public class GameManager : MonoBehaviour
 
         //로딩씬불러옴(씬)
         //LoadingManger2.LoadScene(num);
+    }
+
+    public void SetTimeScale(int speed)
+    {
+        Time.timeScale = speed;
     }
 }
