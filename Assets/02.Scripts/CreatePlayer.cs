@@ -42,6 +42,7 @@ public class CreatePlayer : MonoBehaviour
         }
         miniMap.SetPlayerPos(playerChracter);
         ActionButtonSet(playerChracter);
+        GameManager.instance.SetPlayerAnim(playerChracter.GetComponent<Animator>());
 
     }
     void ActionButtonSet(GameObject go)

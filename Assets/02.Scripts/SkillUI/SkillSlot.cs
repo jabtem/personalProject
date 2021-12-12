@@ -51,7 +51,6 @@ public class SkillSlot : MonoBehaviour ,IBeginDragHandler, IDragHandler , IEndDr
     public void OnEndDrag(PointerEventData eventData)
     {
         DragSkillSlot.instance.SetColor(0);
-        Debug.Log("end");
     }
     void SetColor(float _alpha)
     {

@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
     GameManager[] objs;
     GameObject loading;
     LoadSceneManger loadSceneManager;
-    public int speed = 1;
+
+    //플레이어 애니메이션 속도관리용
+    Animator playerAnim;
 
 
     //캐릭터 넘버
@@ -48,16 +50,22 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+
+        //일시정지확인용 테스트코드
         if(Input.GetKeyDown(KeyCode.Space))
         {
 
             if (Time.timeScale == 1)
             {
-                Time.timeScale = 0;
-                Debug.Log("tt");
+                SetTimeScale(0);
+                SetPlayerAnimSpeed(0);
             }
             else
-                Time.timeScale = 1;
+            {
+                SetTimeScale(1);
+                SetPlayerAnimSpeed(1);
+            }
+
         }
     }
 
@@ -75,8 +83,16 @@ public class GameManager : MonoBehaviour
         //LoadingManger2.LoadScene(num);
     }
 
-    public void SetTimeScale(int speed)
+    public void SetTimeScale(float timeScale)
     {
-        Time.timeScale = speed;
+        Time.timeScale = timeScale;
+    }
+    public void SetPlayerAnimSpeed(float speed)
+    {
+        playerAnim.speed = speed;
+    }
+    public void SetPlayerAnim(Animator anim)
+    {
+        playerAnim = anim;
     }
 }
