@@ -11,6 +11,7 @@ TagManager:
   - MinimapManager
   - Enemy
   - BackButton
+  - PerfectZone
   layers:
   - Default
   - TransparentFX

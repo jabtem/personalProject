@@ -95,4 +95,7 @@ public class GameManager : MonoBehaviour
     {
         playerAnim = anim;
     }
+
+
+
 }

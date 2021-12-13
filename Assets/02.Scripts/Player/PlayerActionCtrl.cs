@@ -278,4 +278,38 @@ public class PlayerActionCtrl : MonoBehaviour
     }
 
 
+    public bool pzoneHit = false;
+    public bool enemyHit = false;
+
+
+    //슬로우모션 구현용 테스트코드
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "PerfectZone")
+        {
+            Debug.Log("PerfectZone Hit");
+            pzoneHit = true;
+        }
+        else if(other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("EnemyColider Hit");
+            enemyHit = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+
+        if (other.gameObject.tag == "PerfectZone")
+        {
+            Debug.Log("PerfectZone Exit");
+            pzoneHit = false;
+        }
+        else if (other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("EnemyColider Exit");
+            enemyHit = false;
+        }
+    }
 }
