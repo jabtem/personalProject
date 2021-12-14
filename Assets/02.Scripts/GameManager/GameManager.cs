@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum Child {LoadinBar}
+enum Child {LoadingBar}
 enum PlayerCharacter {Oriental = 1,Dagger, Axe};
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _instance = null;
+    public static GameManager instance = null;
     GameManager[] objs;
     GameObject loading;
     LoadSceneManger loadSceneManager;
@@ -20,32 +20,21 @@ public class GameManager : MonoBehaviour
     //캐릭터 넘버
     public int CharacterNum = 0;
 
-    public static GameManager instance
-    {
-        get
-        {
-            if (_instance == null)
-                Debug.LogError("GameManager is NULL");
-            return _instance;
-        }
-    }
-
     private void Awake()
     {
-        _instance = this;
-        DontDestroyOnLoad(this.gameObject);
-        objs = FindObjectsOfType<GameManager>();
-        loading = transform.GetChild((int)Child.LoadinBar).gameObject;
-        loadSceneManager = gameObject.GetComponent<LoadSceneManger>();
+
+        if (instance == null)
+            instance = this;
         //게임매니저는 항상 한개만 존재해야한다
-        //여러개 존재하면 하나빼고 다삭제
-        if (objs.Length != 1)
+        else if (instance != null)
         {
-            for (int i = 1; i < objs.Length; i++)
-            {
-                Destroy(objs[i].gameObject);
-            }
+            Destroy(this.gameObject);
         }
+
+        DontDestroyOnLoad(this.gameObject);
+        loading = transform.GetChild((int)Child.LoadingBar).gameObject;
+        loadSceneManager = gameObject.GetComponent<LoadSceneManger>();
+
     }
 
     void Update()
