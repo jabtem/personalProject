@@ -150,7 +150,7 @@ public class PlayerActionCtrl : MonoBehaviour
             return;
         }
 
-
+        
 
 
         if (anim.GetInteger(comboStepID) == 0)
@@ -196,6 +196,12 @@ public class PlayerActionCtrl : MonoBehaviour
         // 속도(이동속도*회피속도)로 회피시간만큼 이동한다
         //예) doegeSpeed = 5
         //이동속도의 5배로 회피시간만큼 순간적으로빠르게이동
+        //퍼펙트존에만 닿은상태에서 회피행동을한경우
+        if(pzoneHit && !enemyHit)
+        {
+            GameManager.instance.SetTimeScale(0.5f);
+        }
+
         specialActionID = Animator.StringToHash("dodge");
         anim.SetBool(specialActionID, true);
         float startTime = 0;
@@ -204,7 +210,7 @@ public class PlayerActionCtrl : MonoBehaviour
 
         while(startTime <dodgeTime)
         {
-            startTime += Time.deltaTime;
+            startTime += Time.unscaledDeltaTime;
 
             pMove.moveDirection.x = pMove.lastMoveDirection.x* dodgeSpeed ;
             pMove.moveDirection.z = pMove.lastMoveDirection.z* dodgeSpeed;

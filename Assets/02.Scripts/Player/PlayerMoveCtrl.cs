@@ -124,12 +124,12 @@ public class PlayerMoveCtrl : MonoBehaviour
         else
         {
             //지면이아니면 중력적용
-            moveDirection.y -= gravity * Time.deltaTime;
+            moveDirection.y -= gravity * Time.unscaledDeltaTime;
         }
 
 
 
-        controller.Move(rot * moveDirection * moveSpeed * Time.deltaTime);
+        controller.Move(rot * moveDirection * moveSpeed * Time.unscaledDeltaTime);
 
     }
 

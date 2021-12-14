@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
 
-            if (Time.timeScale == 1)
+            if (Time.timeScale >= 0.1)
             {
                 SetTimeScale(0);
                 SetPlayerAnimSpeed(0);
@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
     public void SetTimeScale(float timeScale)
     {
         Time.timeScale = timeScale;
+        Debug.Log("Set Time!" + timeScale);
     }
     public void SetPlayerAnimSpeed(float speed)
     {
