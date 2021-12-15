@@ -72,24 +72,12 @@ public class PlayerMoveCtrl : MonoBehaviour
         PlayerBody = transform.Find("Body");
         Camera.main.GetComponent<smoothFollowCam>().target = this.transform;
         anim = GetComponent<Animator>();
+        id = Animator.StringToHash("speed");
         canMove = true;
     }
 
     void Update()
     {
-        //테스트용캡슐 애니메이터가 없으므로 일단 주석처리
-        id = Animator.StringToHash("speed");
-
-        //if ((Mathf.Abs(controller.velocity.x) + Mathf.Abs(controller.velocity.z)) > 0)
-        //{
-
-        //    anim.SetInteger(id, 1);
-        //}
-        //else
-        //    anim.SetInteger(id, 0);
-
-        //조작을하고있을때만 미니맵마커회전
-
         float ang = Mathf.Atan2(playerInfo.playerVector.z, playerInfo.playerVector.x) * Mathf.Rad2Deg * -1f;
         Quaternion rot = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0f);//카메라의앵글에따라 변환
         if (controller.isGrounded)
@@ -124,12 +112,12 @@ public class PlayerMoveCtrl : MonoBehaviour
         else
         {
             //지면이아니면 중력적용
-            moveDirection.y -= gravity * Time.unscaledDeltaTime;
+            moveDirection.y -= gravity * Time.fixedUnscaledDeltaTime;
         }
 
 
 
-        controller.Move(rot * moveDirection * moveSpeed * Time.unscaledDeltaTime);
+        controller.Move(rot * moveDirection * moveSpeed * Time.fixedUnscaledDeltaTime);
 
     }
 

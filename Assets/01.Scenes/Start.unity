@@ -426,7 +426,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1501895613}
         m_MethodName: LoadingScene
         m_Mode: 3
         m_Arguments:
