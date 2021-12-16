@@ -44,4 +44,6 @@ public class DragSkillSlot : MonoBehaviour
         color.a = _alpha;
         skillImage.color = color;
     }
+
+
 }

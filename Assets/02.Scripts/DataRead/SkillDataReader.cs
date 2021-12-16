@@ -62,6 +62,7 @@ public class Skill
 //아이템데이터 읽기용 
 public class SkillDataReader : MonoBehaviour
 {
+    static public SkillDataReader instance;
     public TextAsset skillData;
 
 
@@ -69,6 +70,17 @@ public class SkillDataReader : MonoBehaviour
 
     //딕셔너리의경우 해쉬맵과 같아 시간복잡도가 O(1)이므로 배열을탐색하는것보다 빠름
     Dictionary<int, Skill> skillMap = new Dictionary<int, Skill>();
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+
+    }
     private void Start()
     {
         ReadCSV();

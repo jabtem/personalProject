@@ -32,7 +32,7 @@ public class SkillCoolTime : MonoBehaviour
 
         while(startTime < cooltime)
         {
-            startTime += Time.deltaTime;
+            startTime += Time.unscaledDeltaTime;
             coolTimeImage.fillAmount = 1 - (startTime / cooltime);
             coolTimeText.text = string.Format("{0:0.#}", cooltime - startTime);
             yield return null;

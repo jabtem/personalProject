@@ -55,7 +55,6 @@ public class PlayerActionCtrl : MonoBehaviour
 
     //스킬액션 관련변수
     int skilId;
-    public SkillDataReader skillButt;
 
     //스킬사용가능여부
     public bool disableSkill;
@@ -69,8 +68,6 @@ public class PlayerActionCtrl : MonoBehaviour
         idleID = Animator.StringToHash("Base Layer.Idle");
         pMove = GetComponent<PlayerMoveCtrl>();
 
-        //스킬데이터 읽어오는 오브젝트가 단하나이기때문에 허용
-        skillButt = GameObject.FindObjectOfType<SkillDataReader>().GetComponent<SkillDataReader>();
     }
 
     void Update()
@@ -200,6 +197,8 @@ public class PlayerActionCtrl : MonoBehaviour
         if(pzoneHit && !enemyHit)
         {
             GameManager.instance.SetTimeScale(0.5f);
+            GameManager.instance.InvokeResetTimeScale(3f);
+           
         }
 
         specialActionID = Animator.StringToHash("dodge");
@@ -273,7 +272,7 @@ public class PlayerActionCtrl : MonoBehaviour
                 pMove.canMove = false;
             }
             //코루틴은 레퍼런스를 직접사용할수가없으므로 Action사용
-            skilId = skillButt.GetCurrentSKilInfo((value) => disableSkill = value);
+            skilId = SkillDataReader.instance.GetCurrentSKilInfo((value) => disableSkill = value);
             anim.SetInteger(skillNum, skilId%1000);
 
 

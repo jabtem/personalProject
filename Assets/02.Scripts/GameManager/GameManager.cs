@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     GameManager[] objs;
     GameObject loading;
     LoadSceneManger loadSceneManager;
+
+    //플레이어 타임스케일관리용 플레이어 행동을 정지시켜야될때 사용
     public float playerTimeScale = 1f;
 
     //플레이어 애니메이션 속도관리용
@@ -90,6 +92,19 @@ public class GameManager : MonoBehaviour
     {
         playerAnim = anim;
     }
+
+    void ResetTimeScale()
+    {
+        Time.timeScale = 1f;
+    }
+
+    public void InvokeResetTimeScale(float time)
+    {
+        Invoke("ResetTimeScale", time);
+        Debug.Log("TimeReset!");
+    }
+
+
 
 
 
