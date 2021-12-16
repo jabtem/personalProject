@@ -210,7 +210,7 @@ public class PlayerActionCtrl : MonoBehaviour
 
         while(startTime <dodgeTime)
         {
-            startTime += Time.unscaledDeltaTime;
+            startTime += Time.unscaledDeltaTime*GameManager.instance.playerTimeScale;
 
             pMove.moveDirection.x = pMove.lastMoveDirection.x* dodgeSpeed ;
             pMove.moveDirection.z = pMove.lastMoveDirection.z* dodgeSpeed;

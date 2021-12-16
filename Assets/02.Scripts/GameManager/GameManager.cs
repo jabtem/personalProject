@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     GameManager[] objs;
     GameObject loading;
     LoadSceneManger loadSceneManager;
+    public float playerTimeScale = 1f;
 
     //플레이어 애니메이션 속도관리용
     Animator playerAnim;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         loading = transform.GetChild((int)Child.LoadingBar).gameObject;
         loadSceneManager = gameObject.GetComponent<LoadSceneManger>();
+        Application.targetFrameRate = 60;
 
     }
 
@@ -48,11 +50,13 @@ public class GameManager : MonoBehaviour
             {
                 SetTimeScale(0);
                 SetPlayerAnimSpeed(0);
+                playerTimeScale = 0;
             }
             else
             {
                 SetTimeScale(1);
                 SetPlayerAnimSpeed(1);
+                playerTimeScale = 1f;
             }
 
         }
@@ -81,6 +85,7 @@ public class GameManager : MonoBehaviour
     {
         playerAnim.speed = speed;
     }
+
     public void SetPlayerAnim(Animator anim)
     {
         playerAnim = anim;
