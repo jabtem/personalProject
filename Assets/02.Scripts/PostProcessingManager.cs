@@ -7,20 +7,17 @@ public class PostProcessingManager : MonoBehaviour
 {
     PostProcessVolume pVolume;
     Vignette vignette;
-    bool test;
+    bool Trigger;
+
+
     private void Awake()
     {
         pVolume = GetComponent<PostProcessVolume>();
         pVolume.profile.TryGetSettings<Vignette>(out vignette);
+        if(GameManager.instance != null)
+        {
+            GameManager.instance.postProcessingManager = this;
+        }
     }
 
-    void Start()
-    {
-        vignette.intensity.value = 0.5f;
-    }
-
-    void FixedUpdate()
-    {
-
-    }
 }

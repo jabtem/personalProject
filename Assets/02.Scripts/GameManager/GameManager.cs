@@ -19,6 +19,18 @@ public class GameManager : MonoBehaviour
     //플레이어 애니메이션 속도관리용
     Animator playerAnim;
 
+    [SerializeField]
+    PostProcessingManager _postProcessingManager;
+    public PostProcessingManager postProcessingManager
+    {
+        set
+        {
+            if(_postProcessingManager == null)
+                _postProcessingManager = value;
+        }
+    }
+
+
 
     //캐릭터 넘버
     public int CharacterNum = 0;
