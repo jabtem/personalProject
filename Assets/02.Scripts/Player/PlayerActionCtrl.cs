@@ -197,6 +197,7 @@ public class PlayerActionCtrl : MonoBehaviour
         if(pzoneHit && !enemyHit)
         {
             GameManager.instance.SetTimeScale(0.5f);
+            GameManager.instance.postProcessingManager.TimeSlowEffect(0.7f);
             GameManager.instance.InvokeResetTimeScale(3f);
            
         }

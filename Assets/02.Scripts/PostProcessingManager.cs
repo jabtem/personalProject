@@ -20,4 +20,39 @@ public class PostProcessingManager : MonoBehaviour
         }
     }
 
+    IEnumerator TimeSlow(float intensity)
+    {
+
+        if (intensity > 0)
+        {
+            vignette.active = true;
+            while (vignette.intensity.value < intensity)
+            {
+                if (vignette.intensity.value >= intensity)
+                    yield break;
+                vignette.intensity.value += 0.01f;
+                yield return null;
+            }
+        }
+        if(intensity == 0)
+        {
+            while(vignette.intensity.value >0)
+            {
+                if (vignette.intensity.value <= 0)
+                {
+                    vignette.active = false;
+                    yield break;
+                }
+                vignette.intensity.value -= 0.01f;
+                yield return null;
+            }
+        }
+        
+    }
+
+    public void TimeSlowEffect(float intensity)
+    {
+        StartCoroutine(TimeSlow(intensity));
+    }
+
 }

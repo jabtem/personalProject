@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     //플레이어 애니메이션 속도관리용
     Animator playerAnim;
 
-    [SerializeField]
     PostProcessingManager _postProcessingManager;
     public PostProcessingManager postProcessingManager
     {
@@ -27,6 +26,10 @@ public class GameManager : MonoBehaviour
         {
             if(_postProcessingManager == null)
                 _postProcessingManager = value;
+        }
+        get
+        {
+            return _postProcessingManager;
         }
     }
 
@@ -53,28 +56,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-
-        //일시정지확인용 테스트코드
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-
-            if (Time.timeScale >= 0.1)
-            {
-                SetTimeScale(0);
-                SetPlayerAnimSpeed(0);
-                playerTimeScale = 0;
-            }
-            else
-            {
-                SetTimeScale(1);
-                SetPlayerAnimSpeed(1);
-                playerTimeScale = 1f;
-            }
-
-        }
-    }
 
     public void LoadScene(int num)
     {
@@ -108,6 +89,7 @@ public class GameManager : MonoBehaviour
     void ResetTimeScale()
     {
         Time.timeScale = 1f;
+        postProcessingManager.TimeSlowEffect(0f);
     }
 
     public void InvokeResetTimeScale(float time)

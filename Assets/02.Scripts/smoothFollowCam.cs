@@ -10,8 +10,6 @@ public class smoothFollowCam : MonoBehaviour
     public Transform target;
     public float distance = 10.0f;
     RadarMap map;
-    Transform myTr;
-
     //터치 불가능 영역
     List<Rect> dontTouchArea = new List<Rect>();
 
@@ -28,7 +26,6 @@ public class smoothFollowCam : MonoBehaviour
 
     private void Awake()
     {
-        myTr = GetComponent<Transform>();
         map = GameObject.FindGameObjectWithTag("Minimap").GetComponent<RadarMap>();
         dontTouchArea.Add(new Rect(0, 0, Screen.width * 0.5f, Screen.height));
     }
