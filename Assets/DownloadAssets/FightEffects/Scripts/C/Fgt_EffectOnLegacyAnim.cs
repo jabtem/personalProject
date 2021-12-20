@@ -18,7 +18,7 @@ public class Fgt_EffectOnLegacyAnim : MonoBehaviour {
 	public Text writeHere;
 
 	public GameObject[] database;
-	private int currentEffectNo;
+	public int currentEffectNo;
 
 	void  Start (){
 
