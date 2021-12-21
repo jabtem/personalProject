@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AfterImage
-  m_Shader: {fileID: 4800000, guid: dac68eccd6321bb44a5b5de3e47a5207, type: 3}
+  m_Name: SampleMat
+  m_Shader: {fileID: 4800000, guid: 8e98442a4727c184592a10fcbc6a22c0, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -56,32 +56,28 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Alpha: 1
     - _BumpScale: 1
-    - _ColorFactor: 0
+    - _ChangeValue: 0
+    - _CumstomValue: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FresnelInvert: 0
-    - _FresnelPower: 8
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Intensity: 0.5
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RimLightMul: 1
-    - _RimLightPow: 1
+    - _RimLightMul: 1.86
+    - _RimLightPow: 0.16
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorA: {r: 3.5648696, g: 3.0591402, b: 0, a: 1}
-    - _ColorB: {r: 3.6992393, g: 0, b: 4.759381, a: 1}
-    - _ColorC: {r: 0, g: 1, b: 0.49451518, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color1: {r: 0, g: 0, b: 0, a: 1}
+    - _Color2: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

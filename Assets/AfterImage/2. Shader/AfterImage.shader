@@ -2,8 +2,8 @@
 {
 	Properties
 	{
-		[HideInInspector] _Color("Color", Color) = (1,0,0,1)
-		[HideInInspector]_Alpha("Alpha", float) = 1
+		 _Color("Color", Color) = (1,0,0,1)
+		_Alpha("Alpha", float) = 1
 		_RimLightMul("RimLightMul", Range(0, 10)) = 0.5
 		_RimLightPow("RimLightPow", Range(0, 10)) = 1.5
 		_Intensity("Intensity", Range(0, 10)) = 1

@@ -2256,12 +2256,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 79368330}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &85305586 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4122301995010736144, guid: 8737e2db481ff3d47baf319ab632da62,
-    type: 3}
-  m_PrefabInstance: {fileID: 4122301994925451490}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &85471954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4989,7 +4983,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f9619563aba8b7542abf0aabdc638afe, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21071,7 +21065,7 @@ RectTransform:
   m_Children:
   - {fileID: 1875651959}
   m_Father: {fileID: 1684559457}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -42115,8 +42109,8 @@ RectTransform:
   - {fileID: 1805391546}
   - {fileID: 2044555967}
   - {fileID: 666273497}
+  - {fileID: 4122301994925451491}
   - {fileID: 828630791}
-  - {fileID: 85305586}
   m_Father: {fileID: 634528403}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52979,6 +52973,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8737e2db481ff3d47baf319ab632da62, type: 3}
+--- !u!4 &4122301994925451491 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 4122301994925451490}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7072406635526354028
 PrefabInstance:
   m_ObjectHideFlags: 0

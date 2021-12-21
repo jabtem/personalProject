@@ -5640,15 +5640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6149a22cf8a47a192a60b00b3becb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 1
-  ref_SMR_EYE_DEF: {fileID: 131063481}
-  ref_SMR_EL_DEF: {fileID: 131063511}
-  ratio_Close: 85
-  ratio_HalfClose: 20
-  ratio_Open: 0
-  timeBlink: 0.4
-  threshold: 0.3
-  interval: 3
 --- !u!114 &129181271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7449,7 +7440,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219231203}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 3, z: -6.36}
+  m_LocalPosition: {x: 1.3, y: 3.21, z: -5.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7512,7 +7503,7 @@ MonoBehaviour:
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 16384
-    ctime2: 32768
+    ctime2: 32575
     ctime3: 49151
     ctime4: 65535
     ctime5: 0
@@ -7645,12 +7636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e127aa8c10cad954783ce5f7fa84598b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveVector: {x: 0, y: 0, z: 0}
-  _moveSpeed: 3
-  _runSpeedMultiplier: 1.5
-  _turnSpeed: 4
-  _animMoveParam: Move Speed
-  _runKey: 304
 --- !u!114 &1855976490
 MonoBehaviour:
   m_ObjectHideFlags: 0
