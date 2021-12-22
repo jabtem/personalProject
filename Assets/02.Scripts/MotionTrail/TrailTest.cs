@@ -28,10 +28,23 @@ public class TrailTest : MonoBehaviour
 
     float motionTrailTime;
     float colorChangeTime;
-    SkinnedMeshRenderer skinnedMeshRenderer;
+
+    GameObject[] skinMeshTagObj;
+    //원하는 메쉬에 대해서만 잔상을 만들기위해
+    SkinnedMeshRenderer[] skinnedMeshRenderer;
     private void Awake()
     {
-        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+        skinMeshTagObj = GameObject.FindGameObjectsWithTag("SkinMesh");
+
+        if(skinMeshTagObj != null)
+        {
+            skinnedMeshRenderer = new SkinnedMeshRenderer[skinMeshTagObj.Length];
+            for (int i=0; i< skinMeshTagObj.Length; i++)
+            {
+                skinnedMeshRenderer[i] = skinMeshTagObj[i].GetComponent<SkinnedMeshRenderer>();
+            }
+        }
+
     }
 
     private void Update()
@@ -46,23 +59,24 @@ public class TrailTest : MonoBehaviour
             }
             Color color = motionTrailGradient.Evaluate(colorChangeTime);
             colorChangeTime += colorChangeSpeed;
-            Mesh mesh = new Mesh();
-            skinnedMeshRenderer.BakeMesh(mesh);
-            
-            GameObject obj = new GameObject("TrailTest");
-            MeshFilter mf = obj.AddComponent<MeshFilter>();
-            MeshRenderer mr = obj.AddComponent<MeshRenderer>();
-            mf.mesh = mesh;
-            mr.material = motionTrailMat;
-            mr.material.SetColor("_Color", color);
-            obj.transform.position = this.transform.position;
-            obj.transform.rotation = this.transform.rotation;
 
+            foreach(var v in skinnedMeshRenderer)
+            {
+                Mesh mesh = new Mesh();
+                v.BakeMesh(mesh);
 
-
-            //테스트용이므로 오브젝트풀링x
-            Destroy(obj, 1f);
-            motionTrailTime = 0f;
+                GameObject obj = new GameObject($"{gameObject.name} TrailTest");
+                MeshFilter mf = obj.AddComponent<MeshFilter>();
+                MeshRenderer mr = obj.AddComponent<MeshRenderer>();
+                mf.mesh = mesh;
+                mr.material = motionTrailMat;
+                mr.material.SetColor("_Color", color);
+                obj.transform.position = this.transform.position;
+                obj.transform.rotation = this.transform.rotation;
+                //테스트용이므로 오브젝트풀링x
+                Destroy(obj, 1f);
+                motionTrailTime = 0f;
+            }
 
         }
 

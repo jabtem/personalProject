@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - BackButton
   - PerfectZone
+  - SkinMesh
   layers:
   - Default
   - TransparentFX
