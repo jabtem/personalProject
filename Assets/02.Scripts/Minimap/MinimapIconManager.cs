@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class MinimapIconManager : MonoBehaviour
 {
 
+
+
     public static MinimapIconManager instance;
     public Image enemyIcon;//적의 미니맵아이콘
     public Image playerIcon;//플레이어
