@@ -31,7 +31,7 @@ public class PlayerActionCtrl : MonoBehaviour
     //애니메이션 파라미터 ID저장용
     int comboStepID;
     int specialActionID;
-    int idleID;
+    int speedID;
     int skillNum;
 
 
@@ -65,7 +65,7 @@ public class PlayerActionCtrl : MonoBehaviour
         controller = GetComponent<CharacterController>();
         comboStepID = Animator.StringToHash("comboStep");
         skillNum = Animator.StringToHash("skillNum");
-        idleID = Animator.StringToHash("Base Layer.Idle");
+        speedID = Animator.StringToHash("speed");
         pMove = GetComponent<PlayerMoveCtrl>();
 
     }
@@ -139,6 +139,11 @@ public class PlayerActionCtrl : MonoBehaviour
 
     public void Attack()
     {
+        //정지상태일때만 공격가능
+        if (anim.GetInteger(speedID) != 0)
+        {
+            return;
+        }
 
         pMove.canMove = false;
 
@@ -198,7 +203,8 @@ public class PlayerActionCtrl : MonoBehaviour
         {
             GameManager.instance.SetTimeScale(0.5f);
             GameManager.instance.postProcessingManager.TimeSlowEffect(0.7f);
-            GameManager.instance.InvokeResetTimeScale(3f);
+            MotionTrailObjectPoolManager.instance.motionTrailOn = true;
+            GameManager.instance.InvokeResetTimeSlow(3f);
            
         }
 
@@ -237,6 +243,7 @@ public class PlayerActionCtrl : MonoBehaviour
     #endregion
 
 
+    #region 콤보체크
     public void ComboPossible()
     {
         comboPossible = true;
@@ -254,11 +261,13 @@ public class PlayerActionCtrl : MonoBehaviour
         pMove.canMove = true;
     }
 
+    #endregion
+
     public void UseSkill()
     {
 
-        //대기모션중이아니면 스킬사용못하게
-        if(anim.GetCurrentAnimatorStateInfo(0).fullPathHash != idleID)
+        //정지상태일때만 스킬사용가능
+        if(anim.GetInteger(speedID) != 0)
         {
             return;
         }

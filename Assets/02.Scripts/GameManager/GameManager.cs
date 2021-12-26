@@ -86,15 +86,16 @@ public class GameManager : MonoBehaviour
         playerAnim = anim;
     }
 
-    void ResetTimeScale()
+    void ResetTimeSlow()
     {
         Time.timeScale = 1f;
+        MotionTrailObjectPoolManager.instance.motionTrailOn = false;
         postProcessingManager.TimeSlowEffect(0f);
     }
 
-    public void InvokeResetTimeScale(float time)
+    public void InvokeResetTimeSlow(float time)
     {
-        Invoke("ResetTimeScale", time);
+        Invoke("ResetTimeSlow", time);
         Debug.Log("TimeReset!");
     }
 

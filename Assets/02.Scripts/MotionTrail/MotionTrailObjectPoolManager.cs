@@ -8,8 +8,24 @@ public class MotionTrailObjectPoolManager : MonoBehaviour
 
     Stack<GameObject> motionTrailContainerStack = new Stack<GameObject>();
 
+    [SerializeField]
+    bool _motionTrailOn;
 
-    public int index = 0;
+
+    public bool motionTrailOn
+    {
+        get
+        {
+            return _motionTrailOn;
+        }
+        set
+        {
+            _motionTrailOn = value;
+        }
+    }
+
+
+    int index = 0;
 
     public Material motionTrailMat;
     public Gradient motionTrailGradient = new Gradient()
@@ -65,12 +81,21 @@ public class MotionTrailObjectPoolManager : MonoBehaviour
 
     void Update()
     {
-        motionTarilTime += Time.deltaTime;
-
-        if(motionTarilTime > motionTrailCycle)
+        if(_motionTrailOn)
         {
-            GetMotionTrailContainer();
-            motionTarilTime = 0f;
+            if(colorChangeTime >1.0f)
+            {
+                colorChangeTime = 0f;
+            }
+
+            motionTarilTime += Time.deltaTime;
+            colorChangeTime += colorChangeSpeed;
+
+            if (motionTarilTime > motionTrailCycle)
+            {
+                GetMotionTrailContainer();
+                motionTarilTime = 0f;
+            }
         }
     }
 

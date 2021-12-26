@@ -32,7 +32,6 @@ public class PlayerMoveCtrl : MonoBehaviour
     // CharacterController 컴포넌트를 위한 레퍼런스
     CharacterController controller;
     Transform myTr;
-    Transform PlayerBody;
     Ray ray;
     RaycastHit hitInfo;
     // 중력 
@@ -69,7 +68,6 @@ public class PlayerMoveCtrl : MonoBehaviour
         // 레퍼런스 연결
         myTr = GetComponent<Transform>();
         controller = GetComponent<CharacterController>();
-        PlayerBody = transform.Find("Body");
         Camera.main.GetComponent<smoothFollowCam>().target = this.transform;
         anim = GetComponent<Animator>();
         id = Animator.StringToHash("speed");
@@ -78,7 +76,8 @@ public class PlayerMoveCtrl : MonoBehaviour
 
     void Update()
     {
-        float ang = Mathf.Atan2(playerInfo.playerVector.z, playerInfo.playerVector.x) * Mathf.Rad2Deg * -1f;
+        //데카르트좌표계를 유니티와 일치시킨다 
+        float ang = Mathf.Atan2(playerInfo.playerVector.z, playerInfo.playerVector.x) * Mathf.Rad2Deg *-1;
         Quaternion rot = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0f);//카메라의앵글에따라 변환
         if (controller.isGrounded)
         {
@@ -95,7 +94,9 @@ public class PlayerMoveCtrl : MonoBehaviour
 
                 if (Mathf.Abs(v) > 0 || Mathf.Abs(h) > 0)
                 {
-                    PlayerBody.rotation = Quaternion.Euler(0, ang + Camera.main.transform.rotation.eulerAngles.y + 90, 0);
+                    //캐릭터가 기본적으로 위로바라보고있는각도가 0도이므로 방향을 맞추기 위해 90도를더함
+                    //카메라각도가 바뀌더라도 조이스틱 조작방향이 변경없도록 카메라각도를 더함
+                    transform.rotation = Quaternion.Euler(0, ang+90 +Camera.main.transform.rotation.eulerAngles.y, 0);
 
                     lastMoveDirection = moveDirection;
                     anim.SetInteger(id, 1);
