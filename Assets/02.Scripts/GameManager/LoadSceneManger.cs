@@ -44,29 +44,37 @@ public class LoadSceneManger : MonoBehaviour
         operation.allowSceneActivation = false;
         while(!operation.isDone)
         {
-            
+
             yield return null;
             timer += Time.unscaledDeltaTime;
+            Debug.Log(timer);
 
-            if (operation.progress<0.9f)
+            loadingBar.fillAmount = Mathf.Lerp(0, 1f, operation.progress);
+
+
+            if(operation.progress>=0.9f)
             {
-                loadingBar.fillAmount = Mathf.Lerp(loadingBar.fillAmount, operation.progress, timer);
-                if(loadingBar.fillAmount >= operation.progress)
-                {
-                    timer = 0f;
-                }
-
+                operation.allowSceneActivation = true;
             }
-            else
-            { 
-                loadingBar.fillAmount = Mathf.Lerp(loadingBar.fillAmount, 1f, timer);
+            //if (operation.progress < 0.9f)
+            //{
+            //    loadingBar.fillAmount = Mathf.Lerp(loadingBar.fillAmount, operation.progress, timer);
+            //    if (loadingBar.fillAmount >= operation.progress)
+            //    {
+            //        timer = 0f;
+            //    }
 
-                if(loadingBar.fillAmount == 1.0f)
-                {
-                    operation.allowSceneActivation = true;
-                    yield break;
-                }
-            }
+            //}
+            //else
+            //{
+            //    loadingBar.fillAmount = Mathf.Lerp(loadingBar.fillAmount, 1f, timer);
+
+            //    if (loadingBar.fillAmount == 1.0f)
+            //    {
+            //        operation.allowSceneActivation = true;
+            //        yield break;
+            //    }
+            //}
 
         }
 

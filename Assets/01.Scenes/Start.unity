@@ -426,8 +426,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1501895613}
-        m_MethodName: LoadingScene
+      - m_Target: {fileID: 1501895612}
+        m_MethodName: LoadLoadingScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -748,12 +748,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -811,6 +811,7 @@ GameObject:
   - component: {fileID: 1501895611}
   - component: {fileID: 1501895612}
   - component: {fileID: 1501895613}
+  - component: {fileID: 1501895614}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -845,6 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3560ee35dfa6ecc4bb8ede62e55bce71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTimeScale: 1
   CharacterNum: 0
 --- !u!114 &1501895613
 MonoBehaviour:
@@ -860,6 +862,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingBar: {fileID: 328175506}
   loadingBarCanvas: {fileID: 1793038960}
+--- !u!114 &1501895614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501895610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b439871e5481bed478f122fa426a926c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FPS: 0
+  msFrameTime: 0
 --- !u!1 &1560182673
 GameObject:
   m_ObjectHideFlags: 0

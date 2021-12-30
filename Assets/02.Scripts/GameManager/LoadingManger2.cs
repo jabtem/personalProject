@@ -29,6 +29,8 @@ public class LoadingManger2 : MonoBehaviour
 
     private IEnumerator Load()
     {
+        yield return new WaitForSeconds(1f);
+
         loadingBar.fillAmount = 0;
         float timer =0;
         AsyncOperation operation = SceneManager.LoadSceneAsync(next);
@@ -63,4 +65,6 @@ public class LoadingManger2 : MonoBehaviour
         }
 
     }
+
+
 }
