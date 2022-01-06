@@ -95,8 +95,9 @@ public class RadarMap : MonoBehaviour
 
             //대상오브젝트의 절대각도
             //카메라 각도에따라 미니맵이 회전한다
-            float deltay = Mathf.Atan2(mapPos.z, mapPos.x) * Mathf.Rad2Deg+ Camera.main.transform.eulerAngles.y; //+ playerPos.eulerAngles.y; 이거주석안하면 미니맵이 회전함
+            float deltay = Mathf.Atan2(mapPos.z, mapPos.x) * Mathf.Rad2Deg+ Camera.main.transform.eulerAngles.y;
 
+            Debug.Log(Camera.main.transform.eulerAngles.y);
           
             //미니맵 아이콘x,y
             mapPos.x = dist2Object * Mathf.Cos(deltay * Mathf.Deg2Rad);
