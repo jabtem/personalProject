@@ -36,12 +36,12 @@ public class MonsterFOVTest : MonoBehaviour
         rightVector = new Vector3(Mathf.Sin(angle*0.5f * Mathf.Deg2Rad), 0, Mathf.Cos(angle*0.5f * Mathf.Deg2Rad));
         leftVector = new Vector3(-Mathf.Sin(angle*0.5f * Mathf.Deg2Rad), 0, Mathf.Cos(angle*0.5f * Mathf.Deg2Rad));
 
-
         //대상의 높이를 고려하지않음 자기자신의높이를기준
         targetDirection = new Vector3(target.position.x,transform.position.y,target.position.z) - transform.position;
 
-        Vector3 leftVectToTraget = new Vector3(target.position.x, transform.position.y, target.position.z) - (transform.position + leftVector);
-
+        Vector3 leftVectToTarget = new Vector3(target.position.x, transform.position.y, target.position.z) - (transform.position + leftVector*radius);
+        //Debug.Log(Mathf.Acos(Vector3.Dot(leftVectToTarget.normalized, leftVector)) * Mathf.Rad2Deg );
+        //Debug.Log(transform.TransformDirection(leftVector));
 
         // 백터의 내적 = 벡터A크기 * 벡터B크기 * Cos(theta)
         // Cos(theta) = 백터의내적 / 벡터A크기 / 벡터B크기
@@ -59,9 +59,10 @@ public class MonsterFOVTest : MonoBehaviour
 
         if (targetDirection.sqrMagnitude <= (radius+playerColRadius)*(radius+playerColRadius))
         {
+            //점과 부채꼴체크
             if(Mathf.Acos(Vector3.Dot(transform.forward, targetDirection.normalized)) * Mathf.Rad2Deg <= angle * 0.5f)
                 isCol = true;
-            if(Vector3.Cross(leftVector,targetDirection.normalized).magnitude/radius < radius)
+            else if(Vector3.Cross(leftVector,targetDirection.normalized).magnitude/radius < radius)
             {
                 isCol = true;
             }
@@ -77,6 +78,7 @@ public class MonsterFOVTest : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward * radius, Color.white);
         Debug.DrawRay(transform.position, transform.TransformDirection(rightVector.normalized) * radius, Color.red);
         Debug.DrawRay(transform.position, transform.TransformDirection(leftVector.normalized) * radius, Color.green);
+        Debug.DrawRay(transform.position + leftVector *radius, transform.TransformDirection(leftVectToTarget.normalized), Color.white);
 
     }
 
