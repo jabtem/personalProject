@@ -33,13 +33,13 @@ public class MonsterFOVTest : MonoBehaviour
     private void Update()
     {
 
-        rightVector = new Vector3(Mathf.Sin(angle*0.5f * Mathf.Deg2Rad), 0, Mathf.Cos(angle*0.5f * Mathf.Deg2Rad));
-        leftVector = new Vector3(-Mathf.Sin(angle*0.5f * Mathf.Deg2Rad), 0, Mathf.Cos(angle*0.5f * Mathf.Deg2Rad));
-
+        rightVector = transform.TransformDirection(new Vector3(Mathf.Sin(angle*0.5f * Mathf.Deg2Rad), 0, Mathf.Cos(angle*0.5f * Mathf.Deg2Rad)))*radius;
+        leftVector = transform.TransformDirection(new Vector3(-Mathf.Sin(angle * 0.5f * Mathf.Deg2Rad), 0, Mathf.Cos(angle * 0.5f * Mathf.Deg2Rad)))*radius;
         //대상의 높이를 고려하지않음 자기자신의높이를기준
         targetDirection = new Vector3(target.position.x,transform.position.y,target.position.z) - transform.position;
 
-        Vector3 leftVectToTarget = new Vector3(target.position.x, transform.position.y, target.position.z) - (transform.position + leftVector*radius);
+
+        Vector3 leftVectToTarget = new Vector3(target.position.x, transform.position.y, target.position.z) - (transform.position + leftVector);
         //Debug.Log(Mathf.Acos(Vector3.Dot(leftVectToTarget.normalized, leftVector)) * Mathf.Rad2Deg );
         //Debug.Log(transform.TransformDirection(leftVector));
 
@@ -57,12 +57,24 @@ public class MonsterFOVTest : MonoBehaviour
 
 
 
-        if (targetDirection.sqrMagnitude <= (radius+playerColRadius)*(radius+playerColRadius))
+
+
+        if (targetDirection.sqrMagnitude <= (radius + playerColRadius)* (radius + playerColRadius) &&
+            ((Vector3.Dot(targetDirection.normalized, leftVector.normalized) >= 0) || 
+            (Vector3.Dot(targetDirection.normalized, rightVector.normalized) >= 0)))
         {
-            //점과 부채꼴체크
-            if(Mathf.Acos(Vector3.Dot(transform.forward, targetDirection.normalized)) * Mathf.Rad2Deg <= angle * 0.5f)
+            //부체꼴 호부분과 원 충돌 체크
+            if (Mathf.Acos(Vector3.Dot(transform.forward, targetDirection.normalized)) * Mathf.Rad2Deg <= angle * 0.5f)
+            {
                 isCol = true;
-            else if(Vector3.Cross(leftVector,targetDirection.normalized).magnitude/radius < radius)
+            }
+            //부채꼴 왼쪽선과 원 충돌체크
+            else if (Vector3.Cross(leftVector, targetDirection).magnitude / radius < playerColRadius)
+            {
+                isCol = true;
+            }
+            //부채꼴 오른쪽선과 원 충돌체크
+            else if (Vector3.Cross(rightVector, targetDirection).magnitude / radius < playerColRadius)
             {
                 isCol = true;
             }
@@ -73,12 +85,13 @@ public class MonsterFOVTest : MonoBehaviour
             isCol = false;
 
 
-        
+
 
         Debug.DrawRay(transform.position, transform.forward * radius, Color.white);
-        Debug.DrawRay(transform.position, transform.TransformDirection(rightVector.normalized) * radius, Color.red);
-        Debug.DrawRay(transform.position, transform.TransformDirection(leftVector.normalized) * radius, Color.green);
-        Debug.DrawRay(transform.position + leftVector *radius, transform.TransformDirection(leftVectToTarget.normalized), Color.white);
+        Debug.DrawRay(transform.position, targetDirection, Color.yellow);
+        Debug.DrawRay(transform.position, rightVector, Color.red);
+        Debug.DrawRay(transform.position, leftVector , Color.green);
+        Debug.DrawRay(transform.position + leftVector, leftVectToTarget, Color.white);
 
     }
 
