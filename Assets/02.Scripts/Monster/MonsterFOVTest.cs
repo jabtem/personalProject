@@ -32,10 +32,19 @@ public class MonsterFOVTest : MonoBehaviour
     private void Update()
     {
 
-        rightVector = transform.TransformDirection(new Vector3(Mathf.Sin(angle*0.5f * Mathf.Deg2Rad), 0, Mathf.Cos(angle*0.5f * Mathf.Deg2Rad)))*radius;
-        leftVector = transform.TransformDirection(new Vector3(-Mathf.Sin(angle * 0.5f * Mathf.Deg2Rad), 0, Mathf.Cos(angle * 0.5f * Mathf.Deg2Rad)))*radius;
+        //몬스터가 바라보고있는방향 = transform.eulerAngles.y
+        rightVector = new Vector3(Mathf.Sin((transform.eulerAngles.y+angle*0.5f) * Mathf.Deg2Rad), 0, Mathf.Cos((transform.eulerAngles.y + angle * 0.5f) * Mathf.Deg2Rad))*radius;
+        leftVector = new Vector3(Mathf.Sin((transform.eulerAngles.y-angle * 0.5f) * Mathf.Deg2Rad), 0, Mathf.Cos((transform.eulerAngles.y - angle * 0.5f) * Mathf.Deg2Rad))*radius;
         targetDirection = new Vector3(target.position.x,transform.position.y,target.position.z) - transform.position;
 
+        //Debug.Log("Target to rightVec distance :" + Vector3.Cross(rightVector, targetDirection).magnitude / radius);
+        //Debug.Log("Target to leftVec distance :" + Vector3.Cross(leftVector, targetDirection).magnitude / radius);
+        //Debug.Log("Target to -rightVec distance :" + Vector3.Cross(-rightVector, targetDirection).magnitude / radius);
+        //Debug.Log("Target to -leftVec distance :" + Vector3.Cross(-leftVector, targetDirection).magnitude / radius);
+        //Debug.Log(Vector3.Cross(leftVector, targetDirection).magnitude);
+        //Debug.Log(targetDirection.magnitude * leftVector.magnitude * Mathf.Sin(Mathf.Acos(Vector3.Dot(targetDirection.normalized, leftVector.normalized))));
+        //Debug.Log("11: " + Vector3.Dot(targetDirection.normalized, leftVector.normalized));
+        //Debug.Log("22: " + Vector3.Dot(targetDirection.normalized, rightVector.normalized));
 
 
 
@@ -56,17 +65,32 @@ public class MonsterFOVTest : MonoBehaviour
             //부체꼴 호부분과 원 충돌 체크
             if (Mathf.Acos(Vector3.Dot(transform.forward, targetDirection.normalized)) * Mathf.Rad2Deg <= angle * 0.5f)
             {
+                Debug.Log(1);
                 isCol = true;
             }
             //부채꼴 왼쪽선과 원 충돌체크
             else if (Vector3.Cross(leftVector, targetDirection).magnitude / radius <= playerColRadius)
             {
-                isCol = true;
+                //대상이 오브젝트 정면기준으로 왼쪽에 있을때만체크
+                if (Vector3.Cross(targetDirection, transform.forward).y >= 0)
+                {
+                    Debug.Log(2);
+                    isCol = true;
+                }
+                else
+                    isCol = false;
             }
             //부채꼴 오른쪽선과 원 충돌체크
             else if (Vector3.Cross(rightVector, targetDirection).magnitude / radius <= playerColRadius)
             {
-                isCol = true;
+                //대상이 오브젝트 정면기준으로 오른쪽에 있을때만체크
+                if (Vector3.Cross(targetDirection, transform.forward).y < 0)
+                {
+                    Debug.Log(3);
+                    isCol = true;
+                }
+                else
+                    isCol = false;
             }
             else
                 isCol = false;
@@ -80,7 +104,11 @@ public class MonsterFOVTest : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward * radius, Color.white);
         Debug.DrawRay(transform.position, targetDirection, Color.yellow);
         Debug.DrawRay(transform.position, rightVector, Color.red);
-        Debug.DrawRay(transform.position, leftVector , Color.green);
+        Debug.DrawRay(transform.position, leftVector, Color.green);
+        Debug.DrawRay(transform.position, -rightVector, Color.red);
+        Debug.DrawRay(transform.position, -leftVector , Color.green);
+
+
 
     }
 
@@ -109,4 +137,6 @@ public class MonsterFOVTest : MonoBehaviour
     // 내적 > 0 , theta < 90
     // 내적 < 0 , theta > 90
     // 내적 = 0 , theta = 90
+    // 타겟벡터와 중심벡터의 외적의 y값이 0보다 큼 = 타겟이 중심기준 왼쪽에 위치
+    // 타겟벡터와 중심벡터의 외적의 y값이 0보다 작음 = 타겟이 중심기준 오른쪽에 위치
 }
