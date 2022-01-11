@@ -2880,7 +2880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba152f36fc0bd7140905f9e526824e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 51
+  angle: 204
   radius: 5
   target: {fileID: 1316619509}
   playerColRadius: 0
