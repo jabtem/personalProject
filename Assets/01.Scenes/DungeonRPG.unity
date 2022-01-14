@@ -2847,6 +2847,7 @@ GameObject:
   - component: {fileID: 99017047}
   - component: {fileID: 99017048}
   - component: {fileID: 99017049}
+  - component: {fileID: 99017050}
   m_Layer: 0
   m_Name: MonsterTest
   m_TagString: Enemy
@@ -2862,11 +2863,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99017045}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.19, y: 3.32, z: -29.79}
+  m_LocalPosition: {x: -56.39, y: 0, z: -29.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 184895086}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &99017047
 MonoBehaviour:
@@ -2880,7 +2882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba152f36fc0bd7140905f9e526824e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 204
+  angle: 112
   radius: 5
   target: {fileID: 1316619509}
   playerColRadius: 0
@@ -2908,12 +2910,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9c0f0773144ae4283c02a5a59acd89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roamingArea:
+  - {x: -67.69, y: 0, z: -33.29}
+  - {x: -67.69, y: 0, z: -26.29}
+  - {x: -45.09, y: 0, z: -26.29}
+  - {x: -45.09, y: 0, z: -33.29}
   roamingPoints: []
-  roamingAreaWidth: 0
-  roamingAreaHeight: 0
+  roamingAreaWidth: 11.3
+  roamingAreaHeight: 3.5
   moveRomaingAreaPosionX: 0
   moveRomaingAreaPosionZ: 0
   roamingMode: 1
+--- !u!195 &99017050
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99017045}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &100067896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4650,7 +4679,6 @@ GameObject:
   - component: {fileID: 184895086}
   - component: {fileID: 184895089}
   - component: {fileID: 184895088}
-  - component: {fileID: 184895087}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -4666,25 +4694,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184895085}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.19, y: 3.32, z: -29.79}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 99017046}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &184895087
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184895085}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &184895088
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -33916,7 +33931,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1323239662
 PrefabInstance:
@@ -39642,7 +39657,7 @@ Transform:
   - {fileID: 309598940}
   - {fileID: 530415521}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1574863091
 PrefabInstance:
@@ -48404,7 +48419,7 @@ PrefabInstance:
     - target: {fileID: 6382908670707109207, guid: 3a68dda44e34ab048b4d9f7edba9d5ed,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6382908670707109207, guid: 3a68dda44e34ab048b4d9f7edba9d5ed,
         type: 3}
