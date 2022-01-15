@@ -23,7 +23,9 @@ public class MonsterMove : MonoBehaviour
     //지정 영역내에서는 무작위로 행동하도록 구현목적
     [HideInInspector]
     public Vector3[] roamingArea;
+
     public Vector2[] roamingPoints = new Vector2[0];
+
     [HideInInspector]
     public float roamingAreaWidth;
     [HideInInspector]
@@ -35,15 +37,23 @@ public class MonsterMove : MonoBehaviour
 
     bool gameStart = false;
     Vector3 roamingAreaPosition;
+    int roamingPointsIndex;
+    //오브젝트 시작전위치
+    Vector3 firstPosition;
 
     public RoamingMode roamingMode;
     MonsterState state;
     NavMeshAgent myNavMesh;
+    [SerializeField]
+    bool viewGizmo;
     Transform target;
+
     
     void Awake()
     {
         roamingAreaPosition = new Vector3(transform.position.x + moveRomaingAreaPosionX, 0f, transform.position.z + moveRomaingAreaPosionZ);
+        roamingPointsIndex = 0;
+        firstPosition = transform.position;
         myNavMesh = GetComponent<NavMeshAgent>();
         MonsterState state = MonsterState.Roaming;
         roamingArea = new Vector3[]
@@ -66,12 +76,22 @@ public class MonsterMove : MonoBehaviour
         switch(state)
         {
             case MonsterState.Roaming:
-                switch(roamingMode)
+                myNavMesh.isStopped = false;
+                myNavMesh.speed = 5f;
+                myNavMesh.stoppingDistance = 0.0f;
+                switch (roamingMode)
                 {
                     case RoamingMode.지점순회:
-                        if(target !=null && roamingPoints.Length !=0)
+                        if(target ==null && roamingPoints.Length !=0)
                         {
-                            myNavMesh.destination = roamingPoints[0];
+
+                            if(transform.position == myNavMesh.destination)
+                            {
+                                roamingPointsIndex %= roamingPoints.Length;
+                                Vector3 roamingTarget = new Vector3(firstPosition.x + roamingPoints[roamingPointsIndex].x, 0f, firstPosition.z + roamingPoints[roamingPointsIndex].y);
+                                myNavMesh.destination = roamingTarget;
+                                ++roamingPointsIndex;
+                            }
                         }
 
                         break;
@@ -88,7 +108,7 @@ public class MonsterMove : MonoBehaviour
     private void OnDrawGizmos()
     {
         /******************정찰범위 디버그용**********************/
-        if (roamingMode == RoamingMode.영역내무작위이동 && !gameStart)
+        if (roamingMode == RoamingMode.영역내무작위이동 && viewGizmo)
         {
             roamingAreaPosition = new Vector3(transform.position.x + moveRomaingAreaPosionX, 0f, transform.position.z + moveRomaingAreaPosionZ);
 
@@ -107,14 +127,22 @@ public class MonsterMove : MonoBehaviour
             Handles.DrawSolidRectangleWithOutline(roamingArea, new Color(1f, 1f, 1f, 0.2f), Color.white);
         }
 
-        else if (roamingMode == RoamingMode.지점순회 && roamingPoints.Length != 0 && !gameStart)
+        else if (roamingMode == RoamingMode.지점순회 && roamingPoints.Length != 0 && viewGizmo)
         {
             for (int i=0; i< roamingPoints.Length; ++i)
             {
-                Handles.Label(new Vector3(transform.position.x + roamingPoints[i].x, 1.5f, transform.position.z + roamingPoints[i].y), (i+1).ToString());
-                Gizmos.color = new Color(0f, 0f, 1f, 0.5f);
-                Gizmos.DrawSphere(new Vector3(transform.position.x + roamingPoints[i].x, 0, transform.position.z + roamingPoints[i].y), 1f);
-
+                if(!gameStart)
+                {
+                    Handles.Label(new Vector3(transform.position.x + roamingPoints[i].x, 1.5f, transform.position.z + roamingPoints[i].y), (i + 1).ToString());
+                    Gizmos.color = new Color(0f, 0f, 1f, 0.5f);
+                    Gizmos.DrawSphere(new Vector3(transform.position.x + roamingPoints[i].x, 0, transform.position.z + roamingPoints[i].y), 1f);
+                }
+                else if(gameStart)
+                {
+                    Handles.Label(new Vector3(firstPosition.x + roamingPoints[i].x, 1.5f, firstPosition.z + roamingPoints[i].y), (i + 1).ToString());
+                    Gizmos.color = new Color(0f, 0f, 1f, 0.5f);
+                    Gizmos.DrawSphere(new Vector3(firstPosition.x + roamingPoints[i].x, 0, firstPosition.z + roamingPoints[i].y), 1f);
+                }
 
             }
         }

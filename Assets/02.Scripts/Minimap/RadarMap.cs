@@ -97,7 +97,6 @@ public class RadarMap : MonoBehaviour
             //카메라 각도에따라 미니맵이 회전한다
             float deltay = Mathf.Atan2(mapPos.z, mapPos.x) * Mathf.Rad2Deg+ Camera.main.transform.eulerAngles.y;
 
-            Debug.Log(Camera.main.transform.eulerAngles.y);
           
             //미니맵 아이콘x,y
             mapPos.x = dist2Object * Mathf.Cos(deltay * Mathf.Deg2Rad);

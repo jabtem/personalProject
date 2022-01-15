@@ -11,7 +11,8 @@ public class MnsterMoveInspector : Editor
 
     MonsterMove monsterMove = null;
     SerializedProperty roamingPoints;
-
+    SerializedProperty viewGizmo;
+    MonsterMove Script = null;
 
     private void OnEnable()
     {
@@ -19,10 +20,14 @@ public class MnsterMoveInspector : Editor
             monsterMove = (MonsterMove)target;
 
         roamingPoints = serializedObject.FindProperty("roamingPoints");
+        viewGizmo = serializedObject.FindProperty("viewGizmo");
     }
 
     public override void OnInspectorGUI()
     {
+        GUI.enabled = false;
+        EditorGUILayout.ObjectField("Script", MonoScript.FromMonoBehaviour((MonsterMove)target), typeof(MonsterMove), false);
+        GUI.enabled = true;
         //정찰모드가 변경시 값초기화
         EditorGUI.BeginChangeCheck();
         var roamingMode = (MonsterMove.RoamingMode)EditorGUILayout.EnumPopup("정찰 모드", monsterMove.roamingMode);
@@ -56,18 +61,18 @@ public class MnsterMoveInspector : Editor
                     Array.Resize(ref monsterMove.roamingPoints, monsterMove.roamingPoints.Length + 1);
                 }
 
-                else if (GUILayout.Button("감소") && monsterMove.roamingPoints.Length != 0)
+                else if (GUILayout.Button("삭제") && monsterMove.roamingPoints.Length != 0)
                 {
                     Array.Resize(ref monsterMove.roamingPoints, monsterMove.roamingPoints.Length - 1);
                 }
 
                 EditorGUILayout.EndHorizontal();
-                SerializedProperty(roamingPoints, "roamingPoints");
+                SerializedProperty(roamingPoints, "roamingPoints", "정찰 지점");
                 break;
         }
 
 
-
+        SerializedProperty(viewGizmo, "viewGizmo", "정찰 영역(지점) 기즈모 출력");
 
         //인스펙터 값 변경시 값유지위함
         if (GUI.changed)
@@ -77,11 +82,11 @@ public class MnsterMoveInspector : Editor
         }
     }
 
-    void SerializedProperty(SerializedProperty property,string name)
+    void SerializedProperty(SerializedProperty property,string propertyName, string name)
     {
-        property = serializedObject.FindProperty(name);
+        property = serializedObject.FindProperty(propertyName);
         EditorGUI.BeginChangeCheck();
-        EditorGUILayout.PropertyField(property,new GUIContent("정찰 지점"), true);
+        EditorGUILayout.PropertyField(property,new GUIContent(name), true);
         if(EditorGUI.EndChangeCheck())
         {
             serializedObject.ApplyModifiedProperties();
