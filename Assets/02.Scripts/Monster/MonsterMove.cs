@@ -7,6 +7,7 @@ using System;
 
 public class MonsterMove : MonoBehaviour
 {
+
     public enum RoamingMode
     {
         지점순회, 영역내무작위이동
@@ -42,7 +43,47 @@ public class MonsterMove : MonoBehaviour
     Vector3 firstPosition;
 
     public RoamingMode roamingMode;
-    MonsterState state;
+    MonsterState _state;
+    public bool stateChange;
+
+    //상태가 변화되면 이전상태에서 호출한 코루틴 정지후
+    //해당 상태에서 필요한 동작 실행
+    public MonsterState State
+    {
+        get
+        {
+            return _state;
+        }
+        set
+        {
+            StopAllCoroutines();
+            _state = value;
+            if(stateChange == false)
+                stateChange = true;
+
+            switch(_state)
+            {
+                case MonsterState.Roaming:
+                    if (myNavMesh.isStopped)
+                        myNavMesh.isStopped = false;
+                    myNavMesh.speed = 5f;
+                    myNavMesh.stoppingDistance = 0.0f;
+                    switch (roamingMode)
+                    {
+                        case RoamingMode.영역내무작위이동:
+                            StartCoroutine(RandomMove());
+                            break;
+                        case RoamingMode.지점순회:
+                            StartCoroutine(PointMove());
+                            break;
+                    }
+                        
+                    break;
+            }
+
+            
+        }
+    }
     NavMeshAgent myNavMesh;
     [SerializeField]
     bool viewGizmo;
@@ -55,7 +96,7 @@ public class MonsterMove : MonoBehaviour
         roamingPointsIndex = 0;
         firstPosition = transform.position;
         myNavMesh = GetComponent<NavMeshAgent>();
-        MonsterState state = MonsterState.Roaming;
+        State = MonsterState.Roaming;
         roamingArea = new Vector3[]
         {
             //왼쪽아래
@@ -71,40 +112,74 @@ public class MonsterMove : MonoBehaviour
 
 
     }
-    private void Update()
+    //private void Update()
+    //{
+    //    switch(State)
+    //    {
+    //        case MonsterState.Roaming:
+    //            if(myNavMesh.isStopped)
+    //                myNavMesh.isStopped = false;
+    //            myNavMesh.speed = 5f;
+    //            myNavMesh.stoppingDistance = 0.0f;
+    //            switch (roamingMode)
+    //            {
+    //                case RoamingMode.지점순회:
+    //                    if(target ==null && roamingPoints.Length !=0)
+    //                    {
+    //                        //목표지점에 도달하면 목적지가 다음지점으로 변경
+    //                        if(transform.position == myNavMesh.destination)
+    //                        {
+    //                            roamingPointsIndex %= roamingPoints.Length;
+    //                            Vector3 roamingTarget = new Vector3(firstPosition.x + roamingPoints[roamingPointsIndex].x, 0f, firstPosition.z + roamingPoints[roamingPointsIndex].y);
+    //                            myNavMesh.destination = roamingTarget;
+    //                            ++roamingPointsIndex;
+    //                        }
+    //                    }
+
+    //                    break;
+    //                case RoamingMode.영역내무작위이동:
+    //                    if(stateChange)
+    //                    {
+    //                        //StartCoroutine(RandomMove());
+    //                        stateChange = false;
+    //                    }
+
+                        
+    //                    break;
+    //            }
+
+
+    //            break;
+    //    }
+    //}
+
+    IEnumerator PointMove()
     {
-        switch(state)
+        while(true)
         {
-            case MonsterState.Roaming:
-                myNavMesh.isStopped = false;
-                myNavMesh.speed = 5f;
-                myNavMesh.stoppingDistance = 0.0f;
-                switch (roamingMode)
-                {
-                    case RoamingMode.지점순회:
-                        if(target ==null && roamingPoints.Length !=0)
-                        {
-
-                            if(transform.position == myNavMesh.destination)
-                            {
-                                roamingPointsIndex %= roamingPoints.Length;
-                                Vector3 roamingTarget = new Vector3(firstPosition.x + roamingPoints[roamingPointsIndex].x, 0f, firstPosition.z + roamingPoints[roamingPointsIndex].y);
-                                myNavMesh.destination = roamingTarget;
-                                ++roamingPointsIndex;
-                            }
-                        }
-
-                        break;
-                    case RoamingMode.영역내무작위이동:
-                        break;
-                }
-
-
-                break;
+            if (transform.position == myNavMesh.destination)
+            {
+                roamingPointsIndex %= roamingPoints.Length;
+                Vector3 roamingTarget = new Vector3(firstPosition.x + roamingPoints[roamingPointsIndex].x, 0f, firstPosition.z + roamingPoints[roamingPointsIndex].y);
+                myNavMesh.destination = roamingTarget;
+                ++roamingPointsIndex;
+            }
+            yield return null;
         }
     }
 
+    IEnumerator RandomMove()
+    {
+        while (true)
+        {
+            int ranAngle = UnityEngine.Random.Range(-180, 180);
+            Debug.Log(ranAngle);
 
+
+            yield return new WaitForSeconds(2f);
+        }
+
+    }
     private void OnDrawGizmos()
     {
         /******************정찰범위 디버그용**********************/
