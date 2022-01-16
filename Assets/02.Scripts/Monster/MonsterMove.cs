@@ -61,7 +61,7 @@ public class MonsterMove : MonoBehaviour
             if(stateChange == false)
                 stateChange = true;
 
-            switch(_state)
+            switch (_state)
             {
                 case MonsterState.Roaming:
                     if (myNavMesh.isStopped)
@@ -71,17 +71,18 @@ public class MonsterMove : MonoBehaviour
                     switch (roamingMode)
                     {
                         case RoamingMode.영역내무작위이동:
+                            Debug.Log("call");
                             StartCoroutine(RandomMove());
                             break;
                         case RoamingMode.지점순회:
                             StartCoroutine(PointMove());
                             break;
                     }
-                        
+
                     break;
             }
 
-            
+
         }
     }
     NavMeshAgent myNavMesh;
@@ -114,20 +115,20 @@ public class MonsterMove : MonoBehaviour
     }
     //private void Update()
     //{
-    //    switch(State)
+    //    switch (State)
     //    {
     //        case MonsterState.Roaming:
-    //            if(myNavMesh.isStopped)
+    //            if (myNavMesh.isStopped)
     //                myNavMesh.isStopped = false;
     //            myNavMesh.speed = 5f;
     //            myNavMesh.stoppingDistance = 0.0f;
     //            switch (roamingMode)
     //            {
     //                case RoamingMode.지점순회:
-    //                    if(target ==null && roamingPoints.Length !=0)
+    //                    if (target == null && roamingPoints.Length != 0)
     //                    {
     //                        //목표지점에 도달하면 목적지가 다음지점으로 변경
-    //                        if(transform.position == myNavMesh.destination)
+    //                        if (transform.position == myNavMesh.destination)
     //                        {
     //                            roamingPointsIndex %= roamingPoints.Length;
     //                            Vector3 roamingTarget = new Vector3(firstPosition.x + roamingPoints[roamingPointsIndex].x, 0f, firstPosition.z + roamingPoints[roamingPointsIndex].y);
@@ -138,13 +139,13 @@ public class MonsterMove : MonoBehaviour
 
     //                    break;
     //                case RoamingMode.영역내무작위이동:
-    //                    if(stateChange)
+    //                    if (stateChange)
     //                    {
-    //                        //StartCoroutine(RandomMove());
+    //                        StartCoroutine(RandomMove());
     //                        stateChange = false;
     //                    }
 
-                        
+
     //                    break;
     //            }
 
@@ -161,7 +162,7 @@ public class MonsterMove : MonoBehaviour
             {
                 roamingPointsIndex %= roamingPoints.Length;
                 Vector3 roamingTarget = new Vector3(firstPosition.x + roamingPoints[roamingPointsIndex].x, 0f, firstPosition.z + roamingPoints[roamingPointsIndex].y);
-                myNavMesh.destination = roamingTarget;
+                myNavMesh.SetDestination(roamingTarget);
                 ++roamingPointsIndex;
             }
             yield return null;
@@ -170,22 +171,47 @@ public class MonsterMove : MonoBehaviour
 
     IEnumerator RandomMove()
     {
+        //무작위 숫자 범위 밖의값
+        int ranAngle = -1;
         while (true)
         {
-            int ranAngle = UnityEngine.Random.Range(-180, 180);
-            Debug.Log(ranAngle);
+            ranAngle = RanAngleCheck(ranAngle);
 
+            float radian = ranAngle * Mathf.Deg2Rad;
+            Debug.Log(ranAngle);
+            Vector3 direction = new Vector3(Mathf.Cos(radian), 0f, Mathf.Sin(radian))*10f;
+            Debug.Log(direction);
+            myNavMesh.isStopped = true;
+            myNavMesh.SetDestination(transform.position + direction);
+            myNavMesh.isStopped = false;
 
             yield return new WaitForSeconds(2f);
         }
 
     }
+
+    int RanAngleCheck(int angle)
+    {
+        int result = UnityEngine.Random.Range(0, 360);
+        //중복제거목적
+        if(result == angle)
+        {
+            Debug.Log("test");
+            RanAngleCheck(angle);
+        }
+
+        return result;
+    }
+
     private void OnDrawGizmos()
     {
         /******************정찰범위 디버그용**********************/
         if (roamingMode == RoamingMode.영역내무작위이동 && viewGizmo)
         {
-            roamingAreaPosition = new Vector3(transform.position.x + moveRomaingAreaPosionX, 0f, transform.position.z + moveRomaingAreaPosionZ);
+            if (!gameStart)
+                roamingAreaPosition = new Vector3(transform.position.x + moveRomaingAreaPosionX, 0f, transform.position.z + moveRomaingAreaPosionZ);
+            else if (gameStart)
+                roamingAreaPosition = new Vector3(firstPosition.x + moveRomaingAreaPosionX, 0f, firstPosition.z + moveRomaingAreaPosionZ);
 
             roamingArea = new Vector3[]
             {

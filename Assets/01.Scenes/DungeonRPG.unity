@@ -3027,19 +3027,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roamingArea:
-  - {x: -60.96, y: 0, z: -41.329998}
-  - {x: -60.96, y: 0, z: -26.73}
-  - {x: -51.82, y: 0, z: -26.73}
-  - {x: -51.82, y: 0, z: -41.329998}
+  - {x: -63.489998, y: 0, z: -42.329998}
+  - {x: -63.489998, y: 0, z: -27.73}
+  - {x: -49.29, y: 0, z: -27.73}
+  - {x: -49.29, y: 0, z: -42.329998}
   roamingPoints:
-  - {x: 4.13, y: 0}
-  - {x: 0.45, y: 3.6}
-  - {x: -4.68, y: 0}
-  roamingAreaWidth: 4.57
+  - {x: 0, y: 0}
+  - {x: 7.28, y: 0}
+  - {x: 0, y: -6.78}
+  roamingAreaWidth: 7.1
   roamingAreaHeight: 7.3
   moveRomaingAreaPosionX: 0
-  moveRomaingAreaPosionZ: 1
-  roamingMode: 0
+  moveRomaingAreaPosionZ: 0
+  roamingMode: 1
   stateChange: 0
   viewGizmo: 1
 --- !u!195 &99017050

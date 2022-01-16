@@ -47,7 +47,6 @@ public class LoadSceneManger : MonoBehaviour
 
             yield return null;
             timer += Time.unscaledDeltaTime;
-            Debug.Log(timer);
 
             loadingBar.fillAmount = Mathf.Lerp(0, 1f, operation.progress);
 
