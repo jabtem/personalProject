@@ -2961,8 +2961,8 @@ GameObject:
   m_Component:
   - component: {fileID: 99017046}
   - component: {fileID: 99017047}
-  - component: {fileID: 99017048}
   - component: {fileID: 99017049}
+  - component: {fileID: 99017048}
   - component: {fileID: 99017050}
   m_Layer: 0
   m_Name: MonsterTest
@@ -3000,8 +3000,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: 112
   radius: 5
-  target: {fileID: 1316619509}
-  playerColRadius: 0
 --- !u!114 &99017048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3041,7 +3039,7 @@ MonoBehaviour:
   roamingMode: 0
   _state: 0
   viewGizmo: 1
-  speed: 0
+  speed: 5
 --- !u!195 &99017050
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3055,7 +3053,7 @@ NavMeshAgent:
   m_Speed: 4.2
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 200
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -35144,7 +35142,7 @@ GameObject:
   - component: {fileID: 1316619506}
   m_Layer: 0
   m_Name: testCh
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

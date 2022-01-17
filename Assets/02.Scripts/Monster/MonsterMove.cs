@@ -61,12 +61,14 @@ public class MonsterMove : MonoBehaviour
             StopAllCoroutines();
             _state = value;
             myNavMesh.isStopped = true;
+            myNavMesh.speed = speed;
+
             switch (_state)
             {
+
                 case MonsterState.Roaming:
                     if (myNavMesh.isStopped)
                         myNavMesh.isStopped = false;
-                    myNavMesh.speed = 5f;
                     myNavMesh.stoppingDistance = 0.0f;
                     switch (roamingMode)
                     {
@@ -79,6 +81,13 @@ public class MonsterMove : MonoBehaviour
                     }
 
                     break;
+                case MonsterState.Trace:
+                    if (myNavMesh.isStopped)
+                        myNavMesh.isStopped = false;
+                    myNavMesh.stoppingDistance = 0.0f;
+                    StartCoroutine(TargetTrace());
+                    break;
+
             }
 
 
@@ -89,9 +98,6 @@ public class MonsterMove : MonoBehaviour
     bool viewGizmo;
     [SerializeField]
     float speed;
-
-    Transform target;
-
     
     void Awake()
     {
@@ -117,16 +123,13 @@ public class MonsterMove : MonoBehaviour
 
     }
 
+    
 
     #region 지점순회
     IEnumerator PointMove()
     {
         while(true)
         {
-            if (FoV.IsColision)
-            {
-                State = MonsterState.Trace;
-            }
 
             if (transform.position == myNavMesh.destination )
             {
@@ -203,6 +206,35 @@ public class MonsterMove : MonoBehaviour
         return result;
     }
     #endregion
+
+
+    #region 타겟추적
+
+    IEnumerator TargetTrace()
+    {
+        while(true)
+        {
+            Vector3 targetDirection = FoV.Target.transform.position - transform.position;
+            if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius)
+            {
+                myNavMesh.SetDestination(transform.position);
+            }
+            else
+                myNavMesh.SetDestination(FoV.Target.transform.position);
+            yield return null;
+        }
+
+        
+    }
+    #endregion
+    private void Update()
+    {
+        //정찰중에 시야각에 타겟이 닿았을경우 상태변경
+        if (State == MonsterState.Roaming&&FoV.IsColision)
+        {
+            State = MonsterState.Trace;
+        }
+    }
     private void OnDrawGizmos()
     {
         /******************정찰범위 디버그용**********************/

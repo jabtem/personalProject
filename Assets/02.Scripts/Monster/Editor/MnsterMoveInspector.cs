@@ -12,7 +12,7 @@ public class MnsterMoveInspector : Editor
     MonsterMove monsterMove = null;
     SerializedProperty roamingPoints;
     SerializedProperty viewGizmo;
-    MonsterMove Script = null;
+    SerializedProperty speed;
 
     private void OnEnable()
     {
@@ -74,6 +74,7 @@ public class MnsterMoveInspector : Editor
 
 
         SerializedProperty(viewGizmo, "viewGizmo", "정찰 영역(지점) 기즈모 출력");
+        SerializedProperty(speed, "speed", "이동속도");
 
         //인스펙터 값 변경시 값유지위함
         if (GUI.changed)
