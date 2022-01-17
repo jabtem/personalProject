@@ -56,7 +56,6 @@ public class MonsterFOVTest : MonoBehaviour
             //부체꼴 호부분과 원 충돌 체크
             if (Mathf.Acos(Vector3.Dot(transform.forward, targetDirection.normalized)) * Mathf.Rad2Deg <= angle * 0.5f)
             {
-                Debug.Log(1);
                 isCol = true;
             }
             //부채꼴 왼쪽선과 원 충돌체크
@@ -66,7 +65,6 @@ public class MonsterFOVTest : MonoBehaviour
                 Vector3.Dot(targetDirection.normalized, leftVector.normalized) >= 0)
             {
 
-                Debug.Log(2);
                 isCol = true;
             }
             //부채꼴 오른쪽선과 원 충돌체크
@@ -75,7 +73,6 @@ public class MonsterFOVTest : MonoBehaviour
                 Vector3.Cross(targetDirection, transform.forward).y < 0&&
                 Vector3.Dot(targetDirection.normalized, rightVector.normalized) >= 0)
             {
-                Debug.Log(3);
                 isCol = true;
             }
             else
