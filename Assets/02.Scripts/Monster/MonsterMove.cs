@@ -43,7 +43,10 @@ public class MonsterMove : MonoBehaviour
     Vector3 firstPosition;
 
     public RoamingMode roamingMode;
+    [SerializeField]
     MonsterState _state;
+
+    MonsterFOV FoV;
 
     //상태가 변화되면 이전상태에서 호출한 코루틴 정지후
     //해당 상태에서 필요한 동작 실행
@@ -57,7 +60,7 @@ public class MonsterMove : MonoBehaviour
         {
             StopAllCoroutines();
             _state = value;
-
+            myNavMesh.isStopped = true;
             switch (_state)
             {
                 case MonsterState.Roaming:
@@ -92,6 +95,7 @@ public class MonsterMove : MonoBehaviour
     
     void Awake()
     {
+        FoV = GetComponent<MonsterFOV>();
         roamingAreaPosition = new Vector3(transform.position.x + moveRomaingAreaPosionX, 0f, transform.position.z + moveRomaingAreaPosionZ);
         roamingPointsIndex = 0;
         firstPosition = transform.position;
@@ -119,7 +123,12 @@ public class MonsterMove : MonoBehaviour
     {
         while(true)
         {
-            if (transform.position == myNavMesh.destination)
+            if (FoV.IsColision)
+            {
+                State = MonsterState.Trace;
+            }
+
+            if (transform.position == myNavMesh.destination )
             {
                 roamingPointsIndex %= roamingPoints.Length;
                 Vector3 roamingTarget = new Vector3(firstPosition.x + roamingPoints[roamingPointsIndex].x, 0f, firstPosition.z + roamingPoints[roamingPointsIndex].y);

@@ -2993,7 +2993,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99017045}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba152f36fc0bd7140905f9e526824e02, type: 3}
   m_Name: 
@@ -3032,14 +3032,14 @@ MonoBehaviour:
   - {x: -45.89, y: 0, z: -24.429998}
   - {x: -45.89, y: 0, z: -45.629997}
   roamingPoints:
-  - {x: 5.82, y: 0}
-  - {x: -0.09, y: 4.14}
-  - {x: 0, y: 0}
+  - {x: 3.79, y: 0}
+  - {x: -7.49, y: -0.09}
   roamingAreaWidth: 10.5
   roamingAreaHeight: 10.6
   moveRomaingAreaPosionX: 0
   moveRomaingAreaPosionZ: 0
-  roamingMode: 1
+  roamingMode: 0
+  _state: 0
   viewGizmo: 1
   speed: 0
 --- !u!195 &99017050
@@ -35222,7 +35222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316619505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -53.44, y: 3.29, z: -30.52}
+  m_LocalPosition: {x: -52.9, y: 0, z: -20.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

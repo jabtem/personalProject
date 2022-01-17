@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class MonsterFOVTest : MonoBehaviour
+public class MonsterFOV : MonoBehaviour
 {
     // Start is called before the first frame updat;
 
@@ -18,7 +18,19 @@ public class MonsterFOVTest : MonoBehaviour
     public float playerColRadius;
     Vector3 targetDirection;
 
-    bool isCol = false;
+    //충돌여부판단
+    public bool IsColision
+    {
+        get
+        {
+            return isCol;
+        }
+        set
+        {
+            isCol = value;
+        }
+    }
+    bool isCol;
     bool gameStart = false;
 
 
@@ -56,7 +68,7 @@ public class MonsterFOVTest : MonoBehaviour
             //부체꼴 호부분과 원 충돌 체크
             if (Mathf.Acos(Vector3.Dot(transform.forward, targetDirection.normalized)) * Mathf.Rad2Deg <= angle * 0.5f)
             {
-                isCol = true;
+                IsColision = true;
             }
             //부채꼴 왼쪽선과 원 충돌체크
             //대상이 오브젝트 정면기준으로 왼쪽에 있을때만체크
@@ -65,7 +77,7 @@ public class MonsterFOVTest : MonoBehaviour
                 Vector3.Dot(targetDirection.normalized, leftVector.normalized) >= 0)
             {
 
-                isCol = true;
+                IsColision = true;
             }
             //부채꼴 오른쪽선과 원 충돌체크
             //대상이 오브젝트 정면기준으로 오른쪽에 있을때만체크
@@ -73,13 +85,13 @@ public class MonsterFOVTest : MonoBehaviour
                 Vector3.Cross(targetDirection, transform.forward).y < 0&&
                 Vector3.Dot(targetDirection.normalized, rightVector.normalized) >= 0)
             {
-                isCol = true;
+                IsColision = true;
             }
             else
-                isCol = false;
+                IsColision = false;
         }
         else
-            isCol = false;
+            IsColision = false;
 
 
 

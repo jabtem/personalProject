@@ -25,6 +25,7 @@ public class MnsterMoveInspector : Editor
 
     public override void OnInspectorGUI()
     {
+        base.OnInspectorGUI();
         GUI.enabled = false;
         EditorGUILayout.ObjectField("Script", MonoScript.FromMonoBehaviour((MonsterMove)target), typeof(MonsterMove), false);
         GUI.enabled = true;
