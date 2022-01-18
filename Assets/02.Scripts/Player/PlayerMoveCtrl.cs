@@ -94,9 +94,9 @@ public class PlayerMoveCtrl : MonoBehaviour
 
                 if (Mathf.Abs(v) > 0 || Mathf.Abs(h) > 0)
                 {
-                    //캐릭터가 기본적으로 위로바라보고있는각도가 0도이므로 방향을 맞추기 위해 90도를더함
+                    //캐릭터가 바라보는방향을 데카르트좌표계 
                     //카메라각도가 바뀌더라도 조이스틱 조작방향이 변경없도록 카메라각도를 더함
-                    transform.rotation = Quaternion.Euler(0, ang+90 +Camera.main.transform.rotation.eulerAngles.y, 0);
+                    transform.rotation = Quaternion.Euler(0, ang +Camera.main.transform.rotation.eulerAngles.y, 0);
 
                     lastMoveDirection = moveDirection;
                     anim.SetInteger(id, 1);

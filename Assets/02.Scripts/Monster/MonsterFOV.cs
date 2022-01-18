@@ -58,7 +58,8 @@ public class MonsterFOV : MonoBehaviour
     }
 
 
-    bool gameStart = false;
+    [SerializeField]
+    bool viewGizmo = false;
 
 
 
@@ -66,7 +67,6 @@ public class MonsterFOV : MonoBehaviour
 
     private void Awake()
     {
-        gameStart = true;
         Target = GameObject.FindGameObjectWithTag("Player").transform;
         //현재 플레이어가 캐릭터 컨트롤러를 사용하므로
         TargetRadius = Target.GetComponent<CharacterController>().radius;
@@ -126,23 +126,24 @@ public class MonsterFOV : MonoBehaviour
 
 
 
+
         Debug.DrawRay(transform.position, transform.forward * fovRadius, Color.white);
         Debug.DrawRay(transform.position, targetDirection, Color.yellow);
         Debug.DrawRay(transform.position, rightVector, Color.red);
         Debug.DrawRay(transform.position, leftVector, Color.green);
 
 
-
     }
 
     private void OnDrawGizmos()
     {
-        if(gameStart)
+        if(viewGizmo)
         {
             Handles.color = isCol ? new Color(1f, 0, 0, 0.2f) : new Color(0, 0, 1f, 0.2f);
             Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angle*0.5f, fovRadius);
             Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angle*0.5f, fovRadius);
             Handles.Label(transform.position+transform.forward *2f, angle.ToString());
+
         }
 
     }

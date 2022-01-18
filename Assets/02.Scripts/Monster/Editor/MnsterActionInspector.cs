@@ -4,34 +4,33 @@ using UnityEngine;
 using UnityEditor;
 using System;
 [CanEditMultipleObjects]//다중선택을 가능하게함
-[CustomEditor(typeof(MonsterMove))]
-public class MnsterMoveInspector : Editor
+[CustomEditor(typeof(MonsterAction))]
+public class MnsterActionInspector : Editor
 {
 
 
-    MonsterMove monsterMove = null;
+    MonsterAction monsterMove = null;
     SerializedProperty roamingPoints;
     SerializedProperty viewGizmo;
     SerializedProperty speed;
-
+    //게임 실행 판단여부
     private void OnEnable()
     {
         if (monsterMove == null)
-            monsterMove = (MonsterMove)target;
+            monsterMove = (MonsterAction)target;
 
-        roamingPoints = serializedObject.FindProperty("roamingPoints");
-        viewGizmo = serializedObject.FindProperty("viewGizmo");
+        
     }
 
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
         GUI.enabled = false;
-        EditorGUILayout.ObjectField("Script", MonoScript.FromMonoBehaviour((MonsterMove)target), typeof(MonsterMove), false);
-        GUI.enabled = true;
+        EditorGUILayout.ObjectField("Script", MonoScript.FromMonoBehaviour((MonsterAction)target), typeof(MonsterAction), false);
+        if(!monsterMove.GameStart)
+            GUI.enabled = true;
         //정찰모드가 변경시 값초기화
         EditorGUI.BeginChangeCheck();
-        var roamingMode = (MonsterMove.RoamingMode)EditorGUILayout.EnumPopup("정찰 모드", monsterMove.roamingMode);
+        var roamingMode = (MonsterAction.RoamingMode)EditorGUILayout.EnumPopup("정찰 모드", monsterMove.roamingMode);
         if(EditorGUI.EndChangeCheck())
         {
             RoamingModeChangeTest();
@@ -44,13 +43,13 @@ public class MnsterMoveInspector : Editor
         switch(monsterMove.roamingMode)
         {
   
-            case MonsterMove.RoamingMode.영역내무작위이동:
+            case MonsterAction.RoamingMode.영역내무작위이동:
                 monsterMove.roamingAreaWidth = EditorGUILayout.Slider("정찰영역 가로길이", monsterMove.roamingAreaWidth,0.0f,100.0f);
                 monsterMove.roamingAreaHeight = EditorGUILayout.Slider("정찰영역 세로길이", monsterMove.roamingAreaHeight, 0.0f, 100.0f);
                 monsterMove.moveRomaingAreaPosionX = EditorGUILayout.Slider("정찰영역 X좌표이동", monsterMove.moveRomaingAreaPosionX, -100.0f, 100.0f);
                 monsterMove.moveRomaingAreaPosionZ = EditorGUILayout.Slider("정찰영역 Z좌표이동", monsterMove.moveRomaingAreaPosionZ, -100.0f, 100.0f);
                 break;
-            case MonsterMove.RoamingMode.지점순회:
+            case MonsterAction.RoamingMode.지점순회:
 
 
                 EditorGUILayout.BeginHorizontal();
@@ -71,10 +70,10 @@ public class MnsterMoveInspector : Editor
                 SerializedProperty(roamingPoints, "roamingPoints", "정찰 지점");
                 break;
         }
-
-
+        if (monsterMove.GameStart)
+            GUI.enabled = true;
         SerializedProperty(viewGizmo, "viewGizmo", "정찰 영역(지점) 기즈모 출력");
-        SerializedProperty(speed, "speed", "이동속도");
+        SerializedProperty(speed, "speed", "기본 이동속도");
 
         //인스펙터 값 변경시 값유지위함
         if (GUI.changed)
@@ -97,14 +96,14 @@ public class MnsterMoveInspector : Editor
     public void RoamingModeChangeTest()
     {
 
-        if (monsterMove.roamingMode == MonsterMove.RoamingMode.지점순회)
+        if (monsterMove.roamingMode == MonsterAction.RoamingMode.지점순회)
         {
             monsterMove.roamingAreaWidth = 0f;
             monsterMove.roamingAreaHeight = 0f;
             monsterMove.moveRomaingAreaPosionX = 0f;
             monsterMove.moveRomaingAreaPosionZ = 0f;
         }
-        else if (monsterMove.roamingMode == MonsterMove.RoamingMode.영역내무작위이동)
+        else if (monsterMove.roamingMode == MonsterAction.RoamingMode.영역내무작위이동)
         {
             if (monsterMove.roamingPoints.Length != 0)
             {
