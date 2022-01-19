@@ -81,6 +81,7 @@ public class MonsterAction : MonoBehaviour
                 case MonsterState.Roaming:
                     if (myNavMesh.isStopped)
                         myNavMesh.isStopped = false;
+                    FoV.SetFovActive(true);
                     myNavMesh.stoppingDistance = 0.0f;
                     anim.SetBool(moveId, true);
                     switch (roamingMode)
@@ -97,8 +98,12 @@ public class MonsterAction : MonoBehaviour
                 case MonsterState.Trace:
                     if (myNavMesh.isStopped)
                         myNavMesh.isStopped = false;
+                    FoV.SetFovActive(false);
                     myNavMesh.stoppingDistance = 0.0f;
                     StartCoroutine(TargetTrace());
+                    break;
+                case MonsterState.Battle:
+                    StartCoroutine(BatteMode());
                     break;
 
             }
@@ -115,6 +120,7 @@ public class MonsterAction : MonoBehaviour
 
     Animator anim;
     int moveId;
+    int patternId;
 
     void Awake()
     {
@@ -125,6 +131,7 @@ public class MonsterAction : MonoBehaviour
         myNavMesh = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         moveId = Animator.StringToHash("Move");
+        patternId = Animator.StringToHash("Pattern");
         roamingArea = new Vector3[]
         {
             //왼쪽아래
@@ -150,6 +157,8 @@ public class MonsterAction : MonoBehaviour
     #region 지점순회
     IEnumerator PointMove()
     {
+        myNavMesh.SetDestination(transform.position);
+
         while(true)
         {
 
@@ -217,6 +226,7 @@ public class MonsterAction : MonoBehaviour
 
     int RanAngleCheck(int angle)
     {
+        //0~359까지 랜덤숫자
         int result = UnityEngine.Random.Range(0, 360);
         //중복제거목적
         if(result == angle)
@@ -234,14 +244,18 @@ public class MonsterAction : MonoBehaviour
 
     IEnumerator TargetTrace()
     {
+        //추적 유지시간 측정용
+        float traceTime = 0f;
         while(true)
         {
+            traceTime += Time.deltaTime;
             Vector3 targetDirection = FoV.Target.transform.position - transform.position;
             if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius)
             {
                 if(anim.GetBool(moveId))
                     anim.SetBool(moveId, false);
                 myNavMesh.SetDestination(transform.position);
+                State = MonsterState.Battle;
             }
             else
             {
@@ -249,6 +263,11 @@ public class MonsterAction : MonoBehaviour
                     anim.SetBool(moveId, true);
                 myNavMesh.SetDestination(FoV.Target.transform.position);
                 
+            }
+            if(traceTime >=5f)
+            {
+                //추적시간이 5초이상 지나면 다시 정찰모드로 되돌아감
+                State = MonsterState.Roaming;
             }
 
             yield return null;
@@ -261,7 +280,34 @@ public class MonsterAction : MonoBehaviour
     #region 전투패턴
     IEnumerator BatteMode()
     {
-        yield return null;
+        //0 : 대기 1: 약공격 2: 강공격
+        // 75%확률로 약공격
+        // 25%확률로 강공격
+        float ranPattern;
+        float attackDelay = 0f;
+        while(true)
+        {
+            yield return new WaitForSeconds(attackDelay);
+            Debug.Log("test");
+            anim.SetInteger(patternId, 0);
+
+            ranPattern = UnityEngine.Random.Range(1f, 100.0f);
+            Debug.Log(ranPattern);
+            if(ranPattern >25f)
+            {
+                anim.SetInteger(patternId, 1);
+                attackDelay = 0.5f;
+            }
+            else if(ranPattern <=25f)
+            {
+                anim.SetInteger(patternId, 2);
+                attackDelay = 10f;
+            }
+
+            
+
+        }
+
     }
     #endregion
 

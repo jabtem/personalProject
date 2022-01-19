@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class MonsterFOV : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class MonsterFOV : MonoBehaviour
 
 
     Vector3 targetDirection;
+
+
 
     //충돌여부판단
     public bool IsColision
@@ -57,7 +60,8 @@ public class MonsterFOV : MonoBehaviour
         }
     }
 
-
+    [SerializeField]
+    Image fovImage;
     [SerializeField]
     bool viewGizmo = false;
 
@@ -70,6 +74,7 @@ public class MonsterFOV : MonoBehaviour
         Target = GameObject.FindGameObjectWithTag("Player").transform;
         //현재 플레이어가 캐릭터 컨트롤러를 사용하므로
         TargetRadius = Target.GetComponent<CharacterController>().radius;
+        fovImage.transform.localScale = new Vector3(fovRadius, fovRadius, 1);
     }
     private void Update()
     {
@@ -118,39 +123,66 @@ public class MonsterFOV : MonoBehaviour
                 IsColision = true;
             }
             else
+            {
                 IsColision = false;
+            }
+
         }
         else
             IsColision = false;
 
 
+        //if(IsColision)
+        //{
+        //    if (fovImage.gameObject.activeSelf)
+        //        fovImage.gameObject.SetActive(false);
+        //    else
+        //        return;
+        //}
+        //else if(!IsColision)
+        //{
+        //    if (!fovImage.gameObject.activeSelf)
+        //    {
+        //        fovImage.gameObject.SetActive(true);
+        //    }
+        //    else
+        //        return;
+        //}
 
 
 
-        Debug.DrawRay(transform.position, transform.forward * fovRadius, Color.white);
-        Debug.DrawRay(transform.position, targetDirection, Color.yellow);
-        Debug.DrawRay(transform.position, rightVector, Color.red);
-        Debug.DrawRay(transform.position, leftVector, Color.green);
-
+        if(fovImage.gameObject.activeSelf)
+        {
+            Debug.DrawRay(transform.position, transform.forward * fovRadius, Color.white);
+            Debug.DrawRay(transform.position, targetDirection, Color.yellow);
+            Debug.DrawRay(transform.position, rightVector, Color.red);
+            Debug.DrawRay(transform.position, leftVector, Color.green);
+        }
 
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
-        if(viewGizmo)
+        if (viewGizmo)
         {
             Handles.color = isCol ? new Color(1f, 0, 0, 0.2f) : new Color(0, 0, 1f, 0.2f);
-            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angle*0.5f, fovRadius);
-            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angle*0.5f, fovRadius);
-            Handles.Label(transform.position+transform.forward *2f, angle.ToString());
+            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angle * 0.5f, fovRadius);
+            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angle * 0.5f, fovRadius);
+            Handles.Label(transform.position + transform.forward * 2f, angle.ToString());
 
         }
 
     }
 
+    public void SetFovActive(bool value)
+    {
+        fovImage.gameObject.SetActive(value);
+    }
+
 
     /************************사용한 수식정리*****************************/
-    // 백터의 내적 = 벡터A크기 * 벡터B크기 * Cos(theta)
+    // 백터의 내적 = 벡터A크기 * 벡터B크기 * Cos(theta) = A.x*B.x + A.y*B.y + A.z*B.z
+    // 벡터의 외적 = 벡터A * 벡터b * Sin(theta) = (A.y*B.z - A.z*B.y, A.z*B.x - A.x*B.z, A.x*B.y - A.y*B.x)
     // Cos(theta) = 백터의내적 / 벡터A크기 / 벡터B크기
     // theta = ACos(벡터의 내적/ 벡터A크기/ 벡터 B크기)
     // 플레이어 정면을 축으로 대상과의 각도가 angle의 절반보다 작거나 같다 => 시야범위내에 있다.
