@@ -77,7 +77,7 @@ public class PlayerMoveCtrl : MonoBehaviour
     void Update()
     {
         //데카르트좌표계를 유니티와 일치시킨다 
-        float ang = Mathf.Atan2(playerInfo.playerVector.z, playerInfo.playerVector.x) * Mathf.Rad2Deg *-1;
+        float ang = Mathf.Atan2(playerInfo.playerVector.y, playerInfo.playerVector.z) * Mathf.Rad2Deg;
         Quaternion rot = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0f);//카메라의앵글에따라 변환
         if (controller.isGrounded)
         {
@@ -94,7 +94,6 @@ public class PlayerMoveCtrl : MonoBehaviour
 
                 if (Mathf.Abs(v) > 0 || Mathf.Abs(h) > 0)
                 {
-                    //캐릭터가 바라보는방향을 데카르트좌표계 
                     //카메라각도가 바뀌더라도 조이스틱 조작방향이 변경없도록 카메라각도를 더함
                     transform.rotation = Quaternion.Euler(0, ang +Camera.main.transform.rotation.eulerAngles.y, 0);
 

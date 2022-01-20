@@ -287,21 +287,26 @@ public class MonsterAction : MonoBehaviour
         float attackDelay = 0f;
         while(true)
         {
-            yield return new WaitForSeconds(attackDelay);
-            Debug.Log("test");
-            anim.SetInteger(patternId, 0);
 
+
+            yield return new WaitForSeconds(attackDelay);
+            Vector3 targetDirection = FoV.Target.transform.position - transform.position;
+            float angle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0, angle, 0);
             ranPattern = UnityEngine.Random.Range(1f, 100.0f);
-            Debug.Log(ranPattern);
             if(ranPattern >25f)
             {
-                anim.SetInteger(patternId, 1);
-                attackDelay = 0.5f;
+                patternId = Animator.StringToHash("LightAttack");
+                
+                anim.SetTrigger(patternId);
+                attackDelay = 2f;
             }
             else if(ranPattern <=25f)
             {
-                anim.SetInteger(patternId, 2);
-                attackDelay = 10f;
+                patternId = Animator.StringToHash("HeavyAttack");
+                anim.SetTrigger(patternId);
+                attackDelay = 4f;
             }
 
             
