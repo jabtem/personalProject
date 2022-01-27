@@ -295,21 +295,29 @@ public class MonsterAction : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0, angle, 0);
             ranPattern = UnityEngine.Random.Range(1f, 100.0f);
-            if(ranPattern >25f)
+            if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius)
             {
-                patternId = Animator.StringToHash("LightAttack");
-                
-                anim.SetTrigger(patternId);
-                attackDelay = 2f;
-            }
-            else if(ranPattern <=25f)
-            {
-                patternId = Animator.StringToHash("HeavyAttack");
-                anim.SetTrigger(patternId);
-                attackDelay = 4f;
-            }
+                if (ranPattern > 25f)
+                {
+                    patternId = Animator.StringToHash("LightAttack");
 
+                    anim.SetTrigger(patternId);
+                    attackDelay = 2f;
+                }
+                else if (ranPattern <= 25f)
+                {
+                    patternId = Animator.StringToHash("HeavyAttack");
+                    anim.SetTrigger(patternId);
+                    attackDelay = 4f;
+                }
+            }
+            else if(targetDirection.sqrMagnitude > FoV.TargetRadius + myNavMesh.radius)
+            {
+                State = MonsterState.Trace;
+            }
             
+
+
 
         }
 
