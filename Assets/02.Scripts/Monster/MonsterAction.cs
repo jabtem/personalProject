@@ -232,7 +232,7 @@ public class MonsterAction : MonoBehaviour
         if(result == angle)
         {
             Debug.Log("test");
-            RanAngleCheck(angle);
+            result = RanAngleCheck(angle);
         }
 
         return result;
