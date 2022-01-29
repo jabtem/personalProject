@@ -103,7 +103,7 @@ public class MonsterAction : MonoBehaviour
                     StartCoroutine(TargetTrace());
                     break;
                 case MonsterState.Battle:
-                    StartCoroutine(BatteMode());
+                    StartCoroutine(BattleMode());
                     break;
 
             }
@@ -117,21 +117,33 @@ public class MonsterAction : MonoBehaviour
     [SerializeField]
     float speed;
 
+    [SerializeField]
+    int attackRange;
 
     Animator anim;
     int moveId;
     int patternId;
 
+    int IdleTrasionID;
+
+
+    BoxCollider[] colliders;
+
+    
+
     void Awake()
     {
         FoV = GetComponent<MonsterFOV>();
         roamingAreaPosition = new Vector3(transform.position.x + moveRomaingAreaPosionX, 0f, transform.position.z + moveRomaingAreaPosionZ);
+        colliders = gameObject.GetComponentsInChildren<BoxCollider>();
+
         roamingPointsIndex = 0;
         firstPosition = transform.position;
         myNavMesh = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         moveId = Animator.StringToHash("Move");
         patternId = Animator.StringToHash("Pattern");
+        IdleTrasionID = Animator.StringToHash("BackIdle");
         roamingArea = new Vector3[]
         {
             //왼쪽아래
@@ -250,7 +262,8 @@ public class MonsterAction : MonoBehaviour
         {
             traceTime += Time.deltaTime;
             Vector3 targetDirection = FoV.Target.transform.position - transform.position;
-            if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius +2)
+            //타겟이 공격사거리 내에 들어오면 전투모드로 전환
+            if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius +attackRange)
             {
                 if(anim.GetBool(moveId))
                     anim.SetBool(moveId, false);
@@ -278,7 +291,7 @@ public class MonsterAction : MonoBehaviour
     #endregion
 
     #region 전투패턴
-    IEnumerator BatteMode()
+    IEnumerator BattleMode()
     {
         //0 : 대기 1: 약공격 2: 강공격
         // 75%확률로 약공격
@@ -290,13 +303,20 @@ public class MonsterAction : MonoBehaviour
 
 
             yield return new WaitForSeconds(attackDelay);
+            //공격할때 콜라이더활성
+
             Vector3 targetDirection = FoV.Target.transform.position - transform.position;
             float angle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;
 
             transform.rotation = Quaternion.Euler(0, angle, 0);
             ranPattern = UnityEngine.Random.Range(1f, 100.0f);
-            if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius + 2)
+            //공격이닿는거리면 공격
+            if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius + attackRange)
             {
+                foreach (var col in colliders)
+                {
+                    col.enabled = true;
+                }
                 if (ranPattern > 25f)
                 {
                     patternId = Animator.StringToHash("LightAttack");
@@ -311,7 +331,8 @@ public class MonsterAction : MonoBehaviour
                     attackDelay = 4f;
                 }
             }
-            else if(targetDirection.sqrMagnitude > FoV.TargetRadius + myNavMesh.radius + 2)
+            //사거리를 벗어나면 다시추적
+            else if(targetDirection.sqrMagnitude > FoV.TargetRadius + myNavMesh.radius + attackRange)
             {
                 State = MonsterState.Trace;
             }
@@ -330,6 +351,15 @@ public class MonsterAction : MonoBehaviour
         if (State == MonsterState.Roaming&&FoV.IsColision)
         {
             State = MonsterState.Trace;
+        }
+
+        //공격-> 대기로 돌아갈때 
+        if(anim.GetAnimatorTransitionInfo(0).userNameHash == IdleTrasionID)
+        {
+            foreach(var col in colliders)
+            {
+                col.enabled = false;
+            }
         }
     }
 
