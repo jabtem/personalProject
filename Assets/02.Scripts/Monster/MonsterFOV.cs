@@ -71,10 +71,15 @@ public class MonsterFOV : MonoBehaviour
 
     private void Awake()
     {
+
+
+        fovImage.transform.localScale = new Vector3(fovRadius, fovRadius, 1);
+    }
+    private void Start()
+    {
         Target = GameObject.FindGameObjectWithTag("Player").transform;
         //현재 플레이어가 캐릭터 컨트롤러를 사용하므로
         TargetRadius = Target.GetComponent<CharacterController>().radius;
-        fovImage.transform.localScale = new Vector3(fovRadius, fovRadius, 1);
     }
     private void Update()
     {

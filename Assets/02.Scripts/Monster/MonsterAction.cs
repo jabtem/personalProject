@@ -250,7 +250,7 @@ public class MonsterAction : MonoBehaviour
         {
             traceTime += Time.deltaTime;
             Vector3 targetDirection = FoV.Target.transform.position - transform.position;
-            if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius)
+            if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius +2)
             {
                 if(anim.GetBool(moveId))
                     anim.SetBool(moveId, false);
@@ -295,7 +295,7 @@ public class MonsterAction : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0, angle, 0);
             ranPattern = UnityEngine.Random.Range(1f, 100.0f);
-            if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius)
+            if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius + 2)
             {
                 if (ranPattern > 25f)
                 {
@@ -311,7 +311,7 @@ public class MonsterAction : MonoBehaviour
                     attackDelay = 4f;
                 }
             }
-            else if(targetDirection.sqrMagnitude > FoV.TargetRadius + myNavMesh.radius)
+            else if(targetDirection.sqrMagnitude > FoV.TargetRadius + myNavMesh.radius + 2)
             {
                 State = MonsterState.Trace;
             }
@@ -330,6 +330,14 @@ public class MonsterAction : MonoBehaviour
         if (State == MonsterState.Roaming&&FoV.IsColision)
         {
             State = MonsterState.Trace;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            Debug.Log("hit");
         }
     }
     void OnDrawGizmosSelected()
