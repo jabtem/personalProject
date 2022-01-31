@@ -13,6 +13,7 @@ TagManager:
   - BackButton
   - PerfectZone
   - SkinMesh
+  - AttackZone
   layers:
   - Default
   - TransparentFX

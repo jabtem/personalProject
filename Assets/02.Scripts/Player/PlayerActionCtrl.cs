@@ -306,7 +306,7 @@ public class PlayerActionCtrl : MonoBehaviour
             Debug.Log("PerfectZone Hit");
             pzoneHit = true;
         }
-        else if(other.gameObject.tag == "Enemy")
+        else if(other.gameObject.tag == "AttackZone")
         {
             Debug.Log("EnemyColider Hit");
             enemyHit = true;
@@ -321,7 +321,7 @@ public class PlayerActionCtrl : MonoBehaviour
             Debug.Log("PerfectZone Exit");
             pzoneHit = false;
         }
-        else if (other.gameObject.tag == "Enemy")
+        else if (other.gameObject.tag == "AttackZone")
         {
             Debug.Log("EnemyColider Exit");
             enemyHit = false;
