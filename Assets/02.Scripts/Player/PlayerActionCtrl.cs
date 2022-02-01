@@ -59,6 +59,10 @@ public class PlayerActionCtrl : MonoBehaviour
     //스킬사용가능여부
     public bool disableSkill;
 
+    BoxCollider attackCol;
+
+    int attackToIdle;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -67,6 +71,8 @@ public class PlayerActionCtrl : MonoBehaviour
         skillNum = Animator.StringToHash("skillNum");
         speedID = Animator.StringToHash("speed");
         pMove = GetComponent<PlayerMoveCtrl>();
+        attackCol = gameObject.GetComponentInChildren<BoxCollider>();
+        attackToIdle = Animator.StringToHash("AttackToIdle");
 
     }
 
@@ -85,6 +91,11 @@ public class PlayerActionCtrl : MonoBehaviour
             SkillMotionCheck();
         }
 
+
+        //if(anim.GetAnimatorTransitionInfo(0).userNameHash == attackToIdle)
+        //{
+        //    attackCol.enabled = false;
+        //}
 
 
 
@@ -146,7 +157,6 @@ public class PlayerActionCtrl : MonoBehaviour
         }
 
         pMove.canMove = false;
-
         if (anim.GetInteger(comboStepID) == maxComboCount)
         {
             return;
@@ -256,7 +266,6 @@ public class PlayerActionCtrl : MonoBehaviour
     public void ComboReset()
     {
         comboPossible = false;
-        //anim.applyRootMotion = false;
         anim.SetInteger(comboStepID, 0);
         pMove.canMove = true;
     }
@@ -306,7 +315,7 @@ public class PlayerActionCtrl : MonoBehaviour
             Debug.Log("PerfectZone Hit");
             pzoneHit = true;
         }
-        else if(other.gameObject.tag == "AttackZone")
+        else if(other.gameObject.tag == "EnemyAttack")
         {
             Debug.Log("EnemyColider Hit");
             enemyHit = true;
@@ -321,10 +330,25 @@ public class PlayerActionCtrl : MonoBehaviour
             Debug.Log("PerfectZone Exit");
             pzoneHit = false;
         }
-        else if (other.gameObject.tag == "AttackZone")
+        else if (other.gameObject.tag == "EnemyAttack")
         {
             Debug.Log("EnemyColider Exit");
             enemyHit = false;
+        }
+    }
+
+    public void AttackColEnable(int value)
+    {
+        switch(value)
+        {
+            case 0:
+                attackCol.enabled = false;
+                break;
+            case 1:
+                attackCol.enabled = true;
+                break;
+
+
         }
     }
 }

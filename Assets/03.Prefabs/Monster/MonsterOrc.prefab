@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6432111451642127838}
   - component: {fileID: 955249345760789685}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AttackZone
-  m_TagString: AttackZone
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ BoxCollider:
   m_GameObject: {fileID: 2782924128258233164}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.71, y: 0.48, z: 2.65}
   m_Center: {x: 0, y: 0, z: 0.96}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4296554670266444030}
   - component: {fileID: 30537234747472279}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PerfectZone
   m_TagString: PerfectZone
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ BoxCollider:
   m_GameObject: {fileID: 7067388643732158648}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 3.39}
   m_Center: {x: 0, y: 0, z: 1.24}
@@ -2485,6 +2485,8 @@ GameObject:
   - component: {fileID: 8515802676763946549}
   - component: {fileID: 8515802676763946551}
   - component: {fileID: 8515802676763946550}
+  - component: {fileID: 1153552734}
+  - component: {fileID: 3006535155002366481}
   m_Layer: 0
   m_Name: MonsterOrc
   m_TagString: Enemy
@@ -2544,7 +2546,7 @@ MonoBehaviour:
   roamingPoints:
   - {x: 4.58, y: 0}
   - {x: 0, y: -4.4}
-  - {x: 0, y: 0}
+  - {x: 0, y: 5.66}
   roamingAreaWidth: 8.6
   roamingAreaHeight: 8.1
   moveRomaingAreaPosionX: 0
@@ -2596,7 +2598,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8515802676763946552}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 73d2f4319473c3948940539f22e8ae4e, type: 3}
   m_Controller: {fileID: 9100000, guid: 1fda140bb2402f345840d72672fc6f2c, type: 2}
   m_CullingMode: 0
@@ -2607,3 +2609,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &1153552734
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515802676763946552}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.23
+  m_Height: 3.38
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.36, z: 0.2}
+--- !u!54 &3006535155002366481
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515802676763946552}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

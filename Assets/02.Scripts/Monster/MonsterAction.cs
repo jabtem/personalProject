@@ -243,7 +243,6 @@ public class MonsterAction : MonoBehaviour
         //중복제거목적
         if(result == angle)
         {
-            Debug.Log("test");
             result = RanAngleCheck(angle);
         }
 
@@ -365,7 +364,7 @@ public class MonsterAction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "PlayerAttack")
         {
             Debug.Log("hit");
         }
