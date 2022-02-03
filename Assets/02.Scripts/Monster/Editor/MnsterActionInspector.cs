@@ -14,6 +14,8 @@ public class MnsterActionInspector : Editor
     SerializedProperty viewGizmo;
     SerializedProperty speed;
     SerializedProperty attackRange;
+    SerializedProperty knockBackPower;
+    SerializedProperty konckBackTime;
     //게임 실행 판단여부
     private void OnEnable()
     {
@@ -76,6 +78,8 @@ public class MnsterActionInspector : Editor
         SerializedProperty(viewGizmo, "viewGizmo", "정찰 영역(지점) 기즈모 출력");
         SerializedProperty(speed, "speed", "기본 이동속도");
         SerializedProperty(attackRange, "attackRange", "공격 사거리");
+        SerializedProperty(knockBackPower, "knockBackPower", "피격시 넉백 강도");
+        SerializedProperty(konckBackTime, "konckBackTime", "넉백 시간");
 
         //인스펙터 값 변경시 값유지위함
         if (GUI.changed)

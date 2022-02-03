@@ -69,15 +69,6 @@ public class MotionTrailObjectPoolManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        for(int i=0; i<3;i++)
-        {
-            CreateMotionTrailContainer();
-        }
-
-    }
-
 
     void Update()
     {

@@ -57234,6 +57234,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1153552734, guid: af404122f78d02845820e3272d40dfe5, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: c71cf058155cf1d448919f307fedc163,
+        type: 2}
+    - target: {fileID: 8515802676763946550, guid: af404122f78d02845820e3272d40dfe5,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1fda140bb2402f345840d72672fc6f2c, type: 2}
+    - target: {fileID: 8515802676763946550, guid: af404122f78d02845820e3272d40dfe5,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515802676763946550, guid: af404122f78d02845820e3272d40dfe5,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515802676763946551, guid: af404122f78d02845820e3272d40dfe5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8515802676763946552, guid: af404122f78d02845820e3272d40dfe5,
         type: 3}
       propertyPath: m_Name

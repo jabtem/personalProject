@@ -19,7 +19,17 @@ public class MonsterFOV : MonoBehaviour
 
     Vector3 targetDirection;
 
-
+    public Vector3 TargetDirection
+    {
+        get
+        {
+            return targetDirection;
+        }
+        set
+        {
+            targetDirection = value;
+        }
+    }
 
     //충돌여부판단
     public bool IsColision
@@ -65,14 +75,14 @@ public class MonsterFOV : MonoBehaviour
     [SerializeField]
     bool viewGizmo = false;
 
-
+    MonsterAction monsterAction;
 
 
 
     private void Awake()
     {
 
-
+        monsterAction = GetComponent<MonsterAction>();
         fovImage.transform.localScale = new Vector3(fovRadius, fovRadius, 1);
     }
     private void Start()
@@ -80,6 +90,7 @@ public class MonsterFOV : MonoBehaviour
         Target = GameObject.FindGameObjectWithTag("Player").transform;
         //현재 플레이어가 캐릭터 컨트롤러를 사용하므로
         TargetRadius = Target.GetComponent<CharacterController>().radius;
+        monsterAction.PlayerInfoSet(Target.GetComponent<PlayerActionCtrl>());
     }
     private void Update()
     {
@@ -154,12 +165,13 @@ public class MonsterFOV : MonoBehaviour
         //        return;
         //}
 
+        Debug.DrawRay(transform.position, targetDirection, Color.yellow);
+        Debug.DrawRay(transform.position, targetDirection*-1, Color.red);
 
-
-        if(fovImage.gameObject.activeSelf)
+        if (fovImage.gameObject.activeSelf)
         {
             Debug.DrawRay(transform.position, transform.forward * fovRadius, Color.white);
-            Debug.DrawRay(transform.position, targetDirection, Color.yellow);
+    
             Debug.DrawRay(transform.position, rightVector, Color.red);
             Debug.DrawRay(transform.position, leftVector, Color.green);
         }

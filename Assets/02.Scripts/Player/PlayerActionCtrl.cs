@@ -351,4 +351,8 @@ public class PlayerActionCtrl : MonoBehaviour
 
         }
     }
+    public int GetComboStep()
+    {
+        return anim.GetInteger(comboStepID);
+    }
 }

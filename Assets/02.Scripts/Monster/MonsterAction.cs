@@ -35,6 +35,9 @@ public class MonsterAction : MonoBehaviour
     public float moveRomaingAreaPosionX;
     [HideInInspector]
     public float moveRomaingAreaPosionZ;
+    [HideInInspector]
+    public RoamingMode roamingMode;
+
 
     bool gameStart;
     public bool GameStart
@@ -49,12 +52,12 @@ public class MonsterAction : MonoBehaviour
         }
     }
     Vector3 roamingAreaPosition;
-    int roamingPointsIndex;
+    public int roamingPointsIndex;
     //오브젝트 시작전위치
     Vector3 firstPosition;
 
-    public RoamingMode roamingMode;
 
+    Rigidbody rigid;
 
     MonsterFOV FoV;
 
@@ -129,14 +132,21 @@ public class MonsterAction : MonoBehaviour
 
     BoxCollider[] colliders;
 
-    
+    [SerializeField]
+    int knockBackPower;
+
+    [SerializeField]
+    float konckBackTime;
+
+    PlayerActionCtrl playerActionCtrl;
 
     void Awake()
     {
         FoV = GetComponent<MonsterFOV>();
+
         roamingAreaPosition = new Vector3(transform.position.x + moveRomaingAreaPosionX, 0f, transform.position.z + moveRomaingAreaPosionZ);
         colliders = gameObject.GetComponentsInChildren<BoxCollider>();
-
+        rigid = GetComponent<Rigidbody>();
         roamingPointsIndex = 0;
         firstPosition = transform.position;
         myNavMesh = GetComponent<NavMeshAgent>();
@@ -174,8 +184,9 @@ public class MonsterAction : MonoBehaviour
         while(true)
         {
 
-            if (transform.position == myNavMesh.destination )
+            if ((transform.position - myNavMesh.destination).sqrMagnitude <= 0.01f )
             {
+
                 roamingPointsIndex %= roamingPoints.Length;
                 Vector3 roamingTarget = new Vector3(firstPosition.x + roamingPoints[roamingPointsIndex].x, 0f, firstPosition.z + roamingPoints[roamingPointsIndex].y);
                 myNavMesh.SetDestination(roamingTarget);
@@ -360,14 +371,44 @@ public class MonsterAction : MonoBehaviour
                 col.enabled = false;
             }
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "PlayerAttack")
         {
-            Debug.Log("hit");
+            if(playerActionCtrl.GetComboStep() >=3)
+            {
+                Debug.Log("KnockBack");
+                StopAllCoroutines();
+                StartCoroutine(KnockBack());
+            }
+            else if(playerActionCtrl.GetComboStep() <3)
+            {
+                Debug.Log("Hit");
+            }
+
         }
+    }
+
+    IEnumerator KnockBack()
+    {
+
+        float time = 0;
+        patternId = Animator.StringToHash("Hit");
+        //Vector3 start = transform.position;
+        anim.SetTrigger(patternId);
+        while(time < konckBackTime)
+        {
+            transform.Translate((FoV.TargetDirection*-1) * knockBackPower * Time.deltaTime,Space.World);
+            //transform.position = Vector3.Lerp(start, start + (transform.forward * -1) * knockBackPower, time);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        State = MonsterState.Trace;
+        yield break;
     }
     void OnDrawGizmosSelected()
     {
@@ -414,6 +455,14 @@ public class MonsterAction : MonoBehaviour
             }
         }
     }
+
+    public void PlayerInfoSet(PlayerActionCtrl info)
+    {
+        playerActionCtrl = info;
+
+    }
+
+
     //미사용
     //private void Update()
     //{

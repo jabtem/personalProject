@@ -2486,7 +2486,7 @@ GameObject:
   - component: {fileID: 8515802676763946551}
   - component: {fileID: 8515802676763946550}
   - component: {fileID: 1153552734}
-  - component: {fileID: 3006535155002366481}
+  - component: {fileID: 2083430338186102755}
   m_Layer: 0
   m_Name: MonsterOrc
   m_TagString: Enemy
@@ -2552,10 +2552,13 @@ MonoBehaviour:
   moveRomaingAreaPosionX: 0
   moveRomaingAreaPosionZ: 0
   roamingMode: 0
+  roamingPointsIndex: 0
   _state: 0
   viewGizmo: 1
   speed: 5
   attackRange: 5
+  knockBackPower: 5
+  konckBackTime: 0.2
 --- !u!114 &8515802676763946549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2598,7 +2601,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8515802676763946552}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 73d2f4319473c3948940539f22e8ae4e, type: 3}
   m_Controller: {fileID: 9100000, guid: 1fda140bb2402f345840d72672fc6f2c, type: 2}
   m_CullingMode: 0
@@ -2623,7 +2626,7 @@ CapsuleCollider:
   m_Height: 3.38
   m_Direction: 1
   m_Center: {x: 0, y: 1.36, z: 0.2}
---- !u!54 &3006535155002366481
+--- !u!54 &2083430338186102755
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2635,7 +2638,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
