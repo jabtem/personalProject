@@ -28,7 +28,7 @@ public class Bilboard : MonoBehaviour
         //항상 카메라방향을보며 정면방향으로 나타나도록
         //x축은 카메라 y각도로 고정
         //y축은 몸체가 회전한만큼을 다시 빼서 정면방향으로 돌려줌
-        myTr.rotation = Quaternion.Euler(-mainCameraTr.rotation.eulerAngles.y, -90f - mainCameraTr.rotation.eulerAngles.y, 0f);
-        //myTr.localRotation = Quaternion.Euler(-mainCameraTr.rotation.eulerAngles.y, -90f - mainCameraTr.rotation.eulerAngles.y -parent.rotation.eulerAngles.y, 0f);
+        myTr.rotation = Quaternion.Euler(-45f, -180f + mainCameraTr.rotation.eulerAngles.y, 0f);
+        //myTr.localRotation = Quaternion.Euler(-mainCameraTr.rotation.eulerAngles.y, -180f + mainCameraTr.rotation.eulerAngles.y -parent.rotation.eulerAngles.y, 0f);
     }
 }

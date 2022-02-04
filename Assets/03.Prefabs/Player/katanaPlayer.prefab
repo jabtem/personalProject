@@ -5370,6 +5370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4644215718511449879}
   - component: {fileID: 5816263804066208608}
+  - component: {fileID: 711484009626509627}
   m_Layer: 11
   m_Name: AttakCollider
   m_TagString: PlayerAttack
@@ -5404,6 +5405,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.34, y: 12.74, z: 118.1}
   m_Center: {x: -1.68, y: -0.9, z: -25.5}
+--- !u!114 &711484009626509627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3679149615046053817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b196f90661ce334a8781490a23c37f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3684686611085353618
 GameObject:
   m_ObjectHideFlags: 0

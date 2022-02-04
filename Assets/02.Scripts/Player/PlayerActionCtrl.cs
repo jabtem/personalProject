@@ -61,7 +61,8 @@ public class PlayerActionCtrl : MonoBehaviour
 
     BoxCollider attackCol;
 
-    int attackToIdle;
+
+    Damage attackDamage;
 
     void Awake()
     {
@@ -72,7 +73,7 @@ public class PlayerActionCtrl : MonoBehaviour
         speedID = Animator.StringToHash("speed");
         pMove = GetComponent<PlayerMoveCtrl>();
         attackCol = gameObject.GetComponentInChildren<BoxCollider>();
-        attackToIdle = Animator.StringToHash("AttackToIdle");
+        attackDamage = gameObject.GetComponentInChildren<Damage>();
 
     }
 
@@ -90,13 +91,6 @@ public class PlayerActionCtrl : MonoBehaviour
             animTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime * 100f;
             SkillMotionCheck();
         }
-
-
-        //if(anim.GetAnimatorTransitionInfo(0).userNameHash == attackToIdle)
-        //{
-        //    attackCol.enabled = false;
-        //}
-
 
 
     }
@@ -155,7 +149,6 @@ public class PlayerActionCtrl : MonoBehaviour
         {
             return;
         }
-
         pMove.canMove = false;
         if (anim.GetInteger(comboStepID) == maxComboCount)
         {
@@ -170,6 +163,7 @@ public class PlayerActionCtrl : MonoBehaviour
             //공격애니메이션이 루트모션적용하기에 적합하지않음
             //anim.applyRootMotion = true;
             anim.SetInteger(comboStepID, 1);
+            attackDamage.DamageValue = 10;
 
         }
         else if(anim.GetInteger(comboStepID) != 0)
@@ -177,6 +171,15 @@ public class PlayerActionCtrl : MonoBehaviour
             if (comboPossible)
             {
                 anim.SetInteger(comboStepID, anim.GetInteger(comboStepID) +1);
+
+                if(anim.GetInteger(comboStepID) == 2)
+                {
+                    attackDamage.DamageValue = 10;
+                }
+                else if(anim.GetInteger(comboStepID) == 3)
+                {
+                    attackDamage.DamageValue = 20;
+                }
             }
         }
     }
@@ -265,9 +268,14 @@ public class PlayerActionCtrl : MonoBehaviour
 
     public void ComboReset()
     {
+        attackDamage.DamageValue = 0;
         comboPossible = false;
         anim.SetInteger(comboStepID, 0);
         pMove.canMove = true;
+        if(attackCol.enabled)
+        {
+            attackCol.enabled = false;
+        }
     }
 
     #endregion

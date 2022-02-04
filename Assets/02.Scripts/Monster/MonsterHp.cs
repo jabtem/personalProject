@@ -13,14 +13,15 @@ public class MonsterHp : MonoBehaviour
     [SerializeField]
     int Hp;
 
-    int maxHp;
+    [SerializeField]
+    float maxHp;
 
-    private void Awake()
+    private void Start()
     {
         maxHp = Hp;
     }
 
-    void Damaged(int damage)
+    public void Damaged(int damage)
     {
         Hp -= damage;
         hpBar.fillAmount = Hp / maxHp;

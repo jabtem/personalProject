@@ -140,6 +140,8 @@ public class MonsterAction : MonoBehaviour
 
     PlayerActionCtrl playerActionCtrl;
 
+    MonsterHp monsterHp;
+
     void Awake()
     {
         FoV = GetComponent<MonsterFOV>();
@@ -154,6 +156,7 @@ public class MonsterAction : MonoBehaviour
         moveId = Animator.StringToHash("Move");
         patternId = Animator.StringToHash("Pattern");
         IdleTrasionID = Animator.StringToHash("BackIdle");
+        monsterHp = GetComponent<MonsterHp>();
         roamingArea = new Vector3[]
         {
             //왼쪽아래
@@ -378,17 +381,27 @@ public class MonsterAction : MonoBehaviour
     {
         if(other.gameObject.tag == "PlayerAttack")
         {
-            if(playerActionCtrl.GetComboStep() >=3)
+            Damage dam;
+            if(other.gameObject.GetComponent<Damage>() ==null)
+            {
+                return;
+            }
+            else
+                dam = other.gameObject.GetComponent<Damage>();
+
+            if (playerActionCtrl.GetComboStep() >= 3)
             {
                 Debug.Log("KnockBack");
                 StopAllCoroutines();
                 StartCoroutine(KnockBack());
             }
-            else if(playerActionCtrl.GetComboStep() <3)
+            else if (playerActionCtrl.GetComboStep() < 3)
             {
                 Debug.Log("Hit");
             }
 
+            monsterHp.Damaged(dam.DamageValue);
+            other.enabled = false;
         }
     }
 
