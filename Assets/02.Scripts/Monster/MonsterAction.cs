@@ -142,6 +142,8 @@ public class MonsterAction : MonoBehaviour
 
     MonsterHp monsterHp;
 
+    Dictionary<float, WaitForSeconds> waitDic = new Dictionary<float, WaitForSeconds>();
+
     void Awake()
     {
         FoV = GetComponent<MonsterFOV>();
@@ -205,10 +207,12 @@ public class MonsterAction : MonoBehaviour
     {
         //무작위 숫자 범위 밖의값
         int ranAngle = -1;
+        WaitForSeconds wait;
         while (true)
         {
             ranAngle = RanAngleCheck(ranAngle);
             float sec = UnityEngine.Random.Range(1.0f, 2.1f);
+
 
             float radian = ranAngle * Mathf.Deg2Rad;
             Vector3 direction = new Vector3(Mathf.Cos(radian), 0f, Mathf.Sin(radian))*10f;
@@ -226,8 +230,18 @@ public class MonsterAction : MonoBehaviour
             }
 
             myNavMesh.isStopped = false;
-
-            yield return new WaitForSeconds(sec);
+            if (waitDic.ContainsKey(sec))
+            {
+                wait = waitDic[sec];
+                yield return wait;
+            }
+            else if (!waitDic.ContainsKey(sec))
+            {
+                waitDic.Add(sec, new WaitForSeconds(sec));
+                wait = waitDic[sec];
+                yield return wait;
+            }
+            
         }
 
     }
@@ -311,11 +325,11 @@ public class MonsterAction : MonoBehaviour
         // 25%확률로 강공격
         float ranPattern;
         float attackDelay = 0f;
+        WaitForSeconds wait;
         while(true)
         {
 
 
-            yield return new WaitForSeconds(attackDelay);
             //공격할때 콜라이더활성
 
             Vector3 targetDirection = FoV.Target.transform.position - transform.position;
@@ -349,9 +363,26 @@ public class MonsterAction : MonoBehaviour
             {
                 State = MonsterState.Trace;
             }
-            
+
+            if(!waitDic.TryGetValue(attackDelay,out wait))
+            {
+                waitDic.Add(attackDelay, wait = new WaitForSeconds(attackDelay));
+            }
 
 
+            yield return wait;
+
+
+            //if (!waitDic.ContainsKey(attackDelay))
+            //{
+            //    waitDic.Add(attackDelay, wait = new WaitForSeconds(attackDelay));
+            //    yield return wait;
+            //}
+            //else if (waitDic.ContainsKey(attackDelay))
+            //{
+            //    wait = waitDic[attackDelay];
+            //    yield return wait;
+            //}
 
         }
 
@@ -379,25 +410,18 @@ public class MonsterAction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "PlayerAttack")
+        if(other.gameObject.CompareTag ("PlayerAttack"))
         {
             Damage dam;
-            if(other.gameObject.GetComponent<Damage>() ==null)
+            if (!other.gameObject.TryGetComponent<Damage>(out dam))
             {
                 return;
             }
-            else
-                dam = other.gameObject.GetComponent<Damage>();
 
             if (playerActionCtrl.GetComboStep() >= 3)
             {
-                Debug.Log("KnockBack");
                 StopAllCoroutines();
                 StartCoroutine(KnockBack());
-            }
-            else if (playerActionCtrl.GetComboStep() < 3)
-            {
-                Debug.Log("Hit");
             }
 
             monsterHp.Damaged(dam.DamageValue);

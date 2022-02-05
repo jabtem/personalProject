@@ -318,14 +318,12 @@ public class PlayerActionCtrl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "PerfectZone")
+        if (other.gameObject.CompareTag("PerfectZone"))
         {
-            Debug.Log("PerfectZone Hit");
             pzoneHit = true;
         }
-        else if(other.gameObject.tag == "EnemyAttack")
+        else if(other.gameObject.CompareTag("EnemyAttack"))
         {
-            Debug.Log("EnemyColider Hit");
             enemyHit = true;
         }
     }
@@ -333,14 +331,12 @@ public class PlayerActionCtrl : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
 
-        if (other.gameObject.tag == "PerfectZone")
+        if (other.gameObject.CompareTag("PerfectZone"))
         {
-            Debug.Log("PerfectZone Exit");
             pzoneHit = false;
         }
-        else if (other.gameObject.tag == "EnemyAttack")
+        else if (other.gameObject.CompareTag("EnemyAttack"))
         {
-            Debug.Log("EnemyColider Exit");
             enemyHit = false;
         }
     }

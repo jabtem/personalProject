@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MonsterHp : MonoBehaviour
 {
+
     [SerializeField]
     Image hpBar;
     [SerializeField]
@@ -13,7 +14,6 @@ public class MonsterHp : MonoBehaviour
     [SerializeField]
     int Hp;
 
-    [SerializeField]
     float maxHp;
 
     private void Start()

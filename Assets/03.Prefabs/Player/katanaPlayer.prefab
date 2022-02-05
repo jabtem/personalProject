@@ -2640,6 +2640,7 @@ GameObject:
   - component: {fileID: 1337087426911131246}
   - component: {fileID: 1337087426911131242}
   - component: {fileID: 2508331016200242637}
+  - component: {fileID: -7216743068128335816}
   m_Layer: 9
   m_Name: katanaPlayer
   m_TagString: Player
@@ -2753,6 +2754,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-7216743068128335816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337087426911131244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596542d3947bb1047950fd130d702832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBar: {fileID: 0}
+  hpValue: {fileID: 0}
+  Hp: 200
 --- !u!1 &1365784770838539624
 GameObject:
   m_ObjectHideFlags: 0
@@ -5417,6 +5433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b196f90661ce334a8781490a23c37f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!1 &3684686611085353618
 GameObject:
   m_ObjectHideFlags: 0
