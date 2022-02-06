@@ -64,6 +64,8 @@ public class PlayerActionCtrl : MonoBehaviour
 
     Damage attackDamage;
 
+    PlayerHp playerHp;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -74,6 +76,7 @@ public class PlayerActionCtrl : MonoBehaviour
         pMove = GetComponent<PlayerMoveCtrl>();
         attackCol = gameObject.GetComponentInChildren<BoxCollider>();
         attackDamage = gameObject.GetComponentInChildren<Damage>();
+        TryGetComponent<PlayerHp>(out playerHp);
 
     }
 
@@ -321,10 +324,18 @@ public class PlayerActionCtrl : MonoBehaviour
         if (other.gameObject.CompareTag("PerfectZone"))
         {
             pzoneHit = true;
+
         }
         else if(other.gameObject.CompareTag("EnemyAttack"))
         {
             enemyHit = true;
+
+            Damage dam;
+            if (!other.gameObject.TryGetComponent<Damage>(out dam))
+            {
+                return;
+            }
+            playerHp.Damaged(dam.DamageValue);
         }
     }
 

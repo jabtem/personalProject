@@ -77,7 +77,7 @@ public class MonsterAction : MonoBehaviour
             _state = value;
             myNavMesh.isStopped = true;
             myNavMesh.speed = speed;
-
+            attackDamage.DamageValue = 0;
             switch (_state)
             {
 
@@ -144,6 +144,7 @@ public class MonsterAction : MonoBehaviour
 
     Dictionary<float, WaitForSeconds> waitDic = new Dictionary<float, WaitForSeconds>();
 
+    Damage attackDamage;
     void Awake()
     {
         FoV = GetComponent<MonsterFOV>();
@@ -159,6 +160,8 @@ public class MonsterAction : MonoBehaviour
         patternId = Animator.StringToHash("Pattern");
         IdleTrasionID = Animator.StringToHash("BackIdle");
         monsterHp = GetComponent<MonsterHp>();
+
+        attackDamage = gameObject.GetComponentInChildren<Damage>();
         roamingArea = new Vector3[]
         {
             //왼쪽아래
@@ -230,18 +233,26 @@ public class MonsterAction : MonoBehaviour
             }
 
             myNavMesh.isStopped = false;
-            if (waitDic.ContainsKey(sec))
+
+
+            if (!waitDic.TryGetValue(sec, out wait))
             {
-                wait = waitDic[sec];
-                yield return wait;
+                waitDic.Add(sec, wait = new WaitForSeconds(sec));
             }
-            else if (!waitDic.ContainsKey(sec))
-            {
-                waitDic.Add(sec, new WaitForSeconds(sec));
-                wait = waitDic[sec];
-                yield return wait;
-            }
-            
+
+            yield return wait;
+
+            //if (waitDic.ContainsKey(sec))
+            //{
+            //    wait = waitDic[sec];
+            //    yield return wait;
+            //}
+            //else if (!waitDic.ContainsKey(sec))
+            //{
+            //    waitDic.Add(sec, new WaitForSeconds(sec));
+            //    wait = waitDic[sec];
+            //    yield return wait;
+            //}
         }
 
     }
@@ -347,13 +358,15 @@ public class MonsterAction : MonoBehaviour
                 if (ranPattern > 25f)
                 {
                     patternId = Animator.StringToHash("LightAttack");
-
+                    attackDamage.DamageValue = 20;
                     anim.SetTrigger(patternId);
                     attackDelay = 2f;
                 }
                 else if (ranPattern <= 25f)
                 {
                     patternId = Animator.StringToHash("HeavyAttack");
+                    //헤비어택이 다단히트판정이기때문에 기본데미지는낮게
+                    attackDamage.DamageValue = 5;
                     anim.SetTrigger(patternId);
                     attackDelay = 4f;
                 }
@@ -418,6 +431,7 @@ public class MonsterAction : MonoBehaviour
                 return;
             }
 
+            //마지막타격에 맞았을때만 넉백
             if (playerActionCtrl.GetComboStep() >= 3)
             {
                 StopAllCoroutines();
