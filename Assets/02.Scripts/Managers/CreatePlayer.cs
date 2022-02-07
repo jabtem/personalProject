@@ -49,7 +49,7 @@ public class CreatePlayer : MonoBehaviour
     {
         PlayerActionCtrl actionCtrl;
 
-        if (go.TryGetComponent<PlayerActionCtrl>(out actionCtrl) )
+        if (!go.TryGetComponent<PlayerActionCtrl>(out actionCtrl) )
         {
             //어택컨트롤컴포넌트가없을경우 세팅X
             return;

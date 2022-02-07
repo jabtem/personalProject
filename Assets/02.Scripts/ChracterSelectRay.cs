@@ -33,13 +33,15 @@ public class ChracterSelectRay : MonoBehaviour
             {
                 var objs = GameObject.FindObjectsOfType<SelectCharacterMove>();
 
+                //모든캐릭터가 제자리로 되돌아가게함
                 foreach(var obj in objs)
                 {
                     obj.go = false;
                 }
+                SelectCharacterMove chracter;
+                rayhit.collider.gameObject.TryGetComponent<SelectCharacterMove>(out chracter);
 
-                SelectCharacterMove chracter = rayhit.collider.gameObject.GetComponent<SelectCharacterMove>();
-
+                //선택한캐릭터만 정면으로 나오도록
                 chracter.go = true;
 
                 if(GameManager.instance !=null)
