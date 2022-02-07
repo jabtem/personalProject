@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 //미니맵 각도계산에 참조하기위한 플레이어의 x,z
-public class PlayerInfo
+public struct PlayerInfo
 {
 
     Vector3 _playerVector;
@@ -62,7 +62,7 @@ public class PlayerMoveCtrl : MonoBehaviour
     //공격중 조이스틱조작이나 구르기중 조이스틱 조작차단용
     public bool canMove;
 
-    public PlayerInfo playerInfo = new PlayerInfo();
+    public PlayerInfo playerInfo;
     void Awake()
     {
         // 레퍼런스 연결

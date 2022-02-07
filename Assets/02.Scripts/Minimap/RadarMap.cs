@@ -51,7 +51,6 @@ public class RadarMap : MonoBehaviour
         
 
         image = MinimapIconManager.instance.GetMinimapIcon(o.tag);
-           
         mapObject.Add(new MapObject() { owner = o, icon = image });
     }
 
@@ -105,7 +104,7 @@ public class RadarMap : MonoBehaviour
             m.icon.transform.SetParent(this.transform);
             m.icon.transform.position = new Vector3(mapPos.x, mapPos.z, 0) + this.transform.position;
             m.icon.transform.localScale = new Vector3(rect.rect.width*0.01f, rect.rect.width * 0.01f, rect.rect.width * 0.01f);
-            if (m.owner.layer == LayerMask.NameToLayer("Player"))
+            if (m.owner.CompareTag("Player"))
             {
                 if ((Mathf.Abs(player.playerInfo.playerVector.x) + Mathf.Abs(player.playerInfo.playerVector.z)) > 0)
                 {
@@ -124,7 +123,6 @@ public class RadarMap : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         DrawMapDots();
