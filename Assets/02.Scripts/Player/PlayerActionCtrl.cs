@@ -198,8 +198,8 @@ public class PlayerActionCtrl : MonoBehaviour
 
         if (SA == specialAction.Dodge)
         {
-
-            StartCoroutine(Dodge());
+            CoroutineManager.StartUpdateCoroutine(Dodge());
+            //StartCoroutine(Dodge());
         }
         else if(SA == specialAction.Guard)
         {
@@ -211,7 +211,7 @@ public class PlayerActionCtrl : MonoBehaviour
     IEnumerator Dodge()
     {
         //회피로직
-        // 속도(이동속도*회피속도)로 회피시간만큼 이동한다
+        // 속도(이동속도*회피속도)로 회피시간만큼 마지막으로 이동한 방향으로 회피
         //예) doegeSpeed = 5
         //이동속도의 5배로 회피시간만큼 순간적으로빠르게이동
         //퍼펙트존에만 닿은상태에서 회피행동을한경우

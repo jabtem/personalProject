@@ -95,7 +95,8 @@ public class LoadSceneManger : MonoBehaviour
         {
             CreatePlayer obj = GameObject.FindObjectOfType<CreatePlayer>();
             obj.Create(GameManager.instance.CharacterNum);
-            Button backButt = GameObject.FindGameObjectWithTag("BackButton").GetComponent<Button>();
+            Button backButt;
+            GameObject.FindGameObjectWithTag("BackButton").TryGetComponent<Button>(out backButt);
 
             backButt.onClick.RemoveAllListeners();
             backButt.onClick.AddListener(() => { LoadingScene(1); });

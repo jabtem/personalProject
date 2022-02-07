@@ -151,15 +151,15 @@ public class MonsterAction : MonoBehaviour
 
         roamingAreaPosition = new Vector3(transform.position.x + moveRomaingAreaPosionX, 0f, transform.position.z + moveRomaingAreaPosionZ);
         colliders = gameObject.GetComponentsInChildren<BoxCollider>();
-        rigid = GetComponent<Rigidbody>();
+        TryGetComponent<Rigidbody>(out rigid);
         roamingPointsIndex = 0;
         firstPosition = transform.position;
-        myNavMesh = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
+        TryGetComponent<NavMeshAgent>(out myNavMesh);
+        TryGetComponent<Animator>(out anim);
         moveId = Animator.StringToHash("Move");
         patternId = Animator.StringToHash("Pattern");
         IdleTrasionID = Animator.StringToHash("BackIdle");
-        monsterHp = GetComponent<MonsterHp>();
+        TryGetComponent<MonsterHp>(out monsterHp);
 
         attackDamage = gameObject.GetComponentInChildren<Damage>();
         roamingArea = new Vector3[]

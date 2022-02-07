@@ -69,17 +69,15 @@ public class RadarMap : MonoBehaviour
             {
                 //Destroy(mapObject[i].icon.gameObject);
 
-                if (GameObject.FindGameObjectWithTag("MinimapManager") != null)
-                {
-                    mapObject[i].icon.gameObject.SetActive(false);
-                    mapObject[i].icon.gameObject.transform.SetParent(MinimapIconManager.instance.transform);
-                    mapObject.RemoveAt(i);
-                }
-                else
-                    return;
+                mapObject[i].icon.gameObject.SetActive(false);
+                mapObject[i].icon.gameObject.transform.SetParent(MinimapIconManager.instance.transform);
+                mapObject.RemoveAt(i);
+
 
                 //continue;
             }
+            else
+                return;
             //else
             //    newList.Add(mapObject[i]);
         }

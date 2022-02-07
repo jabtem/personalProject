@@ -35,8 +35,6 @@ public class smoothFollowCam : MonoBehaviour
         CamRotation();
     }
 
-    // 한 프레임에 모든 Update가 실행된 후 호출되는 함수로
-    // 주로 카메라의 이동이나 Update와 따로 실행되야 할 로직에 사용
     void LateUpdate()
     {
 
