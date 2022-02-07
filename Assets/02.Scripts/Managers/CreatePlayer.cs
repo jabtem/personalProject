@@ -47,62 +47,54 @@ public class CreatePlayer : MonoBehaviour
     }
     void ActionButtonSet(GameObject go)
     {
-        if(go.GetComponent<PlayerActionCtrl>() == null)
+        PlayerActionCtrl actionCtrl;
+
+        if (go.TryGetComponent<PlayerActionCtrl>(out actionCtrl) )
         {
             //어택컨트롤컴포넌트가없을경우 세팅X
             return;
         }
-        else
+        ////버튼할당된 리스너 초기화
+        //for(int i=0; i< actionButtos.Length; ++i)
+        //{
+        //    actionButtos[i].onClick.RemoveAllListeners();
+        //}
+
+        //actionButtos[0].onClick.AddListener(delegate { attCtrl.Attack(); });
+        for (int i = 0; i < actionButtons.Length; ++i)
         {
-            PlayerActionCtrl actionCtrl = go.GetComponent<PlayerActionCtrl>();
-            ////버튼할당된 리스너 초기화
-            //for(int i=0; i< actionButtos.Length; ++i)
-            //{
-            //    actionButtos[i].onClick.RemoveAllListeners();
-            //}
-
-            //actionButtos[0].onClick.AddListener(delegate { attCtrl.Attack(); });
-            for(int i=0; i< actionButtons.Length; ++i)
+            EventTrigger.Entry triggerDownEntry = new EventTrigger.Entry();
+            triggerDownEntry.eventID = EventTriggerType.PointerDown;
+            triggerDownEntry.callback.RemoveAllListeners();
+            switch (i)
             {
-                EventTrigger.Entry triggerDownEntry = new EventTrigger.Entry();
-                triggerDownEntry.eventID = EventTriggerType.PointerDown;
-                triggerDownEntry.callback.RemoveAllListeners();
-                switch (i)
-                {
-                    //공격버튼 세팅
-                    case 0:
+                //공격버튼 세팅
+                case 0:
 
-                        triggerDownEntry.callback.AddListener((data) => { actionCtrl.Attack(); });
-                        break;
-                    //특수액션 세팅
-                    case 1:
-                        //델리게이트(대리자)
-                        //triggerEntry.callback.AddListener(delegate { attCtrl.SpecialAction(); });
-                        //람다식
-                        triggerDownEntry.callback.AddListener((data) => { actionCtrl.SpecialAction(); });
-                        if(actionCtrl.SA == PlayerActionCtrl.specialAction.Guard)
-                        {
-                            EventTrigger.Entry triggerUpEntry = new EventTrigger.Entry();
-                            triggerUpEntry.eventID = EventTriggerType.PointerUp;
-                            triggerUpEntry.callback.AddListener((data) => { actionCtrl.GuardButtUp(); });
-                            actionButtons[i].triggers.Add(triggerUpEntry);
-                        }
+                    triggerDownEntry.callback.AddListener((data) => { actionCtrl.Attack(); });
+                    break;
+                //특수액션 세팅
+                case 1:
+                    //델리게이트(대리자)
+                    //triggerEntry.callback.AddListener(delegate { attCtrl.SpecialAction(); });
+                    //람다식
+                    triggerDownEntry.callback.AddListener((data) => { actionCtrl.SpecialAction(); });
+                    if (actionCtrl.SA == PlayerActionCtrl.specialAction.Guard)
+                    {
+                        EventTrigger.Entry triggerUpEntry = new EventTrigger.Entry();
+                        triggerUpEntry.eventID = EventTriggerType.PointerUp;
+                        triggerUpEntry.callback.AddListener((data) => { actionCtrl.GuardButtUp(); });
+                        actionButtons[i].triggers.Add(triggerUpEntry);
+                    }
 
-                        break;
-                    case 2:
-                        triggerDownEntry.callback.AddListener((data) => { actionCtrl.UseSkill(); });
-                        break;
-                }
-                actionButtons[i].triggers.Add(triggerDownEntry);
+                    break;
+                case 2:
+                    triggerDownEntry.callback.AddListener((data) => { actionCtrl.UseSkill(); });
+                    break;
             }
-            
-
-
-
-
-
-
+            actionButtons[i].triggers.Add(triggerDownEntry);
         }
+
     }
 }
 

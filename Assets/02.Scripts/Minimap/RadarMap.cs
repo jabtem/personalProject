@@ -48,10 +48,15 @@ public class RadarMap : MonoBehaviour
     {
         //Image image = Instantiate(i);
         Image image = null;
-        
 
-        image = MinimapIconManager.instance.GetMinimapIcon(o.tag);
-        mapObject.Add(new MapObject() { owner = o, icon = image });
+        if (MinimapIconManager.instance != null)
+        {
+            image = MinimapIconManager.instance.GetMinimapIcon(o.tag);
+            mapObject.Add(new MapObject() { owner = o, icon = image });
+        }
+        else
+            return;
+
     }
 
     public static void RemoveMapObject(GameObject o)
@@ -60,7 +65,7 @@ public class RadarMap : MonoBehaviour
         for(int i = 0; i< mapObject.Count;i++)
         {
             
-            if (mapObject[i].owner == o && mapObject[i].icon !=null)
+            if (MinimapIconManager.instance != null)
             {
                 //Destroy(mapObject[i].icon.gameObject);
 
@@ -86,18 +91,20 @@ public class RadarMap : MonoBehaviour
     {
         foreach(MapObject m in mapObject)
         {
-            //플레이어 위치를 중심으로 대상오브젝트의 상대적위치
             Vector3 mapPos = (m.owner.transform.position - playerPos.position);
 
-            //실제 오브젝트 사이의 거리 * 맵스케일
+            //오브젝트 사이의 거리
+            //Object Distance
             float dist2Object = Vector3.Distance(playerPos.position, m.owner.transform.position) * mapScale;
 
             //대상오브젝트의 절대각도
             //카메라 각도에따라 미니맵이 회전한다
+            //The object's minimap rotates according to the main camera angle.
             float deltay = Mathf.Atan2(mapPos.z, mapPos.x) * Mathf.Rad2Deg+ Camera.main.transform.eulerAngles.y;
 
           
             //미니맵 아이콘x,y
+            //Minimap Icon X, Y
             mapPos.x = dist2Object * Mathf.Cos(deltay * Mathf.Deg2Rad);
             mapPos.z = dist2Object * Mathf.Sin(deltay * Mathf.Deg2Rad);
 
@@ -118,8 +125,7 @@ public class RadarMap : MonoBehaviour
     }
     void Awake()
     {
-        rect = GetComponent<RectTransform>();
-        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoveCtrl>();
+        TryGetComponent<RectTransform>(out rect);
 
     }
 

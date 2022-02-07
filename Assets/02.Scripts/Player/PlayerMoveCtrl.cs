@@ -63,13 +63,17 @@ public class PlayerMoveCtrl : MonoBehaviour
     public bool canMove;
 
     public PlayerInfo playerInfo;
+    
+    smoothFollowCam followCam;
+
     void Awake()
     {
         // 레퍼런스 연결
-        myTr = GetComponent<Transform>();
-        controller = GetComponent<CharacterController>();
-        Camera.main.GetComponent<smoothFollowCam>().target = this.transform;
-        anim = GetComponent<Animator>();
+        TryGetComponent<Transform>(out myTr);
+        TryGetComponent<CharacterController>(out controller);
+        Camera.main.TryGetComponent<smoothFollowCam>(out followCam);
+        followCam.target = this.transform;
+        TryGetComponent<Animator>(out anim);
         id = Animator.StringToHash("speed");
         canMove = true;
     }
@@ -124,7 +128,7 @@ public class PlayerMoveCtrl : MonoBehaviour
 }
 
 
-/* 만약 CharacterController를 안쓸경우
+/* 캐릭터 컨트롤러 미사용시 이동로직
 
 using System.Collections;
 using System.Collections.Generic;
