@@ -198,7 +198,7 @@ public class PlayerActionCtrl : MonoBehaviour
 
         if (SA == specialAction.Dodge)
         {
-            CoroutineManager.StartUpdateCoroutine(Dodge());
+            CoroutineManager.StartUpdateCoroutine(Dodge(),this);
             //StartCoroutine(Dodge());
         }
         else if(SA == specialAction.Guard)

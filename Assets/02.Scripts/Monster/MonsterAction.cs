@@ -74,6 +74,8 @@ public class MonsterAction : MonoBehaviour
         set
         {
             StopAllCoroutines();
+            CoroutineManager.StopAllUpdateCoroutine(this);
+            
             _state = value;
             myNavMesh.isStopped = true;
             myNavMesh.speed = speed;
@@ -90,10 +92,12 @@ public class MonsterAction : MonoBehaviour
                     switch (roamingMode)
                     {
                         case RoamingMode.영역내무작위이동:
-                            StartCoroutine(RandomMove());
+                            CoroutineManager.StartUpdateCoroutine(RandomMove(),this);
+                            //StartCoroutine(RandomMove());
                             break;
                         case RoamingMode.지점순회:
-                            StartCoroutine(PointMove());
+                            CoroutineManager.StartUpdateCoroutine(PointMove(),this);
+                            //StartCoroutine(PointMove());
                             break;
                     }
 
@@ -103,10 +107,12 @@ public class MonsterAction : MonoBehaviour
                         myNavMesh.isStopped = false;
                     FoV.SetFovActive(false);
                     myNavMesh.stoppingDistance = 0.0f;
-                    StartCoroutine(TargetTrace());
+                    //StartCoroutine(TargetTrace());
+                    CoroutineManager.StartUpdateCoroutine(TargetTrace(),this);
                     break;
                 case MonsterState.Battle:
-                    StartCoroutine(BattleMode());
+                    CoroutineManager.StartUpdateCoroutine(BattleMode(),this);
+                    //StartCoroutine(BattleMode());
                     break;
 
             }
@@ -194,7 +200,6 @@ public class MonsterAction : MonoBehaviour
 
             if ((transform.position - myNavMesh.destination).sqrMagnitude <= 0.01f )
             {
-
                 roamingPointsIndex %= roamingPoints.Length;
                 Vector3 roamingTarget = new Vector3(firstPosition.x + roamingPoints[roamingPointsIndex].x, 0f, firstPosition.z + roamingPoints[roamingPointsIndex].y);
                 myNavMesh.SetDestination(roamingTarget);
@@ -331,6 +336,7 @@ public class MonsterAction : MonoBehaviour
     #region 전투패턴
     IEnumerator BattleMode()
     {
+
         //0 : 대기 1: 약공격 2: 강공격
         // 75%확률로 약공격
         // 25%확률로 강공격
@@ -348,6 +354,7 @@ public class MonsterAction : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0, angle, 0);
             ranPattern = UnityEngine.Random.Range(1f, 100.0f);
+            Debug.Log(3);
             //공격이닿는거리면 공격
             if(targetDirection.sqrMagnitude <= FoV.TargetRadius + myNavMesh.radius + attackRange)
             {
