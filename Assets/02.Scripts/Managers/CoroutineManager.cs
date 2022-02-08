@@ -15,22 +15,28 @@ public class CoroutineManager : MonoBehaviour
         }
         public void Run()
         {
-            foreach(var co in _coroutines.ToList())
+            //이부분에서 리스트로 변환하면서 가비지생성 원인파악필요
+            var remove = _coroutines.Where((data) => !data.Key.MoveNext()).ToList();
+
+            foreach (var removeData in remove)
             {
-                if(!co.Key.MoveNext())
-                {
-                    _coroutines.Remove(co.Key);
-                }
+                _coroutines.Remove(removeData.Key);
             }
+
+
+            //foreach (var co in _coroutines.ToList())
+            //{
+            //    if(!co.Key.MoveNext())
+            //    {
+            //        _coroutines.Remove(co.Key);
+            //    }
+            //}
 
         }
 
         public void StopAllCoroutine(Component component)
         {
 
-            ///<summary>
-            ///해당 스크립에서 Add한 코루틴만 모두 정지
-            /// </summary>
             //var remove = _coroutines.Where((key) => key.Value.Equals(component)).ToList();
 
             //foreach(var removeData in remove)
@@ -49,6 +55,30 @@ public class CoroutineManager : MonoBehaviour
         }
     }
 
+    public class MicroCoroutine2
+    {
+        List<IEnumerator> _coroutines = new List<IEnumerator>();
+
+        public void AddCoroutine(IEnumerator enumerator)
+        {
+            _coroutines.Add(enumerator);
+        }
+
+        public void Run()
+        {
+            int i = 0;
+            while (i < _coroutines.Count)
+            {
+                if (!_coroutines[i].MoveNext())
+                {
+                    _coroutines.RemoveAt(i);
+                    continue;
+                }
+                i++;
+            }
+        }
+    }
+
     static CoroutineManager _instance;
     public static CoroutineManager instance
     {
@@ -57,8 +87,6 @@ public class CoroutineManager : MonoBehaviour
             return _instance;
         }
     }
-    WaitForSeconds Wfs;
-    Dictionary<float, WaitForSeconds> waitDic = new Dictionary<float, WaitForSeconds>();
 
     private void Awake()
     {
@@ -76,12 +104,19 @@ public class CoroutineManager : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(RunUpdateCoroutine());
-        StartCoroutine(RunWfsCoroutine());
+        StartCoroutine(RunUpdateCoroutine());
+        //StartCoroutine(RunTestCoroutine());
     }
 
     MicroCoroutine updateCoroutine = new MicroCoroutine();
-    MicroCoroutine wfsCoroutine = new MicroCoroutine();
+    MicroCoroutine2 test = new MicroCoroutine2();
+    public static void StartUpdateCoroutine(IEnumerator routine)
+    {
+        if (_instance == null)
+            return;
+        _instance.test.AddCoroutine(routine);
+    }
+
     public static void StartUpdateCoroutine(IEnumerator coroutine,Component component)
     {
         if (_instance == null)
@@ -97,45 +132,49 @@ public class CoroutineManager : MonoBehaviour
 
         }
     }
-
-    public static void StartWfsCoroutine(IEnumerator coroutine, Component component)
+    IEnumerator RunTestCoroutine()
     {
-        if (_instance == null)
-            return;
-        _instance.wfsCoroutine.Add(coroutine, component);
-    }
-
-
-
-    IEnumerator RunWfsCoroutine()
-    {
-        while(true)
+        while (true)
         {
-            wfsCoroutine.Run();
-            yield return Wfs;
+            test.Run();
+            yield return null;
+
         }
     }
-
-    public void SetWaitforSeconds(float time)
-    {
-        if (!waitDic.TryGetValue(time, out Wfs))
-        {
-            waitDic.Add(time, Wfs = new WaitForSeconds(time));
-        }
-    }
-
-    public static void StopAllWfsCoroutine(Component component)
-    {
-        if (_instance == null)
-            return;
-        _instance.wfsCoroutine.StopAllCoroutine(component);
-    }
-
     public static void StopAllUpdateCoroutine(Component component)
     {
         if (_instance == null)
             return;
         _instance.updateCoroutine.StopAllCoroutine(component);
     }
+
+
+    //public static void StartWfsCoroutine(IEnumerator coroutine, Component component)
+    //{
+    //    if (_instance == null)
+    //        return;
+    //    _instance.wfsCoroutine.Add(coroutine, component);
+    //}
+
+
+
+    //IEnumerator RunWfsCoroutine()
+    //{
+    //    while(true)
+    //    {
+    //        wfsCoroutine.Run();
+    //        yield return Wfs;
+    //    }
+    //}
+
+
+    //public static void StopAllWfsCoroutine(Component component)
+    //{
+    //    if (_instance == null)
+    //        return;
+    //    _instance.wfsCoroutine.StopAllCoroutine(component);
+    //}
+
+
 
 }

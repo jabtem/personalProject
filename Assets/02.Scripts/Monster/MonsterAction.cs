@@ -75,7 +75,6 @@ public class MonsterAction : MonoBehaviour
         {
             StopAllCoroutines();
             CoroutineManager.StopAllUpdateCoroutine(this);
-            CoroutineManager.StopAllWfsCoroutine(this);
             
             _state = value;
             myNavMesh.isStopped = true;
@@ -94,7 +93,7 @@ public class MonsterAction : MonoBehaviour
                     {
                         case RoamingMode.영역내무작위이동:
                             //CoroutineManager.StartWfsCoroutine(RandomMove(),this);
-                            //StartCoroutine(RandomMove());
+                            StartCoroutine(RandomMove());
                             break;
                         case RoamingMode.지점순회:
                             //CoroutineManager.StartUpdateCoroutine(PointMove(),this);
@@ -113,7 +112,7 @@ public class MonsterAction : MonoBehaviour
                     break;
                 case MonsterState.Battle:
                     //CoroutineManager.StartWfsCoroutine(BattleMode(),this);
-                    //StartCoroutine(BattleMode());
+                    StartCoroutine(BattleMode());
                     break;
 
             }
@@ -152,6 +151,8 @@ public class MonsterAction : MonoBehaviour
 
 
     Damage attackDamage;
+    Dictionary<float, WaitForSeconds> waitDic = new Dictionary<float, WaitForSeconds>();
+
     void Awake()
     {
         FoV = GetComponent<MonsterFOV>();
@@ -216,7 +217,7 @@ public class MonsterAction : MonoBehaviour
     {
         //무작위 숫자 범위 밖의값
         int ranAngle = -1;
-        //WaitForSeconds wait;
+        WaitForSeconds wait;
         while (true)
         {
             ranAngle = RanAngleCheck(ranAngle);
@@ -240,23 +241,14 @@ public class MonsterAction : MonoBehaviour
 
             myNavMesh.isStopped = false;
 
+            if (!waitDic.TryGetValue(sec, out wait))
+            {
+                waitDic.Add(sec, wait = new WaitForSeconds(sec));
+            }
+            //CoroutineManager.instance.SetWaitforSeconds(sec);
 
-            CoroutineManager.instance.SetWaitforSeconds(sec);
 
-
-            yield return null;
-
-            //if (waitDic.ContainsKey(sec))
-            //{
-            //    wait = waitDic[sec];
-            //    yield return wait;
-            //}
-            //else if (!waitDic.ContainsKey(sec))
-            //{
-            //    waitDic.Add(sec, new WaitForSeconds(sec));
-            //    wait = waitDic[sec];
-            //    yield return wait;
-            //}
+            yield return wait;
         }
 
     }
@@ -341,7 +333,7 @@ public class MonsterAction : MonoBehaviour
         // 25%확률로 강공격
         float ranPattern;
         float attackDelay = 0f;
-        //WaitForSeconds wait;
+        WaitForSeconds wait;
         while(true)
         {
 
@@ -384,10 +376,14 @@ public class MonsterAction : MonoBehaviour
             }
 
 
-            CoroutineManager.instance.SetWaitforSeconds(attackDelay);
+            if (!waitDic.TryGetValue(attackDelay, out wait))
+            {
+                waitDic.Add(attackDelay, wait = new WaitForSeconds(attackDelay));
+            }
+
 
             //코루틴매니저애의해 관리되므로 null로해도 상관없어짐 아예없으면 무한루프라 게임이정지됨
-            yield return null;
+            yield return wait;
             //yield return wait;
 
 

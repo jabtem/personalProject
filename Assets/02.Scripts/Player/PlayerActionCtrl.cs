@@ -11,12 +11,6 @@ public class PlayerActionCtrl : MonoBehaviour
     }
 
 
-
-
-
-
-    
-
     public Animator anim;
     //콤보 가능여부
 
