@@ -76,7 +76,7 @@ public class CoroutineManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(RunUpdateCoroutine());
+        //StartCoroutine(RunUpdateCoroutine());
         StartCoroutine(RunWfsCoroutine());
     }
 
