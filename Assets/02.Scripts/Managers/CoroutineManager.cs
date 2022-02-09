@@ -148,7 +148,7 @@ public class CoroutineManager : MonoBehaviour
 
     MicroCoroutine updateCoroutine = new MicroCoroutine();
     MicroCoroutine2 test = new MicroCoroutine2();
-    public static void StartUpdateCoroutine(IEnumerator routine)
+    public static void StarTestCoroutine(IEnumerator routine)
     {
         if (_instance == null)
             return;
@@ -187,6 +187,15 @@ public class CoroutineManager : MonoBehaviour
     }
 
 
+
+
+
+
+
+
+
+
+    //구현하려했으나 실패 더손대기엔 시간이너무많이걸릴것같으니 나중을기약
     //public static void StartWfsCoroutine(IEnumerator coroutine, Component component)
     //{
     //    if (_instance == null)

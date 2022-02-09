@@ -19,7 +19,6 @@ public class CorotineTest : MonoBehaviour
     WaitForSeconds wait2 = new WaitForSeconds(4f);
     IEnumerator TestCoroutine()
     {
-        //CoroutineManager.instance.SetWaitforSeconds(2f);
         yield return null;
 
     }
@@ -29,7 +28,6 @@ public class CorotineTest : MonoBehaviour
         while(true)
         {
             Debug.Log(2);
-            //CoroutineManager.instance.SetWaitforSeconds(2f);
             yield return wait;
         }
 
@@ -39,7 +37,6 @@ public class CorotineTest : MonoBehaviour
         while (true)
         {
             Debug.Log(4);
-            //CoroutineManager.instance.SetWaitforSeconds(4f);
             yield return wait2;
         }
 
