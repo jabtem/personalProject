@@ -7,51 +7,50 @@ public class CoroutineManager : MonoBehaviour
 {
     public class MicroCoroutine
     {
-        Dictionary<IEnumerator,Component> _coroutines = new Dictionary<IEnumerator,Component>();
-
-        public void Add(IEnumerator enumerator,Component component)
+        //Dictionary<IEnumerator,Component> _coroutines = new Dictionary<IEnumerator,Component>();
+        List<KeyValuePair<IEnumerator, Component>> _coroutineList = new List<KeyValuePair<IEnumerator, Component>>();
+        public void Add(IEnumerator enumerator, Component component)
         {
-            _coroutines.Add(enumerator, component);
+            //_coroutines.Add(enumerator, component);
+            _coroutineList.Add(new KeyValuePair<IEnumerator, Component>(enumerator, component));
         }
         public void Run()
         {
-            //이부분에서 리스트로 변환하면서 가비지생성 원인파악필요
-            var remove = _coroutines.Where((data) => !data.Key.MoveNext()).ToList();
 
-            foreach (var removeData in remove)
-            {
-                _coroutines.Remove(removeData.Key);
-            }
-
-
+            //딕셔너리 사용시
             //foreach (var co in _coroutines.ToList())
             //{
-            //    if(!co.Key.MoveNext())
+            //    if (!co.Key.MoveNext())
             //    {
             //        _coroutines.Remove(co.Key);
             //    }
             //}
 
+            //리스트사용시
+            int i = 0;
+            while (i < _coroutineList.Count)
+            {
+                if (!_coroutineList[i].Key.MoveNext())
+                {
+                    _coroutineList.RemoveAt(i);
+                    continue;
+                }
+                i++;
+            }
         }
 
         public void StopAllCoroutine(Component component)
         {
 
-            //var remove = _coroutines.Where((key) => key.Value.Equals(component)).ToList();
 
-            //foreach(var removeData in remove)
+            //foreach (var co in _coroutines.ToList())
             //{
-            //    _coroutines.Remove(removeData.Key);
+            //    if (co.Value.Equals(component))
+            //    {
+            //        //co.Key.Reset();
+            //        _coroutines.Remove(co.Key);
+            //    }
             //}
-
-            foreach (var co in _coroutines.ToList())
-            {
-                if (co.Value.Equals(component))
-                {
-                    //co.Key.Reset();
-                    _coroutines.Remove(co.Key);
-                }
-            }
         }
     }
 
@@ -104,8 +103,8 @@ public class CoroutineManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(RunUpdateCoroutine());
-        //StartCoroutine(RunTestCoroutine());
+        //StartCoroutine(RunUpdateCoroutine());
+        StartCoroutine(RunTestCoroutine());
     }
 
     MicroCoroutine updateCoroutine = new MicroCoroutine();
