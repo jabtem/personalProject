@@ -7,12 +7,20 @@ public class CoroutineManager : MonoBehaviour
 {
     public class MicroCoroutine
     {
-        //Dictionary<IEnumerator,Component> _coroutines = new Dictionary<IEnumerator,Component>();
-        List<KeyValuePair<IEnumerator, Component>> _coroutineList = new List<KeyValuePair<IEnumerator, Component>>();
+        Dictionary<IEnumerator,Component> _coroutines = new Dictionary<IEnumerator,Component>();
+        //List<KeyValuePair<IEnumerator, Component>> _coroutineList = new List<KeyValuePair<IEnumerator, Component>>();
+        //DeleteData Collect
+        HashSet<IEnumerator> removeKey = new HashSet<IEnumerator>();
+        HashSet<IEnumerator> stopCoroutineKey = new HashSet<IEnumerator>();
+
+        //IEnumerator[] test = new IEnumerator[1000];
+        //Component[] test2 = new Component[1000];
         public void Add(IEnumerator enumerator, Component component)
         {
-            //_coroutines.Add(enumerator, component);
-            _coroutineList.Add(new KeyValuePair<IEnumerator, Component>(enumerator, component));
+            _coroutines.Add(enumerator, component);
+            //_coroutineList.Add(new KeyValuePair<IEnumerator, Component>(enumerator, component));
+            //test1.Add(enumerator);
+            //test2.Add(component);
         }
         public void Run()
         {
@@ -25,22 +33,53 @@ public class CoroutineManager : MonoBehaviour
             //        _coroutines.Remove(co.Key);
             //    }
             //}
-
-            //리스트사용시
-            int i = 0;
-            while (i < _coroutineList.Count)
+            foreach (IEnumerator remove in stopCoroutineKey)
             {
-                if (!_coroutineList[i].Key.MoveNext())
-                {
-                    _coroutineList.RemoveAt(i);
-                    continue;
-                }
-                i++;
+                if (_coroutines.ContainsKey(remove))
+                    _coroutines.Remove(remove);
             }
+
+            foreach (KeyValuePair<IEnumerator,Component> co in _coroutines)
+            {
+                if(!co.Key.MoveNext())
+                {
+                    removeKey.Add(co.Key);
+                }
+            }
+
+            foreach(IEnumerator remove in removeKey)
+            {
+                if(_coroutines.ContainsKey(remove))
+                    _coroutines.Remove(remove);
+            }
+            removeKey.Clear();
+
+
         }
 
         public void StopAllCoroutine(Component component)
         {
+
+            stopCoroutineKey.Clear();
+            foreach (KeyValuePair<IEnumerator, Component> co in _coroutines)
+            {
+                if (co.Value.Equals(component))
+                {
+                    //co.Key.Reset();
+                    stopCoroutineKey.Add(co.Key);
+                }
+            }
+
+            //int i = 0;
+            //while (i < _coroutineList.Count)
+            //{
+            //    if (_coroutineList[i].Value.Equals(component))
+            //    {
+            //        _coroutineList.RemoveAt(i);
+            //        continue;
+            //    }
+            //    i++;
+            //}
 
 
             //foreach (var co in _coroutines.ToList())
@@ -103,8 +142,8 @@ public class CoroutineManager : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(RunUpdateCoroutine());
-        StartCoroutine(RunTestCoroutine());
+        StartCoroutine(RunUpdateCoroutine());
+        //StartCoroutine(RunTestCoroutine());
     }
 
     MicroCoroutine updateCoroutine = new MicroCoroutine();

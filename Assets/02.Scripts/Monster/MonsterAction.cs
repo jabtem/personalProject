@@ -96,8 +96,8 @@ public class MonsterAction : MonoBehaviour
                             StartCoroutine(RandomMove());
                             break;
                         case RoamingMode.지점순회:
-                            //CoroutineManager.StartUpdateCoroutine(PointMove(),this);
-                            StartCoroutine(PointMove());
+                            CoroutineManager.StartUpdateCoroutine(PointMove(),this);
+                            //StartCoroutine(PointMove());
                             break;
                     }
 
@@ -107,8 +107,8 @@ public class MonsterAction : MonoBehaviour
                         myNavMesh.isStopped = false;
                     FoV.SetFovActive(false);
                     myNavMesh.stoppingDistance = 0.0f;
-                    StartCoroutine(TargetTrace());
-                    //CoroutineManager.StartUpdateCoroutine(TargetTrace(),this);
+                    //StartCoroutine(TargetTrace());
+                    CoroutineManager.StartUpdateCoroutine(TargetTrace(),this);
                     break;
                 case MonsterState.Battle:
                     //CoroutineManager.StartWfsCoroutine(BattleMode(),this);

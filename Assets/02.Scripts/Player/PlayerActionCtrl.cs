@@ -364,4 +364,11 @@ public class PlayerActionCtrl : MonoBehaviour
     {
         return anim.GetInteger(comboStepID);
     }
+
+
+    [ContextMenu("StopAll")]
+    public void stopTest()
+    {
+        CoroutineManager.StopAllUpdateCoroutine(this);
+    }
 }

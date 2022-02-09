@@ -9,7 +9,7 @@ public class CorotineTest : MonoBehaviour
     {
         for (int i = 0; i < 10000; i++)
         {
-            CoroutineManager.StartUpdateCoroutine(TestCoroutine());
+            CoroutineManager.StartUpdateCoroutine(TestCoroutine(),this);
             //StartCoroutine(TestCoroutine());
         }
     }
