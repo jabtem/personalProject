@@ -514,6 +514,12 @@ public class MonsterAction : MonoBehaviour
 
     }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        CoroutineManager.StopAllUpdateCoroutine(this);
+    }
+
 
     //미사용
     //private void Update()

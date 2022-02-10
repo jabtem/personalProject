@@ -11421,7 +11421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5eca8ecd00628f4a88bc520a3cb61d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  katana: {fileID: 1337087426911131244, guid: 180ddc90e5aa66f44a1f72624db72722, type: 3}
+  katana: {fileID: 0}
   spear: {fileID: 749803798976602372, guid: fe475e265e0367f44864d96384e7af51, type: 3}
   twoHandSword: {fileID: 2281391034263034779, guid: c1e889250727f87449db32f732058f94,
     type: 3}

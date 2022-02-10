@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class CreatePlayer : MonoBehaviour
 {
-    public GameObject katana;
-    public GameObject spear;
-    public GameObject twoHandSword;
+    GameObject katana;
+    GameObject spear;
+    GameObject twoHandSword;
     public RadarMap miniMap;
     public GameObject katanaSkillSet;
     public GameObject spearSkillSet;
     public GameObject twoHandsSkillSet;
 
+
+    public void Awake()
+    {
+        katana = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/03.Prefabs/Player/katanaPlayer.prefab", typeof(GameObject));
+        spear = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/03.Prefabs/Player/spearPlayer.prefab", typeof(GameObject));
+        twoHandSword = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/03.Prefabs/Player/twoHandPlayer.prefab", typeof(GameObject));
+    }
 
 
     //배열 0:공격버튼 1:특수액션
