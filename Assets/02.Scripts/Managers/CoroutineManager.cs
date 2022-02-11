@@ -22,6 +22,25 @@ public class CoroutineManager : MonoBehaviour
             //test1.Add(enumerator);
             //test2.Add(component);
         }
+
+        public void Show()
+        {
+            int index = 0;
+            foreach(var a in _coroutines)
+            {
+                Debug.Log($"{index++}{a.Key}");
+            }
+        }
+        public void Remove()
+        {
+            foreach (IEnumerator remove in stopCoroutineKey)
+            {
+                if (_coroutines.ContainsKey(remove))
+                    _coroutines.Remove(remove);
+            }
+            stopCoroutineKey.Clear();
+        }
+
         public void Run()
         {
 
@@ -33,6 +52,11 @@ public class CoroutineManager : MonoBehaviour
             //        _coroutines.Remove(co.Key);
             //    }
             //}
+            //삭제대상 삭제를우선
+            if(stopCoroutineKey.Count >0)
+            {
+                return;
+            }
 
 
             foreach (KeyValuePair<IEnumerator,Component> co in _coroutines)
@@ -51,16 +75,6 @@ public class CoroutineManager : MonoBehaviour
             removeKey.Clear();
 
 
-        }
-
-        public void Remove()
-        {
-            foreach (IEnumerator remove in stopCoroutineKey)
-            {
-                if (_coroutines.ContainsKey(remove))
-                    _coroutines.Remove(remove);
-            }
-            stopCoroutineKey.Clear();
         }
 
         public void StopAllCoroutine(Component component)
@@ -97,6 +111,12 @@ public class CoroutineManager : MonoBehaviour
             //    }
             //}
         }
+    }
+
+    [ContextMenu("test")]
+    public void Test()
+    {
+        instance.updateCoroutine.Show();
     }
 
     public class MicroCoroutine2
