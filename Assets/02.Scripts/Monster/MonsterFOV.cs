@@ -94,8 +94,10 @@ public class MonsterFOV : MonoBehaviour
     }
     private void Update()
     {
+        targetDirection = new Vector3(Target.position.x, transform.position.y, Target.position.z) - transform.position;
+
         //시야각이 켜져있을때만 계산
-        if(fovImage.gameObject.activeSelf)
+        if (fovImage.gameObject.activeSelf)
         {
             //시야각 오른쪽 경계선 벡터
             rightVector = new Vector3(Mathf.Sin((transform.eulerAngles.y + angle * 0.5f) * Mathf.Deg2Rad),
@@ -104,7 +106,7 @@ public class MonsterFOV : MonoBehaviour
             leftVector = new Vector3(Mathf.Sin((transform.eulerAngles.y - angle * 0.5f) * Mathf.Deg2Rad),
                 0, Mathf.Cos((transform.eulerAngles.y - angle * 0.5f) * Mathf.Deg2Rad)) * fovRadius;
             //오브젝트에서 타겟방향 벡터
-            targetDirection = new Vector3(Target.position.x, transform.position.y, Target.position.z) - transform.position;
+
 
             /***************************** 부채꼴 원충돌 ********************************/
             // 타겟과의 거리가 (부채꼴반지름 + 플레이어의반지름) 보다 작거나같으면

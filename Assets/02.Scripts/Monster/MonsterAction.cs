@@ -75,7 +75,6 @@ public class MonsterAction : MonoBehaviour
         {
             StopAllCoroutines();
             CoroutineManager.StopAllUpdateCoroutine(this);
-            
             _state = value;
             myNavMesh.isStopped = true;
             myNavMesh.speed = speed;
@@ -294,6 +293,8 @@ public class MonsterAction : MonoBehaviour
         float traceTime = 0f;
         while(true)
         {
+
+
             traceTime += Time.deltaTime;
             Vector3 targetDirection = FoV.Target.transform.position - transform.position;
             //타겟이 공격사거리 내에 들어오면 전투모드로 전환
@@ -315,9 +316,7 @@ public class MonsterAction : MonoBehaviour
             {
                 //추적시간이 5초이상 지나면 다시 정찰모드로 되돌아감
                 State = MonsterState.Roaming;
-                Debug.Log(traceTime);
             }
-
             yield return null;
         }
 
@@ -405,14 +404,11 @@ public class MonsterAction : MonoBehaviour
     private void Update()
     {
         //정찰중에 시야각에 타겟이 닿았을경우 상태변경
-        if (State == MonsterState.Roaming&&FoV.IsColision)
+        if (State.Equals(MonsterState.Roaming)&&FoV.IsColision)
         {
-            FoV.IsColision = false;
             State = MonsterState.Trace;
-            Debug.Log("aaa");
         }
 
-        Debug.Log("aa" + FoV.IsColision);
 
         //공격-> 대기로 돌아갈때 
         if(anim.GetAnimatorTransitionInfo(0).userNameHash == IdleTrasionID)
@@ -480,7 +476,7 @@ public class MonsterAction : MonoBehaviour
             yield return null;
         }
 
-        //CoroutineManager.StartUpdateCoroutine(TargetTrace(), this);
+        State = MonsterState.Trace;
     }
     void OnDrawGizmosSelected()
     {

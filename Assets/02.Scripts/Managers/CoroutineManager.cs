@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class CoroutineManager : MonoBehaviour
 {
     public class MicroCoroutine
     {
         Dictionary<IEnumerator,Component> _coroutines = new Dictionary<IEnumerator,Component>();
+        Dictionary<IEnumerator, Component> _cash = new Dictionary<IEnumerator, Component>();
         //List<KeyValuePair<IEnumerator, Component>> _coroutineList = new List<KeyValuePair<IEnumerator, Component>>();
         //DeleteData Collect
         HashSet<IEnumerator> removeKey = new HashSet<IEnumerator>();
         HashSet<IEnumerator> stopCoroutineKey = new HashSet<IEnumerator>();
-
+        Component removeComponent;
         //IEnumerator[] test = new IEnumerator[1000];
         //Component[] test2 = new Component[1000];
         public void Add(IEnumerator enumerator, Component component)
@@ -33,17 +33,25 @@ public class CoroutineManager : MonoBehaviour
         }
         public void Remove()
         {
-            foreach (IEnumerator remove in stopCoroutineKey)
+            if(stopCoroutineKey.Count>0)
             {
-                if (_coroutines.ContainsKey(remove))
-                    _coroutines.Remove(remove);
+                foreach (IEnumerator remove in stopCoroutineKey)
+                {
+                    if (_coroutines.ContainsKey(remove))
+                        _coroutines.Remove(remove);
+                }
+                stopCoroutineKey.Clear();
             }
-            stopCoroutineKey.Clear();
         }
 
         public void Run()
         {
 
+            //Dictionary DeepCopy
+            foreach(KeyValuePair<IEnumerator,Component> coroutine in _coroutines)
+            {
+                _cash.Add(coroutine.Key, coroutine.Value);
+            }
             //딕셔너리 사용시
             //foreach (var co in _coroutines.ToList())
             //{
@@ -52,27 +60,37 @@ public class CoroutineManager : MonoBehaviour
             //        _coroutines.Remove(co.Key);
             //    }
             //}
-            //삭제대상 삭제를우선
-            if(stopCoroutineKey.Count >0)
-            {
-                return;
-            }
+            ////삭제대상 삭제를우선
+            //if(stopCoroutineKey.Count >0)
+            //{
+            //    return;
+            //}
 
 
-            foreach (KeyValuePair<IEnumerator,Component> co in _coroutines)
+            foreach (KeyValuePair<IEnumerator,Component> co in _cash)
             {
-                if(!co.Key.MoveNext())
+                if (!co.Key.MoveNext() || stopCoroutineKey.Contains(co.Key))
                 {
                     removeKey.Add(co.Key);
                 }
+                else
+                {
+                    continue;
+                }
             }
+
+            _cash.Clear();
 
             foreach(IEnumerator remove in removeKey)
             {
-                if(_coroutines.ContainsKey(remove))
+                if(_coroutines.TryGetValue(remove,out removeComponent))
+                {
                     _coroutines.Remove(remove);
+                }
+
             }
             removeKey.Clear();
+            stopCoroutineKey.Clear();
 
 
         }
@@ -85,7 +103,6 @@ public class CoroutineManager : MonoBehaviour
             {
                 if (co.Value.Equals(component))
                 {
-                    //co.Key.Reset();
                     stopCoroutineKey.Add(co.Key);
                 }
             }
@@ -191,7 +208,7 @@ public class CoroutineManager : MonoBehaviour
     {
         while (true)
         {
-            updateCoroutine.Remove();
+            //updateCoroutine.Remove();
             updateCoroutine.Run();
             yield return null;
 
