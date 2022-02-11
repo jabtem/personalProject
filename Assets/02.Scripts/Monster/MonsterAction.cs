@@ -356,7 +356,7 @@ public class MonsterAction : MonoBehaviour
                 if (ranPattern > 25f)
                 {
                     patternId = Animator.StringToHash("LightAttack");
-                    attackDamage.DamageValue = 20;
+                    attackDamage.DamageValue = 10;
                     anim.SetTrigger(patternId);
                     attackDelay = 2f;
                 }
@@ -381,8 +381,6 @@ public class MonsterAction : MonoBehaviour
                 waitDic.Add(attackDelay, wait = new WaitForSeconds(attackDelay));
             }
 
-
-            //코루틴매니저애의해 관리되므로 null로해도 상관없어짐 아예없으면 무한루프라 게임이정지됨
             yield return wait;
             //yield return wait;
 
@@ -426,23 +424,41 @@ public class MonsterAction : MonoBehaviour
     {
         if(other.gameObject.CompareTag ("PlayerAttack"))
         {
+
             Damage dam;
             if (!other.gameObject.TryGetComponent<Damage>(out dam))
             {
                 return;
             }
-
-            //마지막타격에 맞았을때만 넉백
-            if (playerActionCtrl.GetComboStep() >= 3)
-            {
-                StopAllCoroutines();
-                StartCoroutine(KnockBack());
-            }
-
             monsterHp.Damaged(dam.DamageValue);
             other.enabled = false;
+
+            //마지막타격에 맞았을때 hp가 0이상이면 넉백
+            if (monsterHp.Hp >0 &&playerActionCtrl.GetComboStep() >= 3)
+            {
+                StopAllCoroutines();
+                CoroutineManager.StopAllUpdateCoroutine(this);
+                CoroutineManager.StartUpdateCoroutine(KnockBack(), this);
+                //StartCoroutine(KnockBack());
+            }
+            else if(monsterHp.Hp <=0)
+            {
+                Die();
+            }
+
+
+
         }
     }
+
+
+    void Die()
+    {
+        //patternId = Animator.StringToHash("Die");
+        //anim.SetTrigger(patternId);
+        Debug.Log("hit");
+    }
+
 
     IEnumerator KnockBack()
     {
@@ -459,8 +475,9 @@ public class MonsterAction : MonoBehaviour
             yield return null;
         }
 
+        Debug.Log(1);
+        yield return null;
         State = MonsterState.Trace;
-        yield break;
     }
     void OnDrawGizmosSelected()
     {

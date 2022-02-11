@@ -33,11 +33,7 @@ public class CoroutineManager : MonoBehaviour
             //        _coroutines.Remove(co.Key);
             //    }
             //}
-            foreach (IEnumerator remove in stopCoroutineKey)
-            {
-                if (_coroutines.ContainsKey(remove))
-                    _coroutines.Remove(remove);
-            }
+
 
             foreach (KeyValuePair<IEnumerator,Component> co in _coroutines)
             {
@@ -57,10 +53,20 @@ public class CoroutineManager : MonoBehaviour
 
         }
 
+        public void Remove()
+        {
+            foreach (IEnumerator remove in stopCoroutineKey)
+            {
+                if (_coroutines.ContainsKey(remove))
+                    _coroutines.Remove(remove);
+            }
+            stopCoroutineKey.Clear();
+        }
+
         public void StopAllCoroutine(Component component)
         {
 
-            stopCoroutineKey.Clear();
+            //stopCoroutineKey.Clear();
             foreach (KeyValuePair<IEnumerator, Component> co in _coroutines)
             {
                 if (co.Value.Equals(component))
@@ -165,6 +171,7 @@ public class CoroutineManager : MonoBehaviour
     {
         while (true)
         {
+            updateCoroutine.Remove();
             updateCoroutine.Run();
             yield return null;
 

@@ -11421,10 +11421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5eca8ecd00628f4a88bc520a3cb61d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  katana: {fileID: 0}
-  spear: {fileID: 749803798976602372, guid: fe475e265e0367f44864d96384e7af51, type: 3}
-  twoHandSword: {fileID: 2281391034263034779, guid: c1e889250727f87449db32f732058f94,
-    type: 3}
   miniMap: {fileID: 1474364236}
   katanaSkillSet: {fileID: 753996311}
   spearSkillSet: {fileID: 1805391545}
@@ -57428,6 +57424,11 @@ PrefabInstance:
     - target: {fileID: 2979856730493144921, guid: af404122f78d02845820e3272d40dfe5,
         type: 3}
       propertyPath: Hp
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979856730493144921, guid: af404122f78d02845820e3272d40dfe5,
+        type: 3}
+      propertyPath: _hp
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8515802676763946548, guid: af404122f78d02845820e3272d40dfe5,
