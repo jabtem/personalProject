@@ -56,8 +56,7 @@ public class MonsterAction : MonoBehaviour
     //오브젝트 시작전위치
     Vector3 firstPosition;
 
-
-    Rigidbody rigid;
+    CapsuleCollider bodyCol;
 
     MonsterFOV FoV;
 
@@ -113,6 +112,9 @@ public class MonsterAction : MonoBehaviour
                     //CoroutineManager.StartWfsCoroutine(BattleMode(),this);
                     StartCoroutine(BattleMode());
                     break;
+                case MonsterState.Die:
+                    Die();
+                    break;
 
             }
 
@@ -158,7 +160,7 @@ public class MonsterAction : MonoBehaviour
 
         roamingAreaPosition = new Vector3(transform.position.x + moveRomaingAreaPosionX, 0f, transform.position.z + moveRomaingAreaPosionZ);
         colliders = gameObject.GetComponentsInChildren<BoxCollider>();
-        TryGetComponent<Rigidbody>(out rigid);
+        TryGetComponent<CapsuleCollider>(out bodyCol);
         roamingPointsIndex = 0;
         firstPosition = transform.position;
         TryGetComponent<NavMeshAgent>(out myNavMesh);
@@ -444,7 +446,7 @@ public class MonsterAction : MonoBehaviour
             }
             else if(monsterHp.Hp <=0)
             {
-                Die();
+                State = MonsterState.Die;
             }
 
 
@@ -455,9 +457,10 @@ public class MonsterAction : MonoBehaviour
 
     void Die()
     {
-        //patternId = Animator.StringToHash("Die");
-        //anim.SetTrigger(patternId);
-        Debug.Log("hit");
+        patternId = Animator.StringToHash("Die");
+        anim.SetTrigger(patternId);
+        bodyCol.enabled = false;
+        Destroy(gameObject, 1f);
     }
 
 

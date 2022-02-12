@@ -95,6 +95,14 @@ public class CoroutineManager : MonoBehaviour
 
         }
 
+        public void Clear()
+        {
+            _cash.Clear();
+            stopCoroutineKey.Clear();
+            removeKey.Clear();
+            _coroutines.Clear();
+        }
+
         public void StopAllCoroutine(Component component)
         {
 
@@ -229,6 +237,12 @@ public class CoroutineManager : MonoBehaviour
             return;
         _instance.updateCoroutine.StopAllCoroutine(component);
     }
+
+    private void OnDisable()
+    {
+        updateCoroutine.Clear();
+    }
+
 
 
 
