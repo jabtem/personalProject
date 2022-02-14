@@ -212,7 +212,7 @@ public class PlayerActionCtrl : MonoBehaviour
         if(pzoneHit && !enemyHit)
         {
             GameManager.instance.SetTimeScale(0.5f);
-            GameManager.instance.postProcessingManager.TimeSlowEffect(0.7f);
+            GameManager.instance.PostProcessing.TimeSlowEffect(0.7f);
             MotionTrailObjectPoolManager.instance.motionTrailOn = true;
             GameManager.instance.InvokeResetTimeSlow(3f);
            
@@ -298,7 +298,7 @@ public class PlayerActionCtrl : MonoBehaviour
             //코루틴은 레퍼런스를 직접사용할수가없으므로 Action사용
             skilId = SkillDataReader.instance.GetCurrentSKilInfo((value) => disableSkill = value);
             anim.SetInteger(skillNum, skilId%1000);
-
+            GameManager.instance.Effect.PopEffect(0, new Vector3(transform.position.x,transform.position.y+1f,transform.position.z));
 
 
         }

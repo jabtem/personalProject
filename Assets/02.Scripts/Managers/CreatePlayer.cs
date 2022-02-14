@@ -12,9 +12,9 @@ public class CreatePlayer : MonoBehaviour
     public GameObject spearSkillSet;
     public GameObject twoHandsSkillSet;
 
-    public GameObject[] PlayerObjs;
+    GameObject[] playerObjs;
 
-    public string[] paths;
+    string[] paths;
 
 
     public void Awake()
@@ -22,12 +22,12 @@ public class CreatePlayer : MonoBehaviour
         //프리펩 확장자 파일경로
         paths = System.IO.Directory.GetFiles("Assets/03.Prefabs/Player","*.prefab");
 
-        PlayerObjs = new GameObject[paths.Length];
+        playerObjs = new GameObject[paths.Length];
 
 
         for(int i= 0; i< paths.Length; ++i)
         {
-            PlayerObjs[i] = (GameObject)AssetDatabase.LoadAssetAtPath(paths[i], typeof(GameObject));
+            playerObjs[i] = (GameObject)AssetDatabase.LoadAssetAtPath(paths[i], typeof(GameObject));
         }
 
         //katana = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/03.Prefabs/Player/katanaPlayer.prefab", typeof(GameObject));
@@ -47,15 +47,15 @@ public class CreatePlayer : MonoBehaviour
         switch (num)
         {
             case 1:
-                playerChracter = GameObject.Instantiate(PlayerObjs[0], this.gameObject.transform.position, this.gameObject.transform.rotation);
+                playerChracter = GameObject.Instantiate(playerObjs[0], this.gameObject.transform.position, this.gameObject.transform.rotation);
                 katanaSkillSet.SetActive(true);
                 break;
             case 2:
-                playerChracter = GameObject.Instantiate(PlayerObjs[1], this.gameObject.transform.position, this.gameObject.transform.rotation);
+                playerChracter = GameObject.Instantiate(playerObjs[1], this.gameObject.transform.position, this.gameObject.transform.rotation);
                 spearSkillSet.SetActive(true);
                 break;
             case 3:
-                playerChracter = GameObject.Instantiate(PlayerObjs[2], this.gameObject.transform.position, this.gameObject.transform.rotation);
+                playerChracter = GameObject.Instantiate(playerObjs[2], this.gameObject.transform.position, this.gameObject.transform.rotation);
                 twoHandsSkillSet.SetActive(true);
                 break;
 

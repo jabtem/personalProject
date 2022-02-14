@@ -16,7 +16,7 @@ public class PostProcessingManager : MonoBehaviour
         pVolume.profile.TryGetSettings<Vignette>(out vignette);
         if(GameManager.instance != null)
         {
-            GameManager.instance.postProcessingManager = this;
+            GameManager.instance.PostProcessing = this;
         }
     }
 

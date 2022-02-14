@@ -19,17 +19,37 @@ public class GameManager : MonoBehaviour
     //플레이어 애니메이션 속도관리용
     Animator playerAnim;
 
-    PostProcessingManager _postProcessingManager;
-    public PostProcessingManager postProcessingManager
+    PostProcessingManager _postProcessing;
+    public PostProcessingManager PostProcessing
     {
         set
         {
-            if(_postProcessingManager == null)
-                _postProcessingManager = value;
+            if(_postProcessing == null)
+            {
+                _postProcessing = value;
+            }
+
         }
         get
         {
-            return _postProcessingManager;
+            return _postProcessing;
+        }
+    }
+
+    EffectManager _effect;
+    public EffectManager Effect
+    {
+        set
+        {
+            if(_effect == null)
+            {
+                _effect = value;
+            }
+
+        }
+        get
+        {
+            return _effect;
         }
     }
 
@@ -90,7 +110,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         MotionTrailObjectPoolManager.instance.motionTrailOn = false;
-        postProcessingManager.TimeSlowEffect(0f);
+        PostProcessing.TimeSlowEffect(0f);
     }
 
     public void InvokeResetTimeSlow(float time)
