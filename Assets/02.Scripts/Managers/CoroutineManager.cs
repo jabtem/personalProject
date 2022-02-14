@@ -6,21 +6,17 @@ public class CoroutineManager : MonoBehaviour
 {
     public class MicroCoroutine
     {
+        //Original
         Dictionary<IEnumerator,Component> _coroutines = new Dictionary<IEnumerator,Component>();
+        //Copy
         Dictionary<IEnumerator, Component> _cash = new Dictionary<IEnumerator, Component>();
-        //List<KeyValuePair<IEnumerator, Component>> _coroutineList = new List<KeyValuePair<IEnumerator, Component>>();
         //DeleteData Collect
         HashSet<IEnumerator> removeKey = new HashSet<IEnumerator>();
         HashSet<IEnumerator> stopCoroutineKey = new HashSet<IEnumerator>();
         Component removeComponent;
-        //IEnumerator[] test = new IEnumerator[1000];
-        //Component[] test2 = new Component[1000];
         public void Add(IEnumerator enumerator, Component component)
         {
             _coroutines.Add(enumerator, component);
-            //_coroutineList.Add(new KeyValuePair<IEnumerator, Component>(enumerator, component));
-            //test1.Add(enumerator);
-            //test2.Add(component);
         }
 
         public void Show()
@@ -29,6 +25,10 @@ public class CoroutineManager : MonoBehaviour
             foreach(var a in _coroutines)
             {
                 Debug.Log($"{index++}{a.Key}");
+            }
+            foreach (var a in _cash)
+            {
+                Debug.Log($"{index}{a.Key}");
             }
         }
         public void Remove()
@@ -52,20 +52,6 @@ public class CoroutineManager : MonoBehaviour
             {
                 _cash.Add(coroutine.Key, coroutine.Value);
             }
-            //딕셔너리 사용시
-            //foreach (var co in _coroutines.ToList())
-            //{
-            //    if (!co.Key.MoveNext())
-            //    {
-            //        _coroutines.Remove(co.Key);
-            //    }
-            //}
-            ////삭제대상 삭제를우선
-            //if(stopCoroutineKey.Count >0)
-            //{
-            //    return;
-            //}
-
 
             foreach (KeyValuePair<IEnumerator,Component> co in _cash)
             {

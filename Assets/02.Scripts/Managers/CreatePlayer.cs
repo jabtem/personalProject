@@ -7,20 +7,32 @@ using UnityEditor;
 
 public class CreatePlayer : MonoBehaviour
 {
-    GameObject katana;
-    GameObject spear;
-    GameObject twoHandSword;
     public RadarMap miniMap;
     public GameObject katanaSkillSet;
     public GameObject spearSkillSet;
     public GameObject twoHandsSkillSet;
 
+    public GameObject[] PlayerObjs;
+
+    public string[] paths;
+
 
     public void Awake()
     {
-        katana = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/03.Prefabs/Player/katanaPlayer.prefab", typeof(GameObject));
-        spear = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/03.Prefabs/Player/spearPlayer.prefab", typeof(GameObject));
-        twoHandSword = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/03.Prefabs/Player/twoHandPlayer.prefab", typeof(GameObject));
+        //프리펩 확장자 파일경로
+        paths = System.IO.Directory.GetFiles("Assets/03.Prefabs/Player","*.prefab");
+
+        PlayerObjs = new GameObject[paths.Length];
+
+
+        for(int i= 0; i< paths.Length; ++i)
+        {
+            PlayerObjs[i] = (GameObject)AssetDatabase.LoadAssetAtPath(paths[i], typeof(GameObject));
+        }
+
+        //katana = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/03.Prefabs/Player/katanaPlayer.prefab", typeof(GameObject));
+        //spear = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/03.Prefabs/Player/spearPlayer.prefab", typeof(GameObject));
+        //twoHandSword = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/03.Prefabs/Player/twoHandPlayer.prefab", typeof(GameObject));
     }
 
 
@@ -35,15 +47,15 @@ public class CreatePlayer : MonoBehaviour
         switch (num)
         {
             case 1:
-                playerChracter = GameObject.Instantiate(katana, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                playerChracter = GameObject.Instantiate(PlayerObjs[0], this.gameObject.transform.position, this.gameObject.transform.rotation);
                 katanaSkillSet.SetActive(true);
                 break;
             case 2:
-                playerChracter = GameObject.Instantiate(spear, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                playerChracter = GameObject.Instantiate(PlayerObjs[1], this.gameObject.transform.position, this.gameObject.transform.rotation);
                 spearSkillSet.SetActive(true);
                 break;
             case 3:
-                playerChracter = GameObject.Instantiate(twoHandSword, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                playerChracter = GameObject.Instantiate(PlayerObjs[2], this.gameObject.transform.position, this.gameObject.transform.rotation);
                 twoHandsSkillSet.SetActive(true);
                 break;
 

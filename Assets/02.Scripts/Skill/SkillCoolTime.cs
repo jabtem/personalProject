@@ -12,8 +12,8 @@ public class SkillCoolTime : MonoBehaviour
 
     public void StartCoolTime(float cooltime, Action<bool> disalbeSkill)
     {
-        StartCoroutine(CoolTime(cooltime, (value) => disalbeSkill(value)));
-        //CoroutineManager.StartUpdateCoroutine(CoolTime(cooltime, (value) => disalbeSkill(value)),this);
+        //StartCoroutine(CoolTime(cooltime, (value) => disalbeSkill(value)));
+        CoroutineManager.StartUpdateCoroutine(CoolTime(cooltime, (value) => disalbeSkill(value)),this);
 
     }
 
