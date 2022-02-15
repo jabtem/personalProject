@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class effecttest : MonoBehaviour
+public class effecttest1 : MonoBehaviour
 {
     float time;
     void Update()
@@ -12,7 +12,7 @@ public class effecttest : MonoBehaviour
         if(time > 2f)
         {
             time = 0;
-            GameManager.instance.Effect.PushEffect(1, this.gameObject);
+            GameManager.instance.Effect.PushEffect(2, this.gameObject);
         }
     }
 

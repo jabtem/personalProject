@@ -26,7 +26,7 @@ public class EffectManager : MonoBehaviour
     void CreateEffect(int num)
     {
         Stack<GameObject> stack;
-        GameObject go = Instantiate(effectObjs[0]);
+        GameObject go = EffectObj(num);
         //해당 넘버 스킬이펙트 스택이 존재하지않으면 새로운스택할당
         if (!effectsDic.TryGetValue(num,out stack))
         {
@@ -64,4 +64,30 @@ public class EffectManager : MonoBehaviour
         go.transform.SetParent(this.transform);
     }
 
+    GameObject EffectObj(int num)
+    {
+        GameObject effect =null;
+
+        switch((PlayerCharacter)GameManager.instance.CharacterNum)
+        {
+            case PlayerCharacter.Katana:
+                switch(num)
+                {
+                    case 1:
+                        effect = Instantiate(effectObjs[0]);
+                        break;
+                    case 2:
+                        effect = Instantiate(effectObjs[1]);
+                        break;
+                }    
+                break;
+            case PlayerCharacter.Spear:
+                break;
+            case PlayerCharacter.TwohandSword:
+                break;
+        }
+
+
+        return effect;
+    }
 }

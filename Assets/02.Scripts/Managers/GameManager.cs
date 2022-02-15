@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 enum Child {LoadingBar}
-enum PlayerCharacter {Oriental = 1,Dagger, Axe};
+enum PlayerCharacter {Katana = 1,Spear, TwohandSword};
 
 public class GameManager : MonoBehaviour
 {

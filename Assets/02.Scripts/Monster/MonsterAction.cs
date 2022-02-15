@@ -539,6 +539,10 @@ public class MonsterAction : MonoBehaviour
         CoroutineManager.StopAllUpdateCoroutine(this);
     }
 
+    public void callEffect(int num, Vector3 pos)
+    {
+        GameManager.instance.Effect.PopEffect(num, pos);
+    }
 
 
     //미사용
