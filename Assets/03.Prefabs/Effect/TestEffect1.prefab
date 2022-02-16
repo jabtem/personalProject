@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1722506791392826434}
   - component: {fileID: 1722506791392826437}
   - component: {fileID: 7204978565107364772}
+  - component: {fileID: -3643559224231748269}
   m_Layer: 0
   m_Name: TestEffect1
-  m_TagString: Untagged
+  m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,3 +107,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a9e137ea35144949a458f590fddf11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3643559224231748269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722506791392826436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b196f90661ce334a8781490a23c37f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0

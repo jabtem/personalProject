@@ -76,7 +76,8 @@ public class MonsterFOV : MonoBehaviour
     bool viewGizmo = false;
 
     MonsterAction monsterAction;
-
+    Quaternion rightQuaternion;
+    Quaternion lefttQuaternion;
 
 
     private void Awake()
@@ -91,21 +92,28 @@ public class MonsterFOV : MonoBehaviour
         //현재 플레이어가 캐릭터 컨트롤러를 사용하므로
         TargetRadius = Target.GetComponent<CharacterController>().radius;
         monsterAction.PlayerInfoSet(Target.GetComponent<PlayerActionCtrl>());
+        rightQuaternion = Quaternion.Euler(0f, angle * 0.5f, 0f);
+        lefttQuaternion = Quaternion.Euler(0f, -angle * 0.5f, 0f);
     }
     private void Update()
     {
+        //오브젝트에서 타겟방향 벡터
         targetDirection = new Vector3(Target.position.x, transform.position.y, Target.position.z) - transform.position;
 
         //시야각이 켜져있을때만 계산
         if (fovImage.gameObject.activeSelf)
         {
             //시야각 오른쪽 경계선 벡터
-            rightVector = new Vector3(Mathf.Sin((transform.eulerAngles.y + angle * 0.5f) * Mathf.Deg2Rad),
-                0, Mathf.Cos((transform.eulerAngles.y + angle * 0.5f) * Mathf.Deg2Rad)) * fovRadius;
+            //rightVector = new Vector3(Mathf.Sin((transform.eulerAngles.y + angle * 0.5f) * Mathf.Deg2Rad),
+            //    0, Mathf.Cos((transform.eulerAngles.y + angle * 0.5f) * Mathf.Deg2Rad)) * fovRadius;
+            rightVector = rightQuaternion * transform.forward * fovRadius;
+
             //시야각 왼쪽 경계선 벡터
-            leftVector = new Vector3(Mathf.Sin((transform.eulerAngles.y - angle * 0.5f) * Mathf.Deg2Rad),
-                0, Mathf.Cos((transform.eulerAngles.y - angle * 0.5f) * Mathf.Deg2Rad)) * fovRadius;
-            //오브젝트에서 타겟방향 벡터
+            //leftVector = new Vector3(Mathf.Sin((transform.eulerAngles.y - angle * 0.5f) * Mathf.Deg2Rad),
+            //    0, Mathf.Cos((transform.eulerAngles.y - angle * 0.5f) * Mathf.Deg2Rad)) * fovRadius;
+            leftVector = lefttQuaternion * transform.forward * fovRadius;
+
+  
 
 
             /***************************** 부채꼴 원충돌 ********************************/
@@ -172,11 +180,9 @@ public class MonsterFOV : MonoBehaviour
 
 
 
-            Debug.DrawRay(transform.position, targetDirection, Color.yellow);
-            Debug.DrawRay(transform.position, targetDirection*-1, Color.red);
             Debug.DrawRay(transform.position, transform.forward * fovRadius, Color.white);
 
-            Debug.DrawRay(transform.position, rightVector, Color.red);
+            Debug.DrawRay(transform.position, rightVector, Color.yellow);
             Debug.DrawRay(transform.position, leftVector, Color.green);
 
         }

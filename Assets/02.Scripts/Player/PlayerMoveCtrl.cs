@@ -119,10 +119,11 @@ public class PlayerMoveCtrl : MonoBehaviour
             moveDirection.y -= gravity * Time.unscaledDeltaTime * GameManager.instance.playerTimeScale;
         }
 
-
+        Quaternion testQ = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);
+        Vector3 test = testQ * lastMoveDirection; 
 
         controller.Move(rot * moveDirection * moveSpeed * Time.unscaledDeltaTime* GameManager.instance.playerTimeScale);
-
+        Debug.DrawRay(transform.position,test, Color.yellow);
     }
 
 }
