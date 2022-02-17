@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1722506791392826435}
   - component: {fileID: 1722506791392826434}
   - component: {fileID: 1722506791392826437}
-  - component: {fileID: 7204978565107364772}
   - component: {fileID: -3643559224231748269}
+  - component: {fileID: 6710323990784651570}
   m_Layer: 0
   m_Name: TestEffect1
   m_TagString: PlayerAttack
@@ -95,18 +95,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7204978565107364772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722506791392826436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a9e137ea35144949a458f590fddf11c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-3643559224231748269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,3 +108,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+--- !u!114 &6710323990784651570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722506791392826436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b780ef8852e3946ace55944ecb3206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pos: {x: 0, y: 0, z: 0}

@@ -301,8 +301,7 @@ public class PlayerActionCtrl : MonoBehaviour
             {
                 skilId %= 1000;
                 anim.SetInteger(skillNum, skilId);
-                Vector3 test = transform.position + pMove.lastMoveDirection;
-                Debug.Log(test);
+                Vector3 test = transform.position + pMove.lastMoveDirection.normalized;
                 GameManager.instance.Effect.PopEffect(skilId, test);
             }
         }

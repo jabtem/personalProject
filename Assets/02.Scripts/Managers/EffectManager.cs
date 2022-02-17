@@ -41,6 +41,7 @@ public class EffectManager : MonoBehaviour
     public void PopEffect(int num, Vector3 vec)
     {
         GameObject reqObject = null;
+        SkillBase skill;
         Stack<GameObject> stack;
         if (!effectsDic.TryGetValue(num,out stack))
         {
@@ -51,8 +52,9 @@ public class EffectManager : MonoBehaviour
             CreateEffect(num);
         }
         reqObject = effectsDic[num].Pop();
+        reqObject.TryGetComponent<SkillBase>(out skill);
         reqObject.transform.SetParent(null);
-        reqObject.transform.position = vec;
+        skill.Pos = vec;
         reqObject.SetActive(true);
 
     }

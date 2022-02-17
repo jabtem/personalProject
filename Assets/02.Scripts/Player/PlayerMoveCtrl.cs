@@ -55,9 +55,6 @@ public class PlayerMoveCtrl : MonoBehaviour
     //조이스틱을이용해 마지막으로 이동했던 방향
     public Vector3 lastMoveDirection;
 
-    //정지시 이전 캐릭터방향 미니맵마커 유지용
-    Vector3 preMoveDirection;
-
     //이동가능여부 판단
     //공격중 조이스틱조작이나 구르기중 조이스틱 조작차단용
     public bool canMove;
