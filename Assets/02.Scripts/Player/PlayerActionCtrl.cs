@@ -301,8 +301,11 @@ public class PlayerActionCtrl : MonoBehaviour
             {
                 skilId %= 1000;
                 anim.SetInteger(skillNum, skilId);
-                Vector3 test = transform.position + pMove.lastMoveDirection.normalized;
-                GameManager.instance.Effect.PopEffect(skilId, test);
+                //Quaternion testQ = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);
+                //Vector3 test = testQ * pMove.lastMoveDirection.normalized;
+
+                Vector3 Dir = Quaternion.AngleAxis(Camera.main.transform.rotation.eulerAngles.y, Vector3.up) * pMove.lastMoveDirection.normalized;
+                GameManager.instance.Effect.PopEffect(skilId, transform.position, Dir);
             }
         }
 

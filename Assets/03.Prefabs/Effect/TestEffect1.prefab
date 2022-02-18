@@ -121,4 +121,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pos: {x: 0, y: 0, z: 0}
-  _skillNum: 1001
+  _dir: {x: 0, y: 0, z: 0}
+  _skillNum: 0

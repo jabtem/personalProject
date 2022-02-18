@@ -5,13 +5,22 @@ using UnityEngine;
 //스킬베이스용 추상클래스
 public abstract class SkillBase : MonoBehaviour
 {
-    //스킬출력용 기본좌표받기위함
+    //플레이어 위치
     [SerializeField]
     Vector3 _pos;
     public Vector3 Pos
     {
         get => _pos;
         set => _pos = value;
+    }
+
+    //플레이어의 방향
+    [SerializeField]
+    Vector3 _dir;
+    public Vector3 Dir
+    {
+        get => _dir;
+        set => _dir = value;
     }
     [SerializeField]
     int _skillNum;
