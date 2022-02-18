@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestSkill1 : SkillBase
 {
+
     public override void SkillEffect()
     {
         
@@ -12,5 +13,10 @@ public class TestSkill1 : SkillBase
     private void Start()
     {
         transform.position = Pos;
+    }
+
+    private void Update()
+    {
+        
     }
 }

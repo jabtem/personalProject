@@ -13,6 +13,14 @@ public abstract class SkillBase : MonoBehaviour
         get => _pos;
         set => _pos = value;
     }
+    [SerializeField]
+    int _skillNum;
+
+    public int SkillNum
+    {
+        get => _skillNum;
+        set => _skillNum = value;
+    }
     //스킬별 효과구현용
 
     public abstract void SkillEffect();

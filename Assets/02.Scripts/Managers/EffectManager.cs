@@ -54,6 +54,7 @@ public class EffectManager : MonoBehaviour
         reqObject = effectsDic[num].Pop();
         reqObject.TryGetComponent<SkillBase>(out skill);
         reqObject.transform.SetParent(null);
+        skill.SkillNum = num;
         skill.Pos = vec;
         reqObject.SetActive(true);
 
