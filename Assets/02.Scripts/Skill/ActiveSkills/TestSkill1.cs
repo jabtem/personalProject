@@ -12,7 +12,7 @@ public class TestSkill1 : SkillBase
 
     private void Start()
     {
-        transform.position = Pos+Dir*3f;
+        transform.position = new Vector3(Pos.x, 1.5f, Pos.z) + Dir * 3f;
     }
 
     private void Update()

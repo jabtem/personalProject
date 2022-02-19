@@ -7,16 +7,17 @@ public class TestSkill2 : SkillBase
 
     public override void SkillEffect()
     {
-
+        transform.Translate(Dir * Time.deltaTime);
     }
 
     private void Start()
     {
-        transform.position = Pos + Dir * 10f;
+        transform.position = new Vector3(Pos.x, 1.5f, Pos.z) + Dir * 3f;
     }
 
     private void Update()
     {
 
+        SkillEffect();
     }
 }
