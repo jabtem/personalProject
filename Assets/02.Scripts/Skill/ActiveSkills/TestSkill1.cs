@@ -10,7 +10,7 @@ public class TestSkill1 : SkillBase
     {
         time += Time.deltaTime;
 
-        if (time >= 1.0f)
+        if (time >= 2.0f)
         {
             time = 0f;
             GameManager.instance.Effect.PushEffect(SkillNum, this.gameObject);
