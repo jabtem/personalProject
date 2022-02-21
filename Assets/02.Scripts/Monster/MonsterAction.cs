@@ -429,15 +429,28 @@ public class MonsterAction : MonoBehaviour
         {
 
             Damage dam;
+            //스킬공격인지 일반공격인지 구분용
+            SkillBase skill;
+            bool isSkill = false;
             if (!other.gameObject.TryGetComponent<Damage>(out dam))
             {
                 return;
             }
+            if (other.gameObject.TryGetComponent<SkillBase>(out skill))
+            {
+                isSkill = true;
+            }
+
             monsterHp.Damaged(dam.DamageValue);
+
             other.enabled = false;
 
-            //마지막타격에 맞았을때 hp가 0이상이면 넉백
-            if (monsterHp.Hp >0 &&playerActionCtrl.GetComboStep() >= 3)
+
+
+
+
+            //마지막타격에 맞았을때 혹은 스킬로맞앗으면 hp가 0이상이면 넉백하고 대상 바로추적
+            if (monsterHp.Hp >0 &&playerActionCtrl.GetComboStep() >= 3 || isSkill)
             {
                 StopAllCoroutines();
                 CoroutineManager.StopAllUpdateCoroutine(this);
@@ -449,7 +462,11 @@ public class MonsterAction : MonoBehaviour
                 State = MonsterState.Die;
             }
 
-
+            //스킬일경우 이펙트매니저에 이펙트 오브젝트풀
+            if (isSkill && skill.SkillType.Equals(SkillBase.Type.Projectile)) 
+            {
+                GameManager.instance.Effect.PushEffect(skill.SkillNum, other.gameObject);
+            }
 
         }
     }

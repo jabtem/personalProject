@@ -377,4 +377,9 @@ public class PlayerActionCtrl : MonoBehaviour
     {
         CoroutineManager.StopAllUpdateCoroutine(this);
     }
+
+    private void OnDisable()
+    {
+        CoroutineManager.StopAllUpdateCoroutine(this);
+    }
 }

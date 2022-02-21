@@ -5,18 +5,30 @@ using UnityEngine;
 public class TestSkill1 : SkillBase
 {
 
+    float time;
     public override void SkillEffect()
     {
-        
+        time += Time.deltaTime;
+
+        if (time >= 1.0f)
+        {
+            time = 0f;
+            GameManager.instance.Effect.PushEffect(SkillNum, this.gameObject);
+        }
     }
 
     private void Start()
     {
-        transform.position = new Vector3(Pos.x, 1.5f, Pos.z) + Dir * 3f;
+        SkillType = Type.Point;
+    }
+
+    private void OnEnable()
+    {
+        transform.position = new Vector3(Pos.x, 1.5f, Pos.z) + Dir * 1.5f;
     }
 
     private void Update()
     {
-        
+        SkillEffect();
     }
 }

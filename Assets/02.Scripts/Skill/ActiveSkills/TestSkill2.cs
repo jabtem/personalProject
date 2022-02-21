@@ -9,7 +9,20 @@ public class TestSkill2 : SkillBase
 
     public override void SkillEffect()
     {
-        transform.Translate(Dir * Time.deltaTime*2);
+        time += Time.deltaTime;
+
+        transform.Translate(Dir * Time.deltaTime*5);
+
+        if (time >= 3.0f)
+        {
+            time = 0f;
+            GameManager.instance.Effect.PushEffect(SkillNum, this.gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        SkillType = Type.Projectile;
     }
 
     private void OnEnable()
@@ -19,13 +32,6 @@ public class TestSkill2 : SkillBase
 
     private void Update()
     {
-        time += Time.deltaTime;
         SkillEffect();
-
-        if(time >= 3.0f)
-        {
-            time = 0f;
-            GameManager.instance.Effect.PushEffect(SkillNum, this.gameObject);
-        }
     }
 }

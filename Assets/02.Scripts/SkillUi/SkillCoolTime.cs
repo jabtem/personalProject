@@ -43,4 +43,9 @@ public class SkillCoolTime : MonoBehaviour
         yield break;
     }
 
+    private void OnDisable()
+    {
+        CoroutineManager.StopAllUpdateCoroutine(this);
+    }
+
 }
