@@ -63,6 +63,8 @@ public class PlayerMoveCtrl : MonoBehaviour
     
     smoothFollowCam followCam;
 
+    public Vector3 test1;
+
     void Awake()
     {
         // 레퍼런스 연결
@@ -93,12 +95,13 @@ public class PlayerMoveCtrl : MonoBehaviour
                 //벡터를 정규화 = 조이스틱 움직이는 정도의 상관없이 일정한속도로 이동하게하기위함
                 moveDirection = moveDirection.normalized;
 
+
                 if (Mathf.Abs(v) > 0 || Mathf.Abs(h) > 0)
                 {
                     //카메라각도가 바뀌더라도 조이스틱 조작방향이 변경없도록 카메라각도를 더함
-                    transform.rotation = Quaternion.Euler(0, ang+Camera.main.transform.rotation.eulerAngles.y, 0);
+                    transform.rotation = Quaternion.Euler(0, ang+rot.eulerAngles.y, 0);
 
-                    lastMoveDirection = moveDirection;
+                    lastMoveDirection = rot * moveDirection;
                     anim.SetInteger(id, 1);
 
                 }
@@ -106,6 +109,7 @@ public class PlayerMoveCtrl : MonoBehaviour
                     anim.SetInteger(id, 0);
                 playerInfo.playerVector = moveDirection;
 
+                moveDirection = rot * moveDirection;
             }
 
  
@@ -118,7 +122,10 @@ public class PlayerMoveCtrl : MonoBehaviour
 
 
 
-        controller.Move(rot * moveDirection * moveSpeed * Time.unscaledDeltaTime* GameManager.instance.playerTimeScale);
+        controller.Move(moveDirection * moveSpeed * Time.unscaledDeltaTime* GameManager.instance.playerTimeScale);
+
+
+        Debug.DrawRay(transform.position, lastMoveDirection * 10f,Color.red);
     }
 
 }

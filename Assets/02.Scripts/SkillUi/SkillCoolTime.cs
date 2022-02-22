@@ -39,12 +39,14 @@ public class SkillCoolTime : MonoBehaviour
         }
         coolTimeImage.gameObject.SetActive(false);
         skillButt.canDrop = true;
+
+        Debug.Log("스킬사용가능");
         result(false);
-        yield break;
     }
 
     private void OnDisable()
     {
+
         CoroutineManager.StopAllUpdateCoroutine(this);
     }
 

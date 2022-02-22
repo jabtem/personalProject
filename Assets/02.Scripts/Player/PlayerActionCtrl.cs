@@ -48,7 +48,7 @@ public class PlayerActionCtrl : MonoBehaviour
 
 
     //스킬액션 관련변수
-    int skilId;
+    public int skilId;
 
     //스킬사용가능여부
     public bool disableSkill;
@@ -290,23 +290,26 @@ public class PlayerActionCtrl : MonoBehaviour
         //공격중엔스킬사용불가
         if (!disableSkill && anim.GetInteger(skillNum) <= 0 )
         {
+
+            //코루틴은 레퍼런스를 직접사용할수가없으므로 Action사용
+            skilId = SkillDataReader.instance.GetCurrentSKilInfo((value) => disableSkill = value);
             if (skilId != 0)
             {
                 disableSkill = true;
                 pMove.canMove = false;
             }
-            //코루틴은 레퍼런스를 직접사용할수가없으므로 Action사용
-            skilId = SkillDataReader.instance.GetCurrentSKilInfo((value) => disableSkill = value);
-            if(skilId >0)
+
+            if (skilId >0)
             {
                 skilId %= 1000;
                 anim.SetInteger(skillNum, skilId);
                 //Quaternion testQ = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);
                 //Vector3 test = testQ * pMove.lastMoveDirection.normalized;
 
-                Vector3 Dir = Quaternion.AngleAxis(Camera.main.transform.rotation.eulerAngles.y, Vector3.up) * pMove.lastMoveDirection.normalized;
-                GameManager.instance.Effect.PopEffect(skilId, transform.position, Dir);
-            }
+                Vector3 dir = pMove.lastMoveDirection.normalized;
+                Vector3 rot = transform.rotation.eulerAngles;
+                GameManager.instance.Effect.PopEffect(skilId, transform.position, dir, rot);
+            }   
         }
 
 

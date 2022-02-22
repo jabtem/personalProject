@@ -24,10 +24,33 @@ public class smoothFollowCam : MonoBehaviour
     public float rotationDaping = 3.0f;
 
 
+    //플레이어 방향받아오기위함
+    public PlayerMoveCtrl pMove;
+
+    //현재 카메라가 어느정도 회전했는지 저장용변수
+    [SerializeField]
+    float _rotAngle;
+
+    public float RotAngle
+    {
+        get => _rotAngle;
+        private set => _rotAngle = value;
+    }
+
+
     private void Awake()
     {
         map = GameObject.FindGameObjectWithTag("Minimap").GetComponent<RadarMap>();
         dontTouchArea.Add(new Rect(0, 0, Screen.width * 0.5f, Screen.height));
+    }
+
+    private void Start()
+    {
+        if(target != null)
+        {
+            target.gameObject.TryGetComponent<PlayerMoveCtrl>(out pMove);
+        }
+
     }
 
     private void Update()
@@ -102,9 +125,13 @@ public class smoothFollowCam : MonoBehaviour
                     if (!dontTouchArea[0].Contains(tochPos))
                     {
                         rot.y += x * rotateSpeed;
+
+                        RotAngle = rot.y - curRot.y;
                         Quaternion q = Quaternion.Euler(rot);
                         transform.rotation = Quaternion.Slerp(transform.rotation, q, 2f);
-                        map.RoatateMapDot(rot.y - curRot.y);
+                        map.RoatateMapDot(RotAngle);
+                        //pMove.lastMoveDirection = RotAngle * pMove.lastMoveDirection;
+
                     }
 
                 }
@@ -123,9 +150,13 @@ public class smoothFollowCam : MonoBehaviour
 
             rot.y += x * rotateSpeed;
 
+            RotAngle = rot.y - curRot.y;
+
             Quaternion q = Quaternion.Euler(rot);
             transform.rotation = Quaternion.Slerp(transform.rotation, q, 2f);
-            map.RoatateMapDot(rot.y - curRot.y);
+            map.RoatateMapDot(RotAngle);
+            //if(RotAngle >0 || RotAngle <0)
+            //    pMove.lastMoveDirection = Quaternion.AngleAxis(RotAngle,Vector3.up) * pMove.lastMoveDirection;
         }
 
 

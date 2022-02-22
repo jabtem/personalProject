@@ -38,7 +38,7 @@ public class EffectManager : MonoBehaviour
         go.SetActive(false);
     }
 
-    public void PopEffect(int num, Vector3 pos, Vector3 dir)
+    public void PopEffect(int num, Vector3 pos, Vector3 dir , Vector3 rot)
     {
         GameObject reqObject = null;
         SkillBase skill;
@@ -57,6 +57,7 @@ public class EffectManager : MonoBehaviour
         skill.SkillNum = num;
         skill.Pos = pos;
         skill.Dir = dir;
+        skill.Rot = rot;
         reqObject.SetActive(true);
 
     }

@@ -10,7 +10,6 @@ public abstract class SkillBase : MonoBehaviour
 
 
     //플레이어 위치
-    [SerializeField]
     Vector3 _pos;
     public Vector3 Pos
     {
@@ -18,7 +17,7 @@ public abstract class SkillBase : MonoBehaviour
         set => _pos = value;
     }
 
-    //플레이어의 방향
+    //플레이어가 바라보는방향
     [SerializeField]
     Vector3 _dir;
     public Vector3 Dir
@@ -26,7 +25,14 @@ public abstract class SkillBase : MonoBehaviour
         get => _dir;
         set => _dir = value;
     }
-    [SerializeField]
+
+    Vector3 _rot;
+    public Vector3 Rot
+    {
+        get => _rot;
+        set => _rot = value;
+    }
+
     int _skillNum;
 
     public int SkillNum
@@ -35,7 +41,6 @@ public abstract class SkillBase : MonoBehaviour
         set => _skillNum = value;
     }
 
-    [SerializeField]
     Type _skillType;
 
     public Type SkillType

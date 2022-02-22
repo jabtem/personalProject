@@ -8,6 +8,7 @@ public class SkillUIBase : MonoBehaviour
     [SerializeField]
     //스킬 창
     private GameObject goSkillBase;
+    
 
 
     public void OnBtn()
