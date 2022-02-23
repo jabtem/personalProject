@@ -11,7 +11,7 @@ public class TestSkill2 : SkillBase
     {
         time += Time.deltaTime;
 
-        transform.Translate(Vector3.forward * Time.deltaTime*5);
+        transform.Translate(Dir * Time.deltaTime*5,Space.World);
 
         if (time >= 3.0f)
         {

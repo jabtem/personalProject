@@ -446,9 +446,6 @@ public class MonsterAction : MonoBehaviour
             other.enabled = false;
 
 
-
-
-
             //마지막타격에 맞았을때 혹은 스킬로맞앗으면 hp가 0이상이면 넉백하고 대상 바로추적
             if (monsterHp.Hp >0 &&playerActionCtrl.GetComboStep() >= 3 || isSkill)
             {

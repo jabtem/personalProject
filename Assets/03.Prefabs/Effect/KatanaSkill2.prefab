@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 199350533841138316}
   - component: {fileID: 8848622289112696195}
   - component: {fileID: 8503149814701192452}
+  - component: {fileID: 3761694279169222860}
   m_Layer: 0
   m_Name: KatanaSkill2
-  m_TagString: Untagged
+  m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4672,4 +4673,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7448cd3be6efbc343b7bd8a8d6c023ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dir: {x: 0, y: 0, z: 0}
   myRot: {x: 0, y: 0, z: 0}
+--- !u!65 &3761694279169222860
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124449426615244}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 6.66, z: 2}
+  m_Center: {x: 0, y: -0.29, z: 1.3}
