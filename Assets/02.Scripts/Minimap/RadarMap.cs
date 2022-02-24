@@ -42,9 +42,12 @@ public class RadarMap : MonoBehaviour
     RectTransform rect;
     public float mapScale = 2f;
     PlayerMoveCtrl player;
-    public static List<MapObject> mapObject = new List<MapObject>();
 
-    public static void RegisterMapObject(GameObject o)
+    public static RadarMap instance;
+
+    List<MapObject> mapObject = new List<MapObject>();
+
+    public void RegisterMapObject(GameObject o)
     {
         //Image image = Instantiate(i);
         Image image = null;
@@ -59,7 +62,7 @@ public class RadarMap : MonoBehaviour
 
     }
 
-    public static void RemoveMapObject(GameObject o)
+    public void RemoveMapObject(GameObject o)
     {
         //List<MapObject> newList = new List<MapObject>();
         for(int i = 0; i< mapObject.Count;i++)
@@ -123,6 +126,14 @@ public class RadarMap : MonoBehaviour
     }
     void Awake()
     {
+        //SingleTion
+        if (instance == null)
+            instance = this;
+        else if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+
         TryGetComponent<RectTransform>(out rect);
 
     }

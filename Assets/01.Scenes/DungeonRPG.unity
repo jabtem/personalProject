@@ -26524,6 +26524,8 @@ MonoBehaviour:
   height: 15
   heightDamping: 2
   rotationDaping: 0
+  pMove: {fileID: 0}
+  _rotAngle: 0
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,11 +7,11 @@ public class makeRadarObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RadarMap.RegisterMapObject(this.gameObject);
+        RadarMap.instance.RegisterMapObject(this.gameObject);
     }
     void OnDisable()
     {
-        RadarMap.RemoveMapObject(this.gameObject);
+        RadarMap.instance.RemoveMapObject(this.gameObject);
     }
 
 
