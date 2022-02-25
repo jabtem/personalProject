@@ -6,19 +6,31 @@ public class KeySubject : MonoBehaviour
 {
     public delegate void KeyNotification();
 
-    KeyNotification keyNotification;
+    event KeyNotification keyNotification;
 
+    public int NextKey;
+
+    static KeySubject _instance;
+
+    public static KeySubject Instance
+    {
+        get => _instance;
+    }
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else if (_instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     public void Add(KeyNotification noti)
     {
-        //GetInvocationList = 델리게이트 호출목록 반환함수
-        foreach (KeyNotification keyNotify in keyNotification.GetInvocationList())
-        {
-            if(keyNotify.Equals(noti))
-                {
-                return;
-            }
-        }
 
         keyNotification += noti;
     }
@@ -28,9 +40,9 @@ public class KeySubject : MonoBehaviour
         keyNotification -= noti;
     }
 
-    public void Notify()
+    public void ObserverUpdate()
     {
-        keyNotification.Invoke();
+        keyNotification();
     }
 
 }
