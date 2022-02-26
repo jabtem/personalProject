@@ -43,6 +43,7 @@ public class KeySubject : MonoBehaviour
     public void ObserverUpdate()
     {
         keyNotification();
+        NextKey++;
     }
 
 }

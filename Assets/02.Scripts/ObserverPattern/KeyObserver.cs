@@ -19,7 +19,7 @@ public class KeyObserver : Observer
         if (num.Equals(KeySubject.Instance.NextKey))
         {
             gameObject.SetActive(true);
-            KeySubject.Instance.NextKey++;
+
         }
         else
             gameObject.SetActive(false);
