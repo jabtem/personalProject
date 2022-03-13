@@ -8,30 +8,36 @@ public class KeySubject : MonoBehaviour
 
     event KeyNotification keyNotification;
 
-    public int NextKey;
+    //시작 키 넘버
+    public int startKey;
 
-    static KeySubject _instance;
-
-    public static KeySubject Instance
+    [SerializeField]
+    int _nextKey;
+    public int nextKey
     {
-        get => _instance;
+        get => _nextKey;
+        set => _nextKey = value;
     }
+
+
+    public static KeySubject Instance;
 
     private void Awake()
     {
-        if (_instance == null)
+        if(KeySubject.Instance == null)
         {
-            _instance = this;
-        }
-        else if (_instance != null)
-        {
-            Destroy(this.gameObject);
+            KeySubject.Instance = this;
         }
     }
 
+    public void Start()
+    {
+        ObserverUpdate();
+    }
+
+
     public void Add(KeyNotification noti)
     {
-
         keyNotification += noti;
     }
 
@@ -40,10 +46,24 @@ public class KeySubject : MonoBehaviour
         keyNotification -= noti;
     }
 
+    public void OnEnable()
+    {
+        nextKey = startKey;
+    }
+
     public void ObserverUpdate()
     {
         keyNotification();
-        NextKey++;
+        nextKey++;
+    }
+
+    [ContextMenu("Test")]
+    public void Show()
+    {
+        foreach(var a in keyNotification.GetInvocationList())
+        {
+            Debug.Log(a);
+        }
     }
 
 }
