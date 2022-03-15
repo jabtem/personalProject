@@ -12,6 +12,7 @@ public class makeRadarObject : MonoBehaviour
     void OnDisable()
     {
         RadarMap.instance.RemoveMapObject(this.gameObject);
+        Debug.Log(1);
     }
 
 

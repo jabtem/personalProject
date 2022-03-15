@@ -72,11 +72,12 @@ public class RadarMap : MonoBehaviour
             {
                 //Destroy(mapObject[i].icon.gameObject);
 
-                mapObject[i].icon.gameObject.SetActive(false);
-                mapObject[i].icon.gameObject.transform.SetParent(MinimapIconManager.instance.transform);
-                mapObject.RemoveAt(i);
-
-
+                if(mapObject[i].owner == o)
+                {
+                    mapObject[i].icon.gameObject.SetActive(false);
+                    mapObject[i].icon.gameObject.transform.SetParent(MinimapIconManager.instance.transform);
+                    mapObject.RemoveAt(i);
+                }
                 //continue;
             }
             else
