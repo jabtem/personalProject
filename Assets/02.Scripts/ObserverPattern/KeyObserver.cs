@@ -9,7 +9,8 @@ public class KeyObserver : Observer
     private void Start()
     {
         KeySubject.Instance.Add(Notify);
-        gameObject.SetActive(false);
+        if(KeySubject.Instance.nextKey != num)
+            gameObject.SetActive(false);
     }
 
     private void OnDestroy()

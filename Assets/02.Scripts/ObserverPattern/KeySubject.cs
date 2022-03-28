@@ -11,6 +11,8 @@ public class KeySubject : MonoBehaviour
     //시작 키 넘버
     public int startKey;
 
+    int Count = 3;
+
     [SerializeField]
     int _nextKey;
     public int nextKey
@@ -28,11 +30,6 @@ public class KeySubject : MonoBehaviour
         {
             KeySubject.Instance = this;
         }
-    }
-
-    public void Start()
-    {
-        ObserverUpdate();
     }
 
 
@@ -53,9 +50,21 @@ public class KeySubject : MonoBehaviour
 
     public void ObserverUpdate()
     {
+        ++nextKey;
         keyNotification();
-        nextKey++;
+
+        if(nextKey.Equals(Count))
+        {
+
+        }
     }
+
+    void DoorOpen()
+    {
+
+    }
+
+
 
     [ContextMenu("Test")]
     public void Show()
