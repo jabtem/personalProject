@@ -11,6 +11,8 @@ public class KeySubject : MonoBehaviour
     //시작 키 넘버
     public int startKey;
 
+
+    public Animator anim;
     int Count = 3;
 
     [SerializeField]
@@ -55,13 +57,13 @@ public class KeySubject : MonoBehaviour
 
         if(nextKey.Equals(Count))
         {
-
+            DoorOpen();
         }
     }
 
     void DoorOpen()
     {
-
+        anim.SetTrigger("Open");
     }
 
 
